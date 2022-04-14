@@ -8,7 +8,7 @@
 # setopt xtrace prompt_subst
 
 HOME=${HOME:-'/Users/jesse'}
-echo "Don't forget about: (vd fd icat)"
+echo "Don't forget about: (hg fd icat)"
 
 # Set up ZNAP
 # mkdir ~/.zsh-snap/ && git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.zsh-snap/
@@ -72,14 +72,9 @@ npx() {
 ## Set up autojump `j pro` -> cd /Users/jesse/Projects
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
-## Git manage dotfiles
-alias dotfiles='/usr/bin/git --git-dir=/Users/jesse/.dotfiles/ --work-tree=/Users/jesse'
-
 ## Set Python 3 as default
 alias python=/usr/local/bin/python3
 alias pip=/usr/local/bin/pip3
-
-
 
 ### Helpers and aliases ###
 alias ls="gls --hyperlink=always --color=auto"
@@ -117,7 +112,7 @@ alias kssh="kitty +kitten ssh"
 alias kgd="git difftool --no-symlinks --dir-diff"
 
 #Cloudflare cache clear
-clear_cloudflare() {
+clear_cf() {
   declare -A sites
   sites[objectfactory.io]="f4cf8701f862612a8d2e17540a1bcf59";
   sites[til.io]="d7ccd588786e2149e86e8210d03a9b42";
@@ -160,14 +155,25 @@ alias -g less="maybejless"
 
 ## Shortcut to edit some config files
 config() {
-  if [ -r $HOME/.${@}rc ]; then code $HOME/.${@}rc
-    elif [ -r $HOME/.config/$@/${@}.conf ]; then code $HOME/.config/$@/${@}.conf
-    elif [ -r $HOME/.config/$@/.${@}.conf ]; then code $HOME/.config/$@/.${@}.conf
-    elif [ -r $HOME/.config/$@.conf ]; then code $HOME/.config/$@.conf
-    elif [ -r $HOME/.config/${@}.toml ]; then code $HOME/.config/${@}.toml
-    elif [ -r $HOME/${@} ]; then code $HOME/${@}
+  if [ -r $HOME/.${@}rc ]; then maybechezmoi $HOME/.${@}rc
+    elif [ -r $HOME/.config/$@/${@}.conf ]; then maybechezmoi $HOME/.config/$@/${@}.conf
+    elif [ -r $HOME/.config/$@/.${@}.conf ]; then maybechezmoi $HOME/.config/$@/.${@}.conf
+    elif [ -r $HOME/.config/$@.conf ]; then maybechezmoi $HOME/.config/$@.conf
+    elif [ -r $HOME/.config/${@}.toml ]; then maybechezmoi $HOME/.config/${@}.toml
+    elif [ -r $HOME/${@} ]; then maybechezmoi $HOME/${@}
 
     else echo "Could not find config file."
+  fi
+}
+
+maybechezmoi() {
+  # Get a list of files managed by chezmoi
+  MANAGED=(${(f)"$(chezmoi managed)"})
+  BASENAME=${@//$HOME\//}
+  echo $MANAGED
+  echo $BASENAME
+  if [ ${MANAGED[(ie)$BASENAME]} -le ${#MANAGED} ]; then chezmoi edit $1
+    else code $1
   fi
 }
 
