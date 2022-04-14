@@ -170,6 +170,7 @@ maybechezmoi() {
   # Get a list of files managed by chezmoi
   MANAGED=(${(f)"$(chezmoi managed)"})
   BASENAME=${@//$HOME\//}
+  # Check if the file is managed by chezmoi, otherwise just open in with vscode
   if [ ${MANAGED[(ie)$BASENAME]} -le ${#MANAGED} ]; then chezmoi edit $1
     else code $1
   fi
