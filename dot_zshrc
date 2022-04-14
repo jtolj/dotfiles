@@ -176,8 +176,8 @@ maybechezmoi() {
   fi
 }
 
-alias -g chez="chezmoi"
-chez-cd() {
+alias -g chz="chezmoi"
+chz-cd() {
     cd $(chezmoi source-path)
 }
 
