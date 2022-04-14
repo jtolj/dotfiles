@@ -1,7 +1,7 @@
 [user]
-	name = {{ .git_name }}
-	email = {{ .git_email }}
-	signingkey = {{ .git_signing_key }}
+	name = {{ .git.name }}
+	email = {{ .git.email }}
+	signingkey = {{ .git.signing_key }}
 [core]
 	fileMode = false
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
