@@ -1,0 +1,39 @@
+[user]
+	name = {{ .chezmoi.git_name }}
+	email = {{ .chezmoi.git_email }}
+	signingkey = {{ .chezmoi.git_signing_key }}
+[core]
+	fileMode = false
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+	attributesfile = {{ .chezmoi.homeDir }}/.gitattributes
+	autocrlf = false
+    	pager = delta
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
+[pull]
+	rebase = false
+[init]
+	defaultBranch = master
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
+[rerere]
+	enabled = true
+[maintenance]
+	repo = {{ .chezmoi.homeDir }}/.znap/ohmyzsh
+	repo = {{ .chezmoi.homeDir }}/.znap/terminal
+	repo = {{ .chezmoi.homeDir }}/.znap/zsh-artisan
+	repo = {{ .chezmoi.homeDir }}/.znap/zsh-autosuggestions
+	repo = {{ .chezmoi.homeDir }}/.znap/zsh-completions
+	repo = {{ .chezmoi.homeDir }}/.znap/zsh-syntax-highlighting
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default

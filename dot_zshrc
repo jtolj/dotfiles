@@ -170,11 +170,14 @@ maybechezmoi() {
   # Get a list of files managed by chezmoi
   MANAGED=(${(f)"$(chezmoi managed)"})
   BASENAME=${@//$HOME\//}
-  echo $MANAGED
-  echo $BASENAME
   if [ ${MANAGED[(ie)$BASENAME]} -le ${#MANAGED} ]; then chezmoi edit $1
     else code $1
   fi
+}
+
+alias -g chez="chezmoi"
+chez-cd() {
+    cd $(chezmoi source-path)
 }
 
 ## tidyDOM - create a new template for issue documenation
