@@ -7,7 +7,7 @@
 # zmodload zsh/zprof
 # setopt xtrace prompt_subst
 
-HOME=${HOME:-'/Users/jesse'}
+HOME=${HOME:-'{{ .chezmoi.homeDir }}'}
 echo "Don't forget about: (hg fd icat)"
 
 # Set up ZNAP
