@@ -160,6 +160,7 @@ config() {
     elif [ -r $HOME/.config/$@/.${@}.conf ]; then maybechezmoi $HOME/.config/$@/.${@}.conf
     elif [ -r $HOME/.config/$@.conf ]; then maybechezmoi $HOME/.config/$@.conf
     elif [ -r $HOME/.config/${@}.toml ]; then maybechezmoi $HOME/.config/${@}.toml
+    elif [ -r $HOME/.config/$@/${@}.toml ]; then maybechezmoi $HOME/.config/$@/${@}.toml
     elif [ -r $HOME/${@} ]; then maybechezmoi $HOME/${@}
 
     else echo "Could not find config file."
@@ -177,7 +178,7 @@ maybechezmoi() {
 }
 
 alias -g cz="chezmoi"
-czcd() {
+czd() {
     cd $(chezmoi source-path)
 }
 
