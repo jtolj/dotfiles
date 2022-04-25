@@ -31,10 +31,11 @@ toggle_output("CalDigit Thunderbolt 3 Audio")
 hs.hotkey.bind({"ctrl"}, 50, function()
     local app = hs.application.get("kitty")
     if app then
-        if not app:mainWindow() then
-            app:selectMenuItem({"kitty", "New OS window"})
-        elseif app:isFrontmost() then
-            app:hide()
+        if app:isFrontmost() then
+          app:hide()
+        elseif not app:mainWindow() then
+          app:activate()
+          app:selectMenuItem({"Shell", "New OS Window"})
         else
             app:activate()
         end
