@@ -32,6 +32,9 @@ zstyle ':zshzoo:terminal' auto-title 'yes'
 # Set up Path
 export PATH=/usr/local/sbin:/usr/local/bin:$HOME/.composer/vendor/bin:$HOME/Library/Android/sdk/platform-tools/:$PATH
 
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Terminal
 export QUOTING_STYLE=literal
 
