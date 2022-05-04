@@ -9,6 +9,14 @@
 
 HOME=${HOME:-'{{ .chezmoi.homeDir }}'}
 echo "Don't forget about: (hg fd btop)"
+# Set up Path
+export PATH=/usr/local/sbin:/usr/local/bin:$HOME/.config/composer/vendor/bin:$HOME/Library/Android/sdk/platform-tools/:$PATH
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+# Homebrew on M1
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 
 # Set up ZNAP
 # mkdir ~/.zsh-snap/ && git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.zsh-snap/
@@ -28,14 +36,6 @@ znap source zsh-users/zsh-completions
 znap source ohmyzsh/ohmyzsh plugins/magic-enter
 znap source zshzoo/terminal
 zstyle ':zshzoo:terminal' auto-title 'yes'
-
-# Set up Path
-export PATH=/usr/local/sbin:/usr/local/bin:$HOME/.config/composer/vendor/bin:$HOME/Library/Android/sdk/platform-tools/:$PATH
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-# Homebrew on M1
-if [ -f /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
 
 # Terminal
 export QUOTING_STYLE=literal
