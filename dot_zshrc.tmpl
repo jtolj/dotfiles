@@ -31,7 +31,7 @@ zstyle ':zshzoo:terminal' auto-title 'yes'
 
 # Set up Path
 export PATH=/usr/local/sbin:/usr/local/bin:$HOME/.config/composer/vendor/bin:$HOME/Library/Android/sdk/platform-tools/:$PATH
-
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 # Homebrew on M1
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
