@@ -215,6 +215,10 @@ HOME=${HOME:-'/Users/jesse'}
 export PATH="$HOME/"'.platformsh/bin':"$PATH"
 if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
 
+if [ -f "$HOME/.zshrc_local" ]; then
+  source "$HOME/.zshrc_local"
+fi
+
 #################
 #   trace end   #
 #################
