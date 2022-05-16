@@ -136,6 +136,10 @@ touch_last_commit() {
   git commit --amend --date "`date -R`"
 }
 
+treediff() {
+  git log --left-right --graph --cherry-pick --oneline
+}
+
 # Clean up already merged branches with a whitelist of branch names
 cleanbranches() {
   if [ -z $1 ]; then
