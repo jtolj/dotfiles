@@ -131,6 +131,12 @@ clear_cf() {
 }
 
 # Git stuff
+
+alias gap="git add -p"
+
+# History search with wildcards - ex ghs "*filename.ext"
+alias ghs="git log --all --full-history --"
+
 # Resets the timestamp for the most recent commit to the current time
 touch_last_commit() {
   git commit --amend --date "`date -R`"
