@@ -81,6 +81,7 @@ alias python=/usr/local/bin/python3
 alias pip=/usr/local/bin/pip3
 
 ### Helpers and aliases ###
+export LESS=-iXFR
 alias ls="gls --hyperlink=always --color=auto"
 alias lls="ls"
 alias vs="code"
@@ -151,17 +152,17 @@ cleanbranches() {
   git branch --merged| grep -E -v "(^\*|master|develop|staging|main|dev)" | xargs git branch -d
 }
 
-# Aliases for cat / less / more to either jless or bat
-maybejless() {
+# Aliases for cat / less / more to either fx or bat
+maybeitsjson() {
   if [[ $1 == *.json ]]; then
-    jless "${@}" || bat "${@}"
+    fx "${@}" || bat "${@}"
   else
     bat "${@}"
   fi
 }
-alias -g cat="maybejless"
-alias -g more="maybejless"
-alias -g less="maybejless"
+alias -g cat="maybeitsjson"
+alias -g more="maybeitsjson"
+alias -g less="maybeitsjson"
 
 ## Shortcut to edit some config files
 config() {
