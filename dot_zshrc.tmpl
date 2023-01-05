@@ -153,16 +153,18 @@ cleanbranches() {
 }
 
 # Aliases for cat / less / more to either fx or bat
-maybeitsjson() {
+maybeitsjsonorsomething() {
   if [[ $1 == *.json ]]; then
     fx "${@}" || bat "${@}"
+  elif [[ $1 == *.jpg || $1 == *.png || $1 == *.gif ]]; then
+    icat "${@}"
   else
     bat "${@}"
   fi
 }
-alias -g cat="maybeitsjson"
-alias -g more="maybeitsjson"
-alias -g less="maybeitsjson"
+alias -g cat="maybeitsjsonorsomething"
+alias -g more="maybeitsjsonorsomething"
+alias -g less="maybeitsjsonorsomething"
 
 ## Shortcut to edit some config files
 config() {
