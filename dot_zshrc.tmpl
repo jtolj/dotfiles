@@ -85,7 +85,7 @@ export LESS=-iXFR
 alias ls="gls --hyperlink=always --color=auto"
 alias lls="ls"
 alias vs="code"
-alias p="cd ~/Documents/Projects"
+alias p="[ -d ~/Documents/Projects ] && cd ~/Documents/Projects || cd ~/Projects"
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 alias a="artisan"
 alias tinker="artisan tinker"
