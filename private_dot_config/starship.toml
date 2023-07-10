@@ -12,6 +12,10 @@ success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being
 # symbol = " "
 # style = "bold dimmed green"
 
+[status]
+disabled = false
+
+
 [gcloud]
 disabled = true
 
