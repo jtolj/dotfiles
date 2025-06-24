@@ -208,21 +208,6 @@ maybeitsjsonorsomething() {
 alias -g more="maybeitsjsonorsomething"
 alias -g less="maybeitsjsonorsomething"
 
-## Shortcut to edit some config files
-config() {
-  if [ -r $HOME/.${@}rc ]; then maybechezmoi $HOME/.${@}rc
-    elif [ -r $HOME/.config/$@/${@}.conf ]; then maybechezmoi $HOME/.config/$@/${@}.conf
-    elif [ -r $HOME/.config/$@/.${@}.conf ]; then maybechezmoi $HOME/.config/$@/.${@}.conf
-    elif [ -r $HOME/.config/$@.conf ]; then maybechezmoi $HOME/.config/$@.conf
-    elif [ -r $HOME/.config/${@}.toml ]; then maybechezmoi $HOME/.config/${@}.toml
-    elif [ -r $HOME/.config/$@/${@}.toml ]; then maybechezmoi $HOME/.config/$@/${@}.toml
-    elif [ -r $HOME/.config/$@/config.toml ]; then maybechezmoi $HOME/.config/$@/config.toml
-    elif [ -r $HOME/${@} ]; then maybechezmoi $HOME/${@}
-
-    else echo "Could not find config file."
-  fi
-}
-
 ## Kill all processes matching a grep pattern
 killgrep() {
   echo "Killing:\n"
