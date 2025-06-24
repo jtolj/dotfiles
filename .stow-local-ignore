@@ -1,0 +1,10 @@
+.DS_Store
+
+# Git
+.gitconfig
+.git
+.gitignore
+
+# Assets
+README.md
+

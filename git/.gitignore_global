@@ -1,0 +1,9 @@
+# OS Junk
+.DS_Store
+
+# Editor configuration
+.vscode/
+
+# Packages
+node_modules/
+vendor/

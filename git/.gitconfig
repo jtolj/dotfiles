@@ -1,0 +1,92 @@
+[user]
+name = Jesse Tolj
+email = jesse@objectfactory.io
+signingkey = 8EB49B4E588676EBD2931DC47904AF0C90B2ABCF
+[column]
+ui = auto
+[branch]
+sort = -committerdate
+[tag]
+sort = version:refname
+
+[core]
+fileMode = false
+excludesfile = /Users/jesse/.gitignore_global
+attributesfile = /Users/jesse/.gitattributes
+autocrlf = false
+pager = delta
+editor = nvim
+[gpg]
+program = gpg
+[commit]
+gpgsign = true
+[pull]
+rebase = false
+[init]
+defaultBranch = master
+[rerere]
+enabled = true
+autoupdate = true
+[maintenance]
+repo = /Users/jesse/.znap/ohmyzsh
+repo = /Users/jesse/.znap/zsh-artisan
+repo = /Users/jesse/.znap/zsh-autosuggestions
+repo = /Users/jesse/.znap/zsh-completions
+repo = /Users/jesse/.znap/zsh-syntax-highlighting
+repo = /Users/jesse/.znap/jq-zsh-plugin
+repo = /Users/jesse/.znap/zsh-autocomplete
+repo = /Users/jesse/.znap/Aloxaf/fzf-tab
+repo = /Users/jesse/.znap/jtolj/zsh-artisan
+repo = /Users/jesse/.znap/ohmyzsh/ohmyzsh
+repo = /Users/jesse/.znap/reegnz/jq-zsh-plugin
+repo = /Users/jesse/.znap/zsh-users/zsh-autosuggestions
+repo = /Users/jesse/.znap/zsh-users/zsh-completions
+repo = /Users/jesse/.znap/zsh-users/zsh-syntax-highlighting
+repo = /Users/jesse/.znap/zsh-users/nvm
+repo = /Users/jesse/.znap/aspirewit/zsh-nvm-auto-switch
+repo = /Users/jesse/.znap/zdharma/fast-syntax-highlighting
+	repo = /Users/jesse/.znap/jeffreytse/zsh-vi-mode
+	repo = /Users/jesse/.znap/jessarcher/zsh-artisan
+	repo = /Users/jesse/.znap/romkatv/powerlevel10k
+[interactive]
+diffFilter = delta --color-only
+[delta]
+navigate = true # use n and N to move between diff sections
+light = false
+line-numbers = true
+side-by-side = true
+hyperlinks = true
+hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+[push]
+autoSetupRemote = true
+[merge]
+conflictstyle = diff3
+tool = nvim
+[mergetool "nvim"]
+cmd = nvim -c "DiffviewOpen"
+[mergetool]
+prompt = false
+[diff]
+algorithm = histogram
+colorMoved = plain
+mnemonicPrefix = true
+renames = true
+tool = difftastic
+[difftool]
+prompt = false
+[difftool "difftastic"]
+cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+difftool = true
+[alias]
+pushf = push --force-with-lease
+dft = difftool
+dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+dft = difftool
+dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
+co = checkout
+rb = rebase
+rbc = rebase --continue
+
+[url "git@github.com:"]
+insteadOf = https://github.com/
