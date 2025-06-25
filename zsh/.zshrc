@@ -114,6 +114,10 @@ clear_cf() {
      --data '{"purge_everything":true}'
 }
 
+#PHP Stuff
+alias php="valet php"
+alias composer="valet composer"
+
 # "with xdebug" function, run the command with xdebug enabled
 phpx () {
   if [ -z "$1" ]; then
