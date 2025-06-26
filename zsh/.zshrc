@@ -75,6 +75,7 @@ alias which="/usr/bin/which"
 alias ..="cd .."
 alias ...="cd ../.."
 alias edvault="EDITOR='code --wait' ansible-vault edit"
+alias cdtmp="cd $TMPDIR"
 
 function lmk() {
   say "Process complete!"
