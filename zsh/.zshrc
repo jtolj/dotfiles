@@ -8,8 +8,16 @@
 # setopt xtrace prompt_subst
 HOME=${HOME:-'/Users/jesse'}
 
-export PATH="/opt/homebrew/opt/grep/libexec/gnubin:/usr/local/sbin:/usr/local/bin:$HOME/.config/composer/vendor/bin:$HOME/Library/Android/sdk/platform-tools/:$PATH"
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+path=(
+  /opt/homebrew/opt/grep/libexec/gnubin
+  /usr/local/sbin
+  /usr/local/bin
+  $HOME/.config/composer/vendor/bin
+  $HOME/Library/Android/sdk/platform-tools/
+  /opt/homebrew/opt/mysql-client/bin
+  $path
+)
+
 export VI_MODE_SET_CURSOR=true
 export QUOTING_STYLE=literal
 
