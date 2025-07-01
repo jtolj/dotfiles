@@ -6,7 +6,7 @@ return {
     { '<leader>bp', '<cmd>BufferVacuumPinBuffer<cr>', desc = 'Pin Buffer' },
   },
   opts = {
-    max_buffers = 5,
+    max_buffers = 6,
     enabled_messages = true,
     count_pinned_buffers = false,
   },

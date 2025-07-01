@@ -1,7 +1,6 @@
 return {
   dir = '/Users/jesse/Projects/bufferin.nvim', -- Use local directory instead of GitHub repo
   name = 'bufferin.nvim', -- Optional: specify plugin name for lazy.nvim
-  -- 'wasabeef/bufferin.nvim',
   opts = {
     -- Window appearance
     window = {
@@ -53,8 +52,6 @@ return {
   },
   dependencies = {
     'nvim-tree/nvim-web-devicons', -- For file icons
-    -- 'willothy/nvim-cokeline',     -- For buffer line integration
-    -- 'akinsho/bufferline.nvim',    -- Alternative buffer line
   },
   keys = {
     {

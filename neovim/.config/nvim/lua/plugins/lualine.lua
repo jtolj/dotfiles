@@ -28,7 +28,6 @@ local function get_codecompanion_chat()
   if not chat then
     return nil
   end
-
   return chat
 end
 
@@ -112,19 +111,7 @@ return {
     sections = {
       lualine_a = { 'mode' },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
-      lualine_c = {
-        -- {
-        --   'lsp_status',
-        --   symbols = {
-        --     -- Standard unicode symbols to cycle through for LSP progress:
-        --     spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
-        --     -- Standard unicode symbol for when LSP is done:
-        --     done = ' ',
-        --     -- Delimiter inserted between LSP names:
-        --     separator = ' ',
-        --   },
-        -- },
-      },
+      lualine_c = {},
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
