@@ -14,9 +14,7 @@ return {
         require 'neotest-phpunit' {
           root_ignore_files = { 'tests/Pest.php' },
         },
-        require 'neotest-pest' {
-          root_ignore_files = { 'tailwind.config-poa.js' }, -- Temporary and ugly for Castos
-        },
+        require 'neotest-pest' {},
       },
     }
   end,
