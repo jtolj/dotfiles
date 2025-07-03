@@ -4,8 +4,8 @@ return {
     {
       'fang2hou/blink-copilot',
       opts = {
-        max_completions = 1,
-        max_attempts = 2,
+        max_completions = 2,
+        max_attempts = 3,
         kind_name = 'Copilot', ---@type string | false
         kind_icon = ' ', ---@type string | false
         kind_hl = false, ---@type string | false
@@ -38,6 +38,11 @@ return {
     },
 
     completion = {
+      list = {
+        selection = {
+          preselect = false,
+        },
+      },
       documentation = {
         window = {
           border = 'rounded',
@@ -64,7 +69,7 @@ return {
     },
 
     sources = {
-      default = { 'laravel', 'lsp', 'snippets', 'path', 'buffer' },
+      default = { 'laravel', 'copilot', 'lsp', 'snippets', 'path', 'buffer' },
       providers = {
         path = {
           opts = {
