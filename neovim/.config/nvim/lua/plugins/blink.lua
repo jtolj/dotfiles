@@ -46,13 +46,6 @@ return {
         auto_show = true,
         auto_show_delay_ms = 1000,
       },
-      signature = {
-        enabled = true,
-        window = {
-          border = 'rounded',
-          winhighlight = 'Normal:CatppuccinSurface0,FloatBorder:CatppuccinSurface2,Search:None',
-        },
-      },
       menu = {
         border = 'rounded',
         winhighlight = 'Normal:CatppuccinSurface0,FloatBorder:CatppuccinSurface2,Search:None',
