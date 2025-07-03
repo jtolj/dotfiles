@@ -71,11 +71,25 @@ return {
     },
 
     sources = {
-      default = { 'lsp', 'snippets', 'path', 'buffer' },
+      default = { 'laravel', 'lsp', 'snippets', 'path', 'buffer' },
       providers = {
+        path = {
+          opts = {
+            get_cwd = function(_)
+              return vim.fn.getcwd()
+            end,
+          },
+        },
         laravel = {
           name = 'laravel',
           module = 'laravel.blink_source',
+          transform_items = function(ctx, items)
+            for _, item in ipairs(items) do
+              item.kind_icon = ''
+              item.kind_name = 'Laravel'
+            end
+            return items
+          end,
         },
         copilot = {
           name = 'copilot',

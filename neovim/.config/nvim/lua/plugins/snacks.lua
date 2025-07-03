@@ -62,7 +62,7 @@ return {
         return vim.g.snacks_scroll ~= false
           and vim.b[buf].snacks_scroll ~= false
           and vim.bo[buf].buftype ~= 'terminal'
-          and not vim.bo[buf].filetype:match '^blink-'
+          and not vim.startswith(vim.bo[buf].filetype, 'blink-')
       end,
     },
     statuscolumn = { enabled = true },
