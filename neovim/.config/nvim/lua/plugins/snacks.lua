@@ -56,7 +56,15 @@ return {
     picker = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    scroll = { enabled = true },
+    scroll = {
+      -- Fixes glitches when scrolling with borders in blink
+      filter = function(buf)
+        return vim.g.snacks_scroll ~= false
+          and vim.b[buf].snacks_scroll ~= false
+          and vim.bo[buf].buftype ~= 'terminal'
+          and not vim.bo[buf].filetype:match '^blink-'
+      end,
+    },
     statuscolumn = { enabled = true },
     words = { enabled = true },
     styles = {
