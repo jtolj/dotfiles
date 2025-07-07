@@ -12,7 +12,7 @@ path=(
   /opt/homebrew/opt/grep/libexec/gnubin
   /usr/local/sbin
   /usr/local/bin
-  $HOME/.config/composer/vendor/bin
+  $HOME/.composer/vendor/bin
   $HOME/Library/Android/sdk/platform-tools/
   /opt/homebrew/opt/mysql-client/bin
   $path
@@ -275,3 +275,5 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+. "$HOME/.local/share/../bin/env"

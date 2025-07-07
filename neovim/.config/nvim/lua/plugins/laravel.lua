@@ -4,11 +4,10 @@ return {
     'MunifTanjim/nui.nvim',
     'nvim-lua/plenary.nvim',
   },
-  ft = { 'php', 'blade' },
   config = function()
     require('laravel').setup {
       notifications = false, -- Enable/disable Laravel.nvim notifications
-      debug = false, -- Enable/disable debug error notifications
+      debug = true, -- Enable/disable debug error notifications
       keymaps = true, -- Enable/disable Laravel.nvim keymaps
       sail = {
         enabled = false, -- Enable/disable Laravel Sail integration
