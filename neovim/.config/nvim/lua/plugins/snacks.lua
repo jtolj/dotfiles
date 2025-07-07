@@ -90,6 +90,15 @@ return {
       desc = 'Smart Find Files',
     },
     {
+      '<leader>,',
+      function()
+        Snacks.picker.buffers {
+          focus = 'list',
+        }
+      end,
+      desc = 'Pick Buffer',
+    },
+    {
       '<leader>/',
       function()
         Snacks.picker.grep()
