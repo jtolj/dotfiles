@@ -215,6 +215,8 @@ maybeitsjsonorsomething() {
     fx "${@}" || bat "${@}"
   elif [[ $1 == *.jpg || $1 == *.png || $1 == *.gif ]]; then
     icat "${@}"
+  elif [[ $1 == *.pdf ]]; then
+    fancy-cat "${@}"
   else
     bat "${@}"
   fi
