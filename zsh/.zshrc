@@ -74,8 +74,8 @@ export GPG_TTY=$(tty)
 ### Helpers and aliases ###
 export LESS=-iXFR
 alias vim="nvim"
+alias n="nvim"
 alias date="gdate"
-alias ls="gls --hyperlink=always --color=auto"
 alias lls="ls"
 alias vs="code"
 alias p="[ -d ~/Projects ] && cd ~/Projects"
@@ -86,6 +86,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias edvault="EDITOR='code --wait' ansible-vault edit"
 alias cdtmp="cd $TMPDIR"
+
+function ls() {
+  eza --icons "$@"
+}
 
 function lmk() {
   say "Process complete!"
