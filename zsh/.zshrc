@@ -24,24 +24,16 @@ export QUOTING_STYLE=literal
 # Disable freeze
 stty -ixon
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-() { [[ -r $1 ]] && source $1 } ${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USERNAME}.zsh
-
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-### ZSH Plugins ###
-# Download Znap, if it's not there yet.
 [[ -r ~/.zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
         git@github.com:marlonrichert/zsh-snap.git ~/.zsh-snap
 zstyle ':znap:*' repos-dir ~/.znap
 zstyle ':znap:*' server git@github.com
 source ~/.zsh-snap/znap.zsh
-znap eval fnm 'fnm env --log-level quiet --use-on-cd --shell zsh'
 znap eval zoxide 'zoxide init --cmd z zsh'
 export ARTISAN_PREFIX=valet
 export ARTISAN_OPEN_ON_MAKE_EDITOR=nvim
@@ -54,13 +46,14 @@ znap source ohmyzsh/ohmyzsh plugins/vi-mode
 znap source reegnz/jq-zsh-plugin
 znap source Aloxaf/fzf-tab
 znap source zdharma/fast-syntax-highlighting
-znap source romkatv/powerlevel10k powerlevel10k.zsh-theme
 znap eval atuin 'atuin init zsh'
+znap eval starship 'starship init zsh'
+znap eval mise 'mise activate'
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
-set list-colors to enable filename colorizing
+# set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
@@ -72,7 +65,6 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 export GPG_TTY=$(tty)
 
 ### Helpers and aliases ###
-export LESS=-iXFR
 alias vim="nvim"
 alias n="nvim"
 alias date="gdate"
@@ -84,15 +76,24 @@ alias tinker="artisan tinker"
 alias which="/usr/bin/which"
 alias ..="cd .."
 alias ...="cd ../.."
-alias edvault="EDITOR='code --wait' ansible-vault edit"
-alias cdtmp="cd $TMPDIR"
+alias tmp="cd $TMPDIR"
 
 function ls() {
   eza --icons "$@"
 }
 
+# Notify after command finishes
 function lmk() {
-  say "Process complete!"
+  OUTPUT=$("$@")
+  if [ $? -eq 0 ]; then
+    STATUS="✅ Command Succeeded"
+  else
+    STATUS="🔴 Command Failed"
+  fi
+  terminal-notifier -message "$OUTPUT" \
+    -title "$STATUS" \
+    -subtitle "$@" \
+    -timeout 5
 }
 
 ## Open a directory / project in Tinkerwell
@@ -115,18 +116,6 @@ alias wssh="wezterm ssh"
 # Flush local DNS cache
 flushdns() {
   sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
-}
-
-#Cloudflare cache clear
-clear_cf() {
-  declare -A sites
-  sites[objectfactory.io]="f4cf8701f862612a8d2e17540a1bcf59";
-  sites[til.io]="d7ccd588786e2149e86e8210d03a9b42";
-
-  curl -X POST "https://api.cloudflare.com/client/v4/zones/$sites[$@]/purge_cache" \
-     -H "Authorization: Bearer $CLOUDFLARE_API_KEY" \
-     -H "Content-Type: application/json" \
-     --data '{"purge_everything":true}'
 }
 
 #PHP Stuff
@@ -279,10 +268,3 @@ fi
 #   fi
 # done < /tmp/sample-time.(*).log > /tmp/ztrace.log
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-. "$HOME/.local/share/../bin/env"
-
-# bun completions
-[ -s "/Users/jesse/.bun/_bun" ] && source "/Users/jesse/.bun/_bun"
