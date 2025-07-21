@@ -7,7 +7,9 @@ $git_state\
 $git_status\
 $php\
 $nodejs\
+$bun \
 $golang\
+$rust \
 $mise\
 $line_break\
 $jobs\
@@ -17,6 +19,7 @@ $character"""
 [directory]
 style = "blue"
 
+
 [character]
 success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
@@ -25,6 +28,9 @@ vimcmd_symbol = "[❮](green)"
 [git_branch]
 format = "[$branch]($style)"
 style = "bright-black"
+
+[rust]
+detect_folders = ['src-tauri']
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"

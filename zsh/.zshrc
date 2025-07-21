@@ -263,4 +263,3 @@ fi
 #     last=${line}
 #   fi
 # done < /tmp/sample-time.(*).log > /tmp/ztrace.log
-
