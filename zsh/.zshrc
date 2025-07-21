@@ -38,7 +38,6 @@ znap eval zoxide 'zoxide init --cmd z zsh'
 export ARTISAN_PREFIX=valet
 export ARTISAN_OPEN_ON_MAKE_EDITOR=nvim
 znap source jtolj/zsh-artisan
-znap source zsh-users/zsh-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
 znap source ohmyzsh/ohmyzsh plugins/magic-enter 
