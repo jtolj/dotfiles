@@ -35,7 +35,6 @@ zstyle ':znap:*' repos-dir ~/.znap
 zstyle ':znap:*' server git@github.com
 source ~/.zsh-snap/znap.zsh
 znap eval zoxide 'zoxide init --cmd z zsh'
-export ARTISAN_PREFIX=valet
 export ARTISAN_OPEN_ON_MAKE_EDITOR=nvim
 znap source jtolj/zsh-artisan
 znap source zsh-users/zsh-autosuggestions
@@ -117,9 +116,7 @@ flushdns() {
   sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
 }
 
-#PHP Stuff
-alias php="valet php"
-alias composer="valet composer"
+#PHP Stuf
 
 # "with xdebug" function, run the command with xdebug enabled
 phpx () {
@@ -128,7 +125,7 @@ phpx () {
     return
   fi
 
-  XDEBUG_TRIGGER=1 valet php "$@"
+  XDEBUG_TRIGGER=1 php "$@"
 }
 
 # "with xdebug" function, run the artisan command with xdebug enabled
@@ -138,7 +135,7 @@ ax () {
     return
   fi
 
-  XDEBUG_TRIGGER=1 valet php artisan "$@"
+  XDEBUG_TRIGGER=1 php artisan "$@"
 }
 
 # Git stuff
