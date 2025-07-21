@@ -1,5 +1,5 @@
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
 
-[plugins]
-php = "https://github.com/jtolj/asdf-php-brew.git"
+[alias]
+php = "asdf:https://github.com/jtolj/asdf-php-brew.git"
