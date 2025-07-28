@@ -1,27 +1,11 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    -- Automatically install LSPs and related tools to stdpath for Neovim
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
   },
   config = function()
-    -- vim.api.nvim_create_autocmd('FileType', {
-    --   pattern = { 'php', 'blade' },
-    --   callback = function()
-    --     vim.lsp.start {
-    --       name = 'laravel-ls',
-    --       cmd = { '/Users/jesse/Projects/laravel-ls/build/laravel-ls' },
-    --       -- if you want to recompile everytime
-    --       -- the language server is started.
-    --       -- Uncomment this line instead
-    --       -- cmd = { '/path/to/laravel-ls/start.sh' },
-    --       root_dir = vim.fn.getcwd(),
-    --     }
-    --   end,
-    -- })
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -29,14 +13,6 @@ return {
           mode = mode or 'n'
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
-
-        -- Rename the variable under your cursor.
-        --  Most Language Servers support renaming across files, etc.
-        map('<leader>lr', vim.lsp.buf.rename, 'LSP [r]ename')
-
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
-        map('<leader>la', vim.lsp.buf.code_action, 'LSP [c]ode action', { 'n', 'x' })
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
@@ -70,7 +46,7 @@ return {
         -- The following code creates a keymap to toggle inlay hints in your
         -- code, if the language server you are using supports them
         --
-        -- This may be unwanted, since they displace some of your code
+        -- This maybe unwanted, since they displace some of your code
         if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
           map('<leader>lh', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
@@ -108,7 +84,17 @@ return {
       },
     }
 
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+
     local servers = {
+      harper_ls = {
+        settings = {
+          linters = {
+            SentenceCapitalization = false,
+            SpellCheck = false,
+          },
+        },
+      },
       lua_ls = {
         settings = {
           Lua = {
@@ -129,14 +115,11 @@ return {
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
-      ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      ensure_installed = {},
       automatic_installation = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for ts_ls)
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           require('lspconfig')[server_name].setup(server)
         end,

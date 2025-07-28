@@ -293,7 +293,7 @@ vim.fn.sign_define('DapBreakpointRejected', { text = '❌', texthl = '', linehl 
 vim.fn.sign_define('DapLogPoint', { text = '📝', texthl = '', linehl = '', numhl = '' })
 
 -- Spelling
-vim.opt.spell = true
+vim.opt.spell = false
 vim.opt.spelllang = { 'en_us' }
 vim.opt.spelloptions = 'camel'
 

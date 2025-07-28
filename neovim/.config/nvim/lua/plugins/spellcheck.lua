@@ -10,7 +10,7 @@ return {
         'TextChangedI',
         'TextChangedP',
       },
-      enable = false, -- enable diagnostics on startup
+      enable = true, -- enable diagnostics on startup
       ft_config = { -- spellcheck method: "cursor", "iter", or boolean
         alpha = false,
         help = false,
