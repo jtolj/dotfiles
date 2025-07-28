@@ -45,6 +45,7 @@ znap source reegnz/jq-zsh-plugin
 znap source Aloxaf/fzf-tab
 znap source zdharma/fast-syntax-highlighting
 znap eval atuin 'atuin init zsh'
+export STARSHIP_LOG=error
 znap eval starship 'starship init zsh'
 znap eval mise 'mise activate'
 # disable sort when completing `git checkout`
