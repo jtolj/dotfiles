@@ -204,7 +204,7 @@ maybeitsjsonorsomething() {
   if [[ $1 == *.json ]]; then
     fx "${@}" || bat "${@}"
   elif [[ $1 == *.jpg || $1 == *.png || $1 == *.gif ]]; then
-    icat "${@}"
+    wezterm imgcat "${@}"
   elif [[ $1 == *.pdf ]]; then
     fancy-cat "${@}"
   else
