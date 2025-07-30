@@ -1,7 +1,7 @@
 return {
   {
     'sindrets/diffview.nvim',
-    cond = has_git,
+    event = 'VeryLazy',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
     keys = {
       { '<leader>gD', '<cmd>DiffviewFileHistory %<CR>', desc = 'Diff File' },
