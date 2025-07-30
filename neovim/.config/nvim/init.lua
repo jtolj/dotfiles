@@ -209,7 +209,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Quick save
-vim.keymap.set('n', ';;', ':w<cr>')
+vim.keymap.set('n', ',,', ':w<cr>')
 
 -- Indents
 vim.opt_local.tabstop = 4
