@@ -81,6 +81,30 @@ function ls() {
   eza --icons "$@"
 }
 
+# Tail service logs from homebrew.
+# Usage: logs <service_name> [tail_args]
+# Example: logs caddy -n 100
+logs() {
+  name="$1"
+  tail_args=("${@:2}")
+
+  # if name is empty, just print out the directories in /opt/homebrew/var/log/
+  if [ -z "$name" ]; then
+    eza --icons /opt/homebrew/var/log/
+    return
+  elif
+
+  if [ -f "/opt/homebrew/var/log/${name}" ]; then
+    tail ${tail_args} "/opt/homebrew/var/log/${name}"
+  elif [ -f "/opt/homebrew/var/log/${name}.log" ]; then
+    tail ${tail_args} "/opt/homebrew/var/log/${name}.log"
+  elif [ -d "/opt/homebrew/var/log/${name}" ]; then
+    tail ${tail_args} /opt/homebrew/var/log/${name}/*.log
+  else
+    echo "Log file for $name not found."
+  fi
+}
+
 # Notify after command finishes
 function lmk() {
   OUTPUT=$("$@")
@@ -117,7 +141,7 @@ flushdns() {
   sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
 }
 
-#PHP Stuf
+#PHP Stuff
 
 # "with xdebug" function, run the command with xdebug enabled
 phpx () {
