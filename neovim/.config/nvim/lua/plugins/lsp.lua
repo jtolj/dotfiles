@@ -94,6 +94,17 @@ return {
     local capabilities = require('blink.cmp').get_lsp_capabilities()
 
     local servers = {
+      intelephense = {
+        settings = {
+          intelephense = {
+            filetypes = { 'php', 'blade', 'php_only' },
+            files = {
+              associations = { '*.php', '*.blade.php' },
+              maxSize = 5000000,
+            },
+          },
+        },
+      },
       lua_ls = {
         settings = {
           Lua = {
@@ -125,7 +136,7 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-      automatic_enable = false,
+      automatic_enable = true,
     }
 
     for server_name, server_config in pairs(servers) do
