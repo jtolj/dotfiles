@@ -91,58 +91,48 @@ return {
       },
     }
 
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
-
-    local servers = {
-      intelephense = {
-        settings = {
-          intelephense = {
-            filetypes = { 'php', 'blade', 'php_only' },
-            files = {
-              associations = { '*.php', '*.blade.php' },
-              maxSize = 5000000,
-            },
-          },
-        },
-      },
-      lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            runtime = {
-              version = 'LuaJIT',
-            },
-            diagnostics = {
-              globals = { 'vim' },
-            },
-            workspace = {
-              library = vim.api.nvim_get_runtime_file('', true),
-            },
-            telemetry = {
-              enable = false,
-            },
-          },
-        },
+    require('mason-tool-installer').setup {
+      ensure_installed = {
+        'stylua', -- Used to format Lua code
       },
     }
 
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua', -- Used to format Lua code
-    })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
     require('mason-lspconfig').setup {
       ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
       automatic_enable = true,
+      handlers = {
+        -- Default handler
+        function(server_name)
+          require('lspconfig')[server_name].setup {
+            capabilities = capabilities,
+          }
+        end,
+        ['lua_ls'] = function()
+          require('lspconfig').lua_ls.setup {
+            capabilities = capabilities,
+            settings = {
+              Lua = {
+                completion = {
+                  callSnippet = 'Replace',
+                },
+                runtime = {
+                  version = 'LuaJIT',
+                },
+                diagnostics = {
+                  globals = { 'vim' },
+                },
+                workspace = {
+                  library = vim.api.nvim_get_runtime_file('', true),
+                },
+                telemetry = {
+                  enable = false,
+                },
+              },
+            },
+          }
+        end,
+      },
     }
-
-    for server_name, server_config in pairs(servers) do
-      local server = server_config or {}
-      server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-      require('lspconfig')[server_name].setup(server)
-    end
   end,
 }
