@@ -70,6 +70,15 @@ return {
     sources = {
       default = { 'copilot', 'lsp', 'laravel', 'snippets', 'path', 'buffer' },
       providers = {
+        snippets = {
+          score_offset = -20,
+        },
+        buffer = {
+          score_offset = -30,
+        },
+        lsp = {
+          score_offset = 10,
+        },
         path = {
           opts = {
             get_cwd = function(_)
@@ -80,10 +89,12 @@ return {
         laravel = {
           name = 'laravel',
           module = 'laravel.blink_source',
+          score_offset = -10,
           transform_items = function(ctx, items)
             for _, item in ipairs(items) do
               item.kind_icon = ''
               item.kind_name = 'Laravel'
+              item.score_offset = -10
             end
             return items
           end,
@@ -91,7 +102,7 @@ return {
         copilot = {
           name = 'copilot',
           module = 'blink-copilot',
-          score_offset = 100,
+          score_offset = 20,
           async = true,
         },
       },
