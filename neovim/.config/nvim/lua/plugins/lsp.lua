@@ -4,11 +4,7 @@ return {
     { 'mason-org/mason.nvim', opts = {} },
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP.
     { 'j-hui/fidget.nvim', opts = {} },
-
-    -- Allows extra capabilities provided by blink.cmp
     'saghen/blink.cmp',
   },
   config = function()
@@ -98,41 +94,32 @@ return {
     }
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+    vim.lsp.config['lua_ls'] = {
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          completion = {
+            callSnippet = 'Replace',
+          },
+          runtime = {
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            globals = { 'vim' },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file('', true),
+          },
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    }
+
     require('mason-lspconfig').setup {
       ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-      automatic_enable = true,
-      handlers = {
-        -- Default handler
-        function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-          }
-        end,
-        ['lua_ls'] = function()
-          require('lspconfig').lua_ls.setup {
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                completion = {
-                  callSnippet = 'Replace',
-                },
-                runtime = {
-                  version = 'LuaJIT',
-                },
-                diagnostics = {
-                  globals = { 'vim' },
-                },
-                workspace = {
-                  library = vim.api.nvim_get_runtime_file('', true),
-                },
-                telemetry = {
-                  enable = false,
-                },
-              },
-            },
-          }
-        end,
-      },
     }
   end,
 }

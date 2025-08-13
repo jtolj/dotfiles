@@ -68,7 +68,7 @@ return {
     },
 
     sources = {
-      default = { 'copilot', 'laravel', 'lsp', 'snippets', 'path', 'buffer' },
+      default = { 'copilot', 'lsp', 'laravel', 'snippets', 'path', 'buffer' },
       providers = {
         path = {
           opts = {
