@@ -6,49 +6,11 @@ return {
       'igorlfs/nvim-dap-view',
       opts = {
         winbar = {
-          show = true,
-          -- You can add a "console" section to merge the terminal with the other views
           sections = { 'scopes', 'watches', 'exceptions', 'breakpoints', 'threads', 'repl', 'console' },
-          -- Must be one of the sections declared above
           default_section = 'scopes',
-          headers = {
-            breakpoints = 'Breakpoints [B]',
-            scopes = 'Scopes [S]',
-            exceptions = 'Exceptions [E]',
-            watches = 'Watches [W]',
-            threads = 'Threads [T]',
-            repl = 'REPL [R]',
-            console = 'Console [C]',
-          },
-          controls = {
-            enabled = true,
-            position = 'right',
-            buttons = {
-              'play',
-              'step_into',
-              'step_over',
-              'step_out',
-              'step_back',
-              'run_last',
-              'terminate',
-              'disconnect',
-            },
-            icons = {
-              pause = '',
-              play = '',
-              step_into = '',
-              step_over = '',
-              step_out = '',
-              step_back = '',
-              run_last = '',
-              terminate = '',
-              disconnect = '',
-            },
-            custom_buttons = {},
-          },
         },
         windows = {
-          height = 12,
+          height = 0.25,
           terminal = {
             -- 'left'|'right'|'above'|'below': Terminal position in layout
             position = 'left',
@@ -85,9 +47,7 @@ return {
     local dap_virt_text = require 'nvim-dap-virtual-text'
 
     require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
-      automatic_setup = true,
+      automatic_installation = false,
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
