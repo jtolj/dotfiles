@@ -200,7 +200,7 @@ end
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'c', 'cpp', 'python', 'php' },
   callback = function(args)
-    vim.api.nvim_buf_set_option(args.buf, 'foldexpr', 'v:lua.FileTypeExpr(v:lnum, &filetype)')
+    vim.api.nvim_set_option_value('foldexpr', 'v:lua.FileTypeExpr(v:lnum, &filetype)', {})
   end,
 })
 
