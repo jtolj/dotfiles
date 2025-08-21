@@ -4,7 +4,7 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
-    config = {
+    opts = {
       enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
       multiwindow = false, -- Enable multiwindow support.
       max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
