@@ -2,28 +2,7 @@ return {
   'mfussenegger/nvim-dap',
   lazy = true,
   dependencies = {
-    {
-      'igorlfs/nvim-dap-view',
-      opts = {
-        winbar = {
-          sections = { 'scopes', 'watches', 'exceptions', 'breakpoints', 'threads', 'repl', 'console' },
-          default_section = 'scopes',
-        },
-        windows = {
-          height = 0.25,
-          terminal = {
-            -- 'left'|'right'|'above'|'below': Terminal position in layout
-            position = 'left',
-            -- List of debug adapters for which the terminal should be ALWAYS hidden
-            hide = {},
-            -- Hide the terminal when starting a new session
-            start_hidden = false,
-          },
-        },
-        -- Controls how to jump when selecting a breakpoint or navigating the stack
-        switchbuf = 'usetab,newtab',
-      },
-    },
+    { 'rcarriga/nvim-dap-ui', dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' }, opts = {} },
     'theHamsta/nvim-dap-virtual-text',
     'nvim-telescope/telescope-dap.nvim',
     'jbyuki/one-small-step-for-vimkind',
@@ -34,13 +13,13 @@ return {
     { '<leader>dc', '<cmd>lua require"dap".continue()<CR>', desc = 'Continue' },
     { '<leader>di', '<cmd>lua require"dap".step_into()<CR>', desc = 'Step Into' },
     { '<leader>do', '<cmd>lua require"dap".step_over()<CR>', desc = 'Step Over' },
-    { '<leader>do', '<cmd>lua require"dap".step_out()<CR>', desc = 'Step Out' },
+    { '<leader>dO', '<cmd>lua require"dap".step_out()<CR>', desc = 'Step Out' },
     { '<leader>dr', '<cmd>lua require"dap".repl.open()<CR>', desc = 'Open REPL' },
     { '<leader>ds', '<cmd>lua require"dap".run_last()<CR>', desc = 'Run Last' },
     { '<leader>dt', '<cmd>lua require"dap".terminate()<CR>', desc = 'Terminate' },
     { '<leader>dp', '<cmd>lua require"dap".pause()<CR>', desc = 'Pause' },
     { '<leader>dl', '<cmd>lua require"dap".run_to_cursor()<CR>', desc = 'Run to Cursor' },
-    { '<leader>du', '<cmd>lua require"dap-view".toggle()<CR>', desc = 'Toggle DAP UI' },
+    { '<leader>du', '<cmd>lua require"dapui".toggle()<CR>', desc = 'Toggle DAP UI' },
   },
   config = function()
     local dap = require 'dap'
