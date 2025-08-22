@@ -1,2 +1,2 @@
 #!/bin/bash
-stow -v -t ~ -d . */
+stow --dotfiles -v -t ~ -d . */
