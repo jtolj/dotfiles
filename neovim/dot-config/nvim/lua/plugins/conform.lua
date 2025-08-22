@@ -30,6 +30,7 @@ return { -- Autoformat
       php = { 'pint', stop_after_first = true },
       blade = { 'blade-formatter', stop_after_first = true },
       javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      json = { 'prettierd', 'prettier', stop_after_first = true },
     },
   },
 }
