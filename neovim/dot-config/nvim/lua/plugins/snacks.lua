@@ -71,6 +71,11 @@ return {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
+      zen = {
+        backdrop = {
+          transparent = false,
+        },
+      },
     },
   },
   keys = {
