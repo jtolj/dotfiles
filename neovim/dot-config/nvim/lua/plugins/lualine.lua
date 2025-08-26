@@ -1,28 +1,3 @@
-local mode = {
-  'mode',
-  fmt = function(s)
-    local mode_map = {
-      ['NORMAL'] = 'N',
-      ['O-PENDING'] = 'N?',
-      ['INSERT'] = 'I',
-      ['VISUAL'] = 'V',
-      ['V-BLOCK'] = 'VB',
-      ['V-LINE'] = 'VL',
-      ['V-REPLACE'] = 'VR',
-      ['REPLACE'] = 'R',
-      ['COMMAND'] = '!',
-      ['SHELL'] = 'SH',
-      ['TERMINAL'] = 'T',
-      ['EX'] = 'X',
-      ['S-BLOCK'] = 'SB',
-      ['S-LINE'] = 'SL',
-      ['SELECT'] = 'S',
-      ['CONFIRM'] = 'Y?',
-      ['MORE'] = 'M',
-    }
-    return mode_map[s] or s
-  end,
-}
 local function get_codecompanion_chat()
   local chat = require('codecompanion').buf_get_chat(vim.api.nvim_get_current_buf())
   if not chat then
@@ -85,6 +60,21 @@ local codecompanion = {
   end,
 }
 
+local dmode_enabled = false
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'DebugModeChanged',
+  callback = function(args)
+    dmode_enabled = args.data.enabled
+  end,
+})
+
+local mode = {
+  'mode',
+  fmt = function(s)
+    return dmode_enabled and 'DEBUG' or s
+  end,
+}
+
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
@@ -109,7 +99,7 @@ return {
       lualine_z = {},
     },
     sections = {
-      lualine_a = { 'mode' },
+      lualine_a = { mode },
       lualine_b = { 'branch', 'diff', 'diagnostics' },
       lualine_c = {},
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
