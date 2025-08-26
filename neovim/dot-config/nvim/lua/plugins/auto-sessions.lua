@@ -6,39 +6,26 @@ return {
   ---@module "auto-session"
   ---@type AutoSession.Config
   opts = {
-    suppressed_dirs = { '/tmp', '~/', '~/Projects', '~/Downloads', '/' },
+    -- Saving / restoring
     enabled = true, -- Enables/disables auto creating, saving and restoring
-    root_dir = vim.fn.stdpath 'data' .. '/sessions/', -- Root dir where sessions will be stored
     auto_save = true, -- Enables/disables auto saving session on exit
     auto_restore = true, -- Enables/disables auto restoring session on start
-    auto_create = true, -- Enables/disables auto creating new session files. Can take a function that should return true/false if a new session file should be created or not
-    auto_restore_last_session = false, -- On startup, loads the last saved session if session for cwd does not exist
+    auto_create = true, -- Enables/disables auto creating new session files. Can be a function that returns true if a new session file should be allowed
+    --
+    -- Filtering
+    bypass_save_filetypes = nil, -- List of filetypes to bypass auto save when the only buffer open is one of the file types listed, useful to ignore dashboards
+    close_filetypes_on_save = { 'checkhealth' }, -- Buffers with matching filetypes will be closed before saving
+    close_unsupported_windows = true, -- Close windows that aren't backed by normal file before autosaving a session
+
+    -- Git / Session naming
     git_use_branch_name = true, -- Include git branch name in session name
     git_auto_restore_on_branch_change = true, -- Should we auto-restore the session when the git branch changes. Requires git_use_branch_name
-    lazy_support = true, -- Automatically detect if Lazy.nvim is being used and wait until Lazy is done to make sure session is restored correctly. Does nothing if Lazy isn't being used. Can be disabled if a problem is suspected or for debugging
-    close_unsupported_windows = true, -- Close windows that aren't backed by normal file before autosaving a session
-    args_allow_single_directory = true, -- Follow normal sesion save/load logic if launched with a single directory as the only argument
-    args_allow_files_auto_save = false, -- Allow saving a session even when launched with a file argument (or multiple files/dirs). It does not load any existing session first. While you can just set this to true, you probably want to set it to a function that decides when to save a session when launched with file args. See documentation for more detail
-    continue_restore_on_error = false, -- Keep loading the session even if there's an error
-    show_auto_restore_notif = true, -- Whether to show a notification when auto-restoring
-    cwd_change_handling = false, -- Follow cwd changes, saving a session before change and restoring after
-    lsp_stop_on_restore = false, -- Should language servers be stopped when restoring a session. Can also be a function that will be called if set. Not called on autorestore from startup
-    purge_after_minutes = 1440, -- Sessions older than purge_after_minutes will be deleted asynchronously on startup, e.g. set to 14400 to delete sessions that haven't been accessed for more than 10 days, defaults to off (no purging), requires >= nvim 0.10
-    log_level = 'error', -- Sets the log level of the plugin (debug, info, warn, error).
 
-    session_lens = {
-      load_on_setup = false, -- Initialize on startup (requires Telescope)
-      previewer = false, -- File preview for session picker
-      mappings = {
-        -- Mode can be a string or a table, e.g. {"i", "n"} for both insert and normal mode
-        delete_session = { 'i', '<C-D>' },
-        alternate_session = { 'i', '<C-S>' },
-        copy_session = { 'i', '<C-Y>' },
-      },
-      session_control = {
-        control_dir = vim.fn.stdpath 'data' .. '/auto_session/', -- Auto session control dir, for control files, like alternating between two sessions with session-lens
-        control_filename = 'session_control.json', -- File name of the session control file
-      },
-    },
+    -- Deleting
+    purge_after_minutes = 1440, -- Sessions older than purge_after_minutes will be deleted asynchronously on startup, e.g. set to 14400 to delete sessions that haven't been accessed for more than 10 days, defaults to off (no purging), requires >= nvim 0.10
+
+    -- Misc
+    show_auto_restore_notif = true, -- Whether to show a notification when auto-restoring
+    continue_restore_on_error = false, -- Keep loading the session even if there's an error
   },
 }
