@@ -1,13 +1,12 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
-local mux = wezterm.mux
 local config = wezterm.config_builder()
 
 local keys = {
 	{
 		key = "Escape",
 		mods = "LEADER",
-		action = wezterm.action.Nop,
+		action = act.Nop,
 	},
 	{
 		key = "g",
@@ -17,56 +16,56 @@ local keys = {
 	{
 		key = "s",
 		mods = "LEADER",
-		action = wezterm.action.SplitHorizontal({
+		action = act.SplitHorizontal({
 			domain = "CurrentPaneDomain",
 		}),
 	},
 	{
 		key = "S",
 		mods = "LEADER",
-		action = wezterm.action.SplitVertical({
+		action = act.SplitVertical({
 			domain = "CurrentPaneDomain",
 		}),
 	},
 	{
 		mods = "LEADER",
 		key = "h",
-		action = wezterm.action.ActivatePaneDirection("Left"),
+		action = act.ActivatePaneDirection("Left"),
 	},
 	{
 		mods = "LEADER",
 		key = "j",
-		action = wezterm.action.ActivatePaneDirection("Down"),
+		action = act.ActivatePaneDirection("Down"),
 	},
 	{
 		mods = "LEADER",
 		key = "k",
-		action = wezterm.action.ActivatePaneDirection("Up"),
+		action = act.ActivatePaneDirection("Up"),
 	},
 	{
 		mods = "LEADER",
 		key = "l",
-		action = wezterm.action.ActivatePaneDirection("Right"),
+		action = act.ActivatePaneDirection("Right"),
 	},
 	{
 		mods = "LEADER",
 		key = "LeftArrow",
-		action = wezterm.action.AdjustPaneSize({ "Left", 5 }),
+		action = act.AdjustPaneSize({ "Left", 5 }),
 	},
 	{
 		mods = "LEADER",
 		key = "RightArrow",
-		action = wezterm.action.AdjustPaneSize({ "Right", 5 }),
+		action = act.AdjustPaneSize({ "Right", 5 }),
 	},
 	{
 		mods = "LEADER",
 		key = "DownArrow",
-		action = wezterm.action.AdjustPaneSize({ "Down", 5 }),
+		action = act.AdjustPaneSize({ "Down", 5 }),
 	},
 	{
 		mods = "LEADER",
 		key = "UpArrow",
-		action = wezterm.action.AdjustPaneSize({ "Up", 5 }),
+		action = act.AdjustPaneSize({ "Up", 5 }),
 	},
 	{
 		key = "e",
@@ -79,6 +78,19 @@ local keys = {
 				end
 			end),
 		}),
+	},
+	{
+		key = "\\",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window)
+			local overrides = window:get_config_overrides() or {}
+			if overrides.font_size then
+				overrides.font_size = nil
+			else
+				overrides.font_size = 22.0
+			end
+			window:set_config_overrides(overrides)
+		end),
 	},
 	{
 		key = "p",
@@ -145,6 +157,7 @@ config.window_frame = {
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
+
 wezterm.on("update-right-status", function(window, _)
 	local prefix = ""
 
