@@ -29,28 +29,30 @@ return {
     'olimorris/codecompanion.nvim',
     opts = {
       adapters = {
-        anthropic = function()
-          return require('codecompanion.adapters').extend('anthropic', {
-            env = {
-              api_key = 'ANTHROPIC_API_KEY',
-            },
-          })
-        end,
-        copilot = function()
-          return require('codecompanion.adapters').extend('copilot', {
-            schema = {
-              -- model = {
-              --   default = 'claude-sonnet-4',
-              -- },
-              temperature = {
-                default = 0.1,
+        http = {
+          anthropic = function()
+            return require('codecompanion.adapters').extend('anthropic', {
+              env = {
+                api_key = 'ANTHROPIC_API_KEY',
               },
-              context_window = {
-                default = 200000,
+            })
+          end,
+          copilot = function()
+            return require('codecompanion.adapters').extend('copilot', {
+              schema = {
+                -- model = {
+                --   default = 'claude-sonnet-4',
+                -- },
+                temperature = {
+                  default = 0.1,
+                },
+                context_window = {
+                  default = 200000,
+                },
               },
-            },
-          })
-        end,
+            })
+          end,
+        },
       },
       actions = {
         menu = {
