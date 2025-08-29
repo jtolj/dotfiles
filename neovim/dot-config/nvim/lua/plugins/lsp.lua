@@ -89,7 +89,16 @@ return {
 
     require('mason-tool-installer').setup {
       ensure_installed = {
-        'stylua', -- Used to format Lua code
+        'stylua',
+        'intelephense',
+        'blade-formatter',
+        'pint',
+        'phpcs',
+        'php-debug-adapter',
+        'htmlbeautifier',
+        'prettier',
+        'jq',
+        'biome',
       },
     }
 
