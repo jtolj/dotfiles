@@ -99,10 +99,24 @@ return {
         'prettier',
         'jq',
         'biome',
+        'harper-ls',
       },
     }
 
     local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+    vim.lsp.config['harper_ls'] = {
+      capabilities = capabilities,
+      filetypes = { 'markdown', 'typst' },
+      settings = {
+        ['harper-ls'] = {
+          linters = {
+            SpellCheck = false,
+            SentenceCapitalization = false,
+          },
+        },
+      },
+    }
 
     vim.lsp.config['lua_ls'] = {
       capabilities = capabilities,
