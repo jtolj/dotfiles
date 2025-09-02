@@ -103,7 +103,13 @@ return {
       },
     }
 
-    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities {
+      textDocument = {
+        onTypeFormatting = {
+          dynamicRegistration = false,
+        },
+      },
+    }
 
     vim.lsp.config['harper_ls'] = {
       capabilities = capabilities,
