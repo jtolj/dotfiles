@@ -114,7 +114,7 @@ return {
 
     vim.lsp.config['harper_ls'] = {
       capabilities = capabilities,
-      filetypes = { 'markdown', 'typst' },
+      filetypes = { 'markdown', 'typst', 'gitcommit' },
       settings = {
         ['harper-ls'] = {
           linters = {
