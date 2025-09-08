@@ -91,6 +91,7 @@ return {
       ensure_installed = {
         'stylua',
         'intelephense',
+        'tailwindcss-language-server',
         'blade-formatter',
         'pint',
         'phpcs',
