@@ -117,7 +117,7 @@ config.window_padding = {
 }
 
 config.leader = {
-	key = "z",
+	key = "F18",
 	mods = "SUPER",
 	timeout_milliseconds = 10000,
 }
