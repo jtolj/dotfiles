@@ -140,7 +140,7 @@ tw() {
   fi
 
   if [[ $choice == "done" ]]; then
-    timew stop
+    timew stop && sketchybar --trigger timewarrior_updated ACTIVE=0 LABEL=
     return
   fi
 
@@ -150,7 +150,7 @@ tw() {
     return 1;
   fi
 
-  timew start "$choice"
+  timew start "$choice" && sketchybar --trigger timewarrior_updated ACTIVE=1 LABEL=$choice
 }
 
 # Wezterm
