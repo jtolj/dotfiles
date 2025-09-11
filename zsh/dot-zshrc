@@ -44,8 +44,8 @@ znap source reegnz/jq-zsh-plugin
 znap source Aloxaf/fzf-tab
 znap source zdharma/fast-syntax-highlighting
 znap eval atuin 'atuin init zsh'
-znap eval ohmyposh 'oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml'
 znap eval mise 'mise activate'
+eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml)"
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
