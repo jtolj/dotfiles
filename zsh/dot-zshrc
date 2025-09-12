@@ -27,6 +27,7 @@ if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+
 [[ -r ~/.zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
         git@github.com:marlonrichert/zsh-snap.git ~/.zsh-snap
@@ -46,6 +47,7 @@ znap source zdharma/fast-syntax-highlighting
 znap eval atuin 'atuin init zsh'
 znap eval mise 'mise activate'
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml)"
+
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
@@ -196,7 +198,6 @@ alias grro="git reset --hard @{u}"
 # History search with wildcards - ex ghs "*filename.ext"
 alias ghs="git log --all --full-history --"
 
-
 gfo() {
   git fetch origin $1:$1
 }
@@ -214,7 +215,6 @@ treediff() {
 cleanbranches() {
   git branch --merged| grep -E -v "(^\*|master|develop|staging|main|dev)" | xargs git branch -d
 }
-
 
 # Delete branches that have been removed from the remote
 nukebranches() {
@@ -282,11 +282,6 @@ pw() {
 ## Bitwarden get password and copy to clipboard
 pwcopy() {
   bw get password "$@" | pbcopy
-}
-
-# open a lando database
-ldb() {
-  open $(lando info --format=json -s database 2>/dev/null | jq -r '.[0] | "mysql://\(.creds.user):\(.creds.password)@\(.external_connection.host):\(.external_connection.port)/\(.creds.database)"')
 }
 
 # atuin helpers
