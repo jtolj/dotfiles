@@ -1,0 +1,8 @@
+[server]
+url = "https://localhost"
+
+[session]
+idle_time_limit = 10
+
+[notifications]
+enabled = true
