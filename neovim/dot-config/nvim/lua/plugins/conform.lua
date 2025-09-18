@@ -27,11 +27,12 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      php = { 'pint', stop_after_first = true },
+      php = { 'pint', 'mago_format', stop_after_first = true },
       blade = { 'blade-formatter', stop_after_first = true },
       javascript = { 'biome', 'prettier', stop_after_first = true },
       json = { 'biome', 'prettier', stop_after_first = true },
       html = { 'htmlbeautifier', 'prettier', stop_after_first = true },
+      css = { 'prettier', stop_after_first = true },
     },
   },
 }

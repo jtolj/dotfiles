@@ -93,7 +93,6 @@ return {
         'intelephense',
         'tailwindcss-language-server',
         'blade-formatter',
-        'pint',
         'phpcs',
         'php-debug-adapter',
         'htmlbeautifier',
