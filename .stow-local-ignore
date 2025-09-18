@@ -5,6 +5,6 @@
 .git
 .gitignore
 
+install.sh
 # Assets
 README.md
-
