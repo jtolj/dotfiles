@@ -284,6 +284,20 @@ pwcopy() {
   bw get password "$@" | pbcopy
 }
 
+
+## Homebrew
+brew() {
+  if [ -f /opt/homebrew/bin/brew ]; then
+    /opt/homebrew/bin/brew "$@"
+    if [[ "$1" == "install"  || "$1" == "remove" ]]; then
+      echo "Updating Brewfile..."
+      /opt/homebrew/bin/brew bundle dump --global --force --describe --no-vscode
+    fi
+  else
+    echo "Homebrew not found!"
+  fi
+}
+
 # atuin helpers
 atuin_prune_failed() {
   atuin search --delete -e 1 ""
