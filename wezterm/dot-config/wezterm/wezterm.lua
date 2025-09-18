@@ -50,22 +50,22 @@ local keys = {
 	{
 		mods = "LEADER",
 		key = "LeftArrow",
-		action = act.AdjustPaneSize({ "Left", 5 }),
+		action = act.AdjustPaneSize({ "Left", 10 }),
 	},
 	{
 		mods = "LEADER",
 		key = "RightArrow",
-		action = act.AdjustPaneSize({ "Right", 5 }),
+		action = act.AdjustPaneSize({ "Right", 10 }),
 	},
 	{
 		mods = "LEADER",
 		key = "DownArrow",
-		action = act.AdjustPaneSize({ "Down", 5 }),
+		action = act.AdjustPaneSize({ "Down", 10 }),
 	},
 	{
 		mods = "LEADER",
 		key = "UpArrow",
-		action = act.AdjustPaneSize({ "Up", 5 }),
+		action = act.AdjustPaneSize({ "Up", 10 }),
 	},
 	{
 		key = "e",
