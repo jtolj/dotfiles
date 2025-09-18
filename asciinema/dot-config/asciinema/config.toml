@@ -5,4 +5,5 @@ url = "https://localhost"
 idle_time_limit = 10
 
 [notifications]
+command = 'terminal-notifier -title "asciinema" -message "$TEXT"'
 enabled = true
