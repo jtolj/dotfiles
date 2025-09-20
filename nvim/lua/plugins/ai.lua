@@ -57,7 +57,7 @@ return {
       prompt_library = {
         ['Grammar Check'] = {
           strategy = 'chat',
-          description = 'Make suggestions for grammer, spelling, and tone',
+          description = 'Make suggestions for grammar, spelling, and tone',
           opts = {
             auto_submit = true,
           },
