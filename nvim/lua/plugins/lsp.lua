@@ -95,11 +95,10 @@ return {
         'blade-formatter',
         'phpcs',
         'php-debug-adapter',
-        'htmlbeautifier',
-        'prettier',
         'jq',
         'biome',
         'harper-ls',
+        'bashls',
       },
     }
 

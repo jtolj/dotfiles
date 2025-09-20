@@ -31,7 +31,7 @@ return { -- Autoformat
       blade = { 'blade-formatter', stop_after_first = true },
       javascript = { 'biome', 'prettier', stop_after_first = true },
       json = { 'biome', 'prettier', stop_after_first = true },
-      html = { 'htmlbeautifier', 'prettier', stop_after_first = true },
+      html = { 'prettier', stop_after_first = true },
       css = { 'prettier', stop_after_first = true },
     },
   },
