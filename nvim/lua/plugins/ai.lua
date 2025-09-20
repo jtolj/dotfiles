@@ -54,6 +54,25 @@ return {
           end,
         },
       },
+      prompt_library = {
+        ['Grammar Check'] = {
+          strategy = 'chat',
+          description = 'Make suggestions for grammer, spelling, and tone',
+          opts = {
+            auto_submit = true,
+          },
+          prompts = {
+            {
+              role = 'system',
+              content = 'You are a world class proofreader',
+            },
+            {
+              role = 'user',
+              content = '#{buffer}\nCan you check this copy for spelling and grammar errors? Please also check for consistent tone. Be sure to reference specific line numbers, and give a summary of each change after providing the old and new lines.',
+            },
+          },
+        },
+      },
       actions = {
         menu = {
           'explain_code',
