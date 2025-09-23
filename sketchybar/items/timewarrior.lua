@@ -5,7 +5,7 @@ local settings = require("settings")
 sbar.add("event", "timewarrior_updated")
 
 local timewarrior = sbar.add("item", {
-	padding_left = 1,
+	padding_left = 6,
 	padding_right = 1,
 	position = "right",
 	background = {

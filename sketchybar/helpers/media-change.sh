@@ -8,9 +8,9 @@ on run
 	try
 	set MediaRemote to current application's NSBundle's bundleWithPath:"/System/Library/PrivateFrameworks/MediaRemote.framework/"
 	MediaRemote's load()
-	
+
 	set MRNowPlayingRequest to current application's NSClassFromString("MRNowPlayingRequest")
-	
+
 	set appName to MRNowPlayingRequest's localNowPlayingPlayerPath()'s client()'s displayName()
 	set infoDict to MRNowPlayingRequest's localNowPlayingItem()'s nowPlayingInfo()
 
@@ -25,15 +25,15 @@ EOL
 
 output=$(osascript -e "$osascript")
 
-# Read cached output
+# Read cached output if file is less than 1 minutes old
 cached_output=""
-if [[ -f "$CACHE_FILE" ]]; then
+if [[ $(find "$CACHE_FILE" -mmin -1 2>/dev/null) ]]; then
     cached_output=$(cat "$CACHE_FILE")
 fi
 
 # Compare current output with cached output
 if [[ "$output" == "$cached_output" ]]; then
-    exit 0 # No change, exit without triggering
+        exit 0
 fi
 
 # Update cache with new output
@@ -47,6 +47,7 @@ if [[ $output == "" ]]; then
         APP_NAME=""
     exit 0
 fi
+
 # Split the output by ~~~ delimiter
 IFS='~' read -r isPlaying title album artist appName <<<"$output"
 
