@@ -86,6 +86,7 @@ function ls() {
 # Usage: logs <service_name> [tail_args]
 # Example: logs caddy -n 100
 logs() {
+  local name tail_args
   name="$1"
   tail_args=("${@:2}")
 
@@ -93,7 +94,7 @@ logs() {
   if [ -z "$name" ]; then
     eza --icons /opt/homebrew/var/log/
     return
-  elif
+  fi
 
   if [ -f "/opt/homebrew/var/log/${name}" ]; then
     tail ${tail_args} "/opt/homebrew/var/log/${name}"
@@ -108,6 +109,7 @@ logs() {
 
 # Notify after command finishes
 function lmk() {
+  local OUTPUT STATUS
   OUTPUT=$("$@")
   if [ $? -eq 0 ]; then
     STATUS="✅ Command Succeeded"
@@ -117,12 +119,14 @@ function lmk() {
   terminal-notifier -message "$OUTPUT" \
     -title "$STATUS" \
     -subtitle "$@" \
+    -message "$OUTPUT" \
     -timeout 5
 }
 
 # Start timewarrior with fzf tag selector
 # inspired by vimothy chalomet
 tw() {
+  local tags choice active arg
   tags=(beebic blog journal learning productivity wasted done)
 
   if [[ -n "$1" ]]; then
@@ -137,7 +141,6 @@ tw() {
   fi
 
   if [[ $choice == "" ]]; then
-    echo "No tag selected. Exiting."
     return 1;
   fi
 
@@ -152,7 +155,7 @@ tw() {
     return 1;
   fi
 
-  timew start "$choice" && sketchybar --trigger timewarrior_updated ACTIVE=1 LABEL=$choice
+  timew start "$choice" && sketchybar --trigger timewarrior_updated ACTIVE=1 LABEL="$choice"
 }
 
 # Wezterm
@@ -234,6 +237,7 @@ nukebranches() {
       continue
     fi
 
+    local answer
     echo -n "Would you like to delete $branch? (y/n) "
     read -r answer
     if [[ "$answer" =~ ^[Yy]$ ]]; then
@@ -265,6 +269,7 @@ alias -g less="maybeitsjsonorsomething"
 
 ## Kill all processes matching a grep pattern
 killgrep() {
+  local REPLY
   echo "Killing:\n"
   ps aux | grep "$@"
 
