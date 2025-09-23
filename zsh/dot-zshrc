@@ -125,6 +125,12 @@ function lmk() {
 
 # Start timewarrior with fzf tag selector
 # inspired by vimothy chalomet
+TIMEW_BIN="$(which timew)"
+timew() {
+  "$TIMEW_BIN" "$@"
+  sketchybar --trigger timewarrior_updated ACTIVE="$($TIMEW_BIN get dom.active)" LABEL="$($TIMEW_BIN get dom.tags.1)"
+}
+
 tw() {
   local tags choice active arg
   tags=(beebic blog journal learning productivity wasted done)
@@ -155,8 +161,9 @@ tw() {
     return 1;
   fi
 
-  timew start "$choice" && sketchybar --trigger timewarrior_updated ACTIVE=1 LABEL="$choice"
+  timew start "$choice"
 }
+
 
 # Wezterm
 alias icat="wezterm imgcat"
