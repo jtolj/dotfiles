@@ -20,6 +20,11 @@ return {
 
       return {
         enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+        view = {
+          merge_tool = {
+            layout = 'diff3_mixed',
+          },
+        },
         keymaps = {
           view = {
             { 'n', 'q', actions.close },
