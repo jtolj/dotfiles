@@ -25,6 +25,13 @@ return { -- Autoformat
         }
       end
     end,
+    formatters = {
+      caddy = {
+        command = 'caddy',
+        args = { 'fmt', '-' },
+        stdin = true,
+      },
+    },
     formatters_by_ft = {
       lua = { 'stylua' },
       php = { 'pint', 'mago_format', stop_after_first = true },
@@ -33,6 +40,7 @@ return { -- Autoformat
       json = { 'biome', 'prettier', stop_after_first = true },
       html = { 'prettier', stop_after_first = true },
       css = { 'prettier', stop_after_first = true },
+      caddy = { 'caddy' },
     },
   },
 }

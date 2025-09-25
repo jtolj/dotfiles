@@ -88,6 +88,16 @@ vim.opt.foldnestmax = 4
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.FileTypeExpr(v:lnum, &filetype)'
 
+-- Filetypes
+vim.filetype.add {
+  extension = {
+    caddy = 'caddy',
+  },
+  filename = {
+    Caddyfile = 'caddy',
+  },
+}
+
 -- adapted from https://gist.github.com/elementdavv/350361b3e45695f8152a4d8a97fff1ef
 local doc_state = {}
 local import_state = {}
