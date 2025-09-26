@@ -3,7 +3,21 @@ return { -- Highlight, edit, and navigate code
   build = ':TSUpdate',
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   opts = {
-    ensure_installed = { 'php', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'caddy' },
+    ensure_installed = {
+      'php',
+      'bash',
+      'c',
+      'diff',
+      'html',
+      'lua',
+      'luadoc',
+      'markdown',
+      'markdown_inline',
+      'query',
+      'vim',
+      'vimdoc',
+      'caddy',
+    },
     auto_install = true,
     highlight = {
       enable = true,
