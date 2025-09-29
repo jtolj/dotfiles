@@ -5,29 +5,17 @@
 # exec 3>&2 2>/tmp/sample-time.$$.log
 # zmodload zsh/zprof
 # setopt xtrace prompt_subst
-HOME=${HOME:-'/Users/jesse'}
-
-path=(
-  /opt/homebrew/opt/grep/libexec/gnubin
-  /usr/local/sbin
-  /usr/local/bin
-  $HOME/.composer/vendor/bin
-  $HOME/Library/Android/sdk/platform-tools/
-  /opt/homebrew/opt/mysql-client/bin
-  $path
-)
-
-export VI_MODE_SET_CURSOR=true
-export QUOTING_STYLE=literal
 
 # Disable freeze
 stty -ixon
 
+# Init Homebrew
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 
+# ZSH Packages with znap
 [[ -r ~/.zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
         git@github.com:marlonrichert/zsh-snap.git ~/.zsh-snap
@@ -164,10 +152,22 @@ tw() {
   timew start "$choice"
 }
 
-
 # Wezterm
 alias icat="wezterm imgcat"
 alias wssh="wezterm ssh"
+
+# fzf to search for ssh hosts - from https://kaeruct.github.io/posts/2024/10/10/ssh-config-hostnames/
+ssh () {
+  if [[ $# -gt 0 ]]; then
+    command ssh "$@"
+  else
+    local server
+      server=$(grep -E '^Host ' ~/.ssh/config | awk '{print $2}' | fzf)
+      if [[ -n $server ]] then
+        command ssh $server
+      fi
+  fi
+}
 
 # Flush local DNS cache
 flushdns() {
@@ -273,6 +273,7 @@ maybeitsjsonorsomething() {
 
 alias -g more="maybeitsjsonorsomething"
 alias -g less="maybeitsjsonorsomething"
+alias -g man="batman"
 
 ## Kill all processes matching a grep pattern
 killgrep() {

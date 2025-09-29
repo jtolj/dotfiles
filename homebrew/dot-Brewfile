@@ -35,6 +35,8 @@ brew "aws-sam-cli"
 brew "b2-tools"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Bash scripts that integrate bat with various command-line tools
+brew "bat-extras"
 # Secure and free password manager for all of your devices
 brew "bitwarden-cli"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
@@ -45,6 +47,8 @@ brew "caddy", restart_service: :changed
 brew "ccache"
 # Cross-platform make
 brew "cmake"
+# Conventional Commits toolbox
+brew "cocogitto"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Diff that understands syntax
@@ -103,7 +107,7 @@ brew "gum"
 brew "hugo"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
-# Tool to set default openers for file formats and url schemes on MacOS
+# Tool to set default openers for file formats and url schemes on macOS
 brew "infat"
 # Lightweight and flexible command-line JSON processor
 brew "jq"

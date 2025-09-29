@@ -1,0 +1,24 @@
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# Path
+HOME=${HOME:-'/Users/jesse'}
+path=(
+  /opt/homebrew/opt/grep/libexec/gnubin
+  /usr/local/sbin
+  /usr/local/bin
+  $HOME/.composer/vendor/bin
+  $HOME/Library/Android/sdk/platform-tools/
+  /opt/homebrew/opt/mysql-client/bin
+  $path
+)
+
+# ZSH Config
+export VI_MODE_SET_CURSOR=true
+export QUOTING_STYLE=literal
+
+# Default Programs
+export EDITOR="nvim"
+
+
+# Program Config
+export FZF_DEFAULT_OPTS="--style minimal --color 16 --layout=reverse --height 30% --preview='bat -p --color=always {}'"
