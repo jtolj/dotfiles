@@ -12,13 +12,15 @@ local media_icon = sbar.add("item", "media_icon", {
 	position = "right",
 	scroll_texts = false,
 	label = {
-		width = 18,
+		width = 32,
 		string = icons.media.play,
 		drawing = true,
 		color = colors.white,
+		padding_left = 12,
+		padding_right = 12,
 	},
 	icon = {
-		width = 18,
+		width = 16,
 		font = { family = "sketchybar-app-font", style = "Regular", size = 16 },
 		drawing = false,
 	},
@@ -61,7 +63,6 @@ local media_bracket = sbar.add("bracket", "widgets.media.bracket", {
 	media_artist.name,
 	media_icon.name,
 }, {
-	width = 128,
 	background = { color = colors.bg1, padding_left = 10, padding_right = 10 },
 })
 
