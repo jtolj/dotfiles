@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -e
+
+NEW_PID=$$
+PID_FILE="$HOME/.local/state/media_change_custom.pid"
+
+## TODO: this isn't reliably killing the old processes. Need to learn more about the subprocesses getting spawned and see if they're
+## possibly not under this ppid?
+if [ -f "$PID_FILE" ]; then
+    OLD_PID=$(cat "$PID_FILE")
+    if pkill -9 -P "$OLD_PID"; then
+        echo "Another instance is already running with PID $OLD_PID and was terminated."
+    else
+        echo "Stale PID file found. Removing."
+    fi
+        rm "$PID_FILE"
+fi
+
+echo "New instance running with PID $NEW_PID"
+echo $NEW_PID > "$PID_FILE"
+
+function send_event () {
+    local STATE="$1" TITLE="$2" ALBUM="$3" ARTIST="$4" APP_NAME="$5"
+    echo "Sending event: STATE=$STATE, TITLE=$TITLE, ALBUM=$ALBUM, ARTIST=$ARTIST, APP_NAME=$APP_NAME"
+    sketchybar --trigger media_change_custom \
+        STATE="$STATE" TITLE="$TITLE" ALBUM="$ALBUM" ARTIST="$ARTIST" APP_NAME="$APP_NAME"
+}
+
+media-control stream --no-diff  | jq -r --unbuffered '
+    [
+       if (.payload | length) == 0 then "gone"
+       elif .payload.playbackRate == 1 then "playing"
+       else "paused" end,
+       (if .payload.title == "" then "N/A" else .payload.title end),
+       (if .payload.album == "" then "N/A" else .payload.album end),
+       (if .payload.artist == "" then "N/A" else .payload.artist end),
+       (if .payload.bundleIdentifier == "" then "N/A" else .payload.bundleIdentifier end)
+       ] | @tsv' | while IFS=$'\t' read -r STATE TITLE ALBUM ARTIST APP_NAME; do
+      send_event "$STATE" "$TITLE" "$ALBUM" "$ARTIST" "$APP_NAME"
+    done
