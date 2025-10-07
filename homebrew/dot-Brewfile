@@ -175,6 +175,8 @@ brew "task"
 brew "terminal-notifier"
 # Command-line time tracking application
 brew "timewarrior"
+# Color-based alternative to figlet (uses libcaca)
+brew "toilet"
 # Lightweight BitTorrent client
 brew "transmission-cli"
 # Source code spell checker
