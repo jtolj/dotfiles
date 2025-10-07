@@ -6,9 +6,8 @@ path=(
   /opt/homebrew/opt/grep/libexec/gnubin
   /usr/local/sbin
   /usr/local/bin
+  $HOME/.local/bin
   $HOME/.composer/vendor/bin
-  $HOME/Library/Android/sdk/platform-tools/
-  /opt/homebrew/opt/mysql-client/bin
   $path
 )
 
