@@ -9,6 +9,8 @@ tap "philocalyst/tap"
 tap "platformsh/tap"
 tap "shivammathur/php"
 tap "sst/tap"
+# GNU compiler collection for aarch64-elf
+brew "aarch64-elf-gcc"
 # Run your GitHub Actions locally
 brew "act"
 # Asciicast to GIF converter
@@ -87,6 +89,8 @@ brew "ffmpeg@6"
 brew "fx"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU debugger
+brew "gdb"
 # GitHub command-line tool
 brew "gh"
 # Interpreter for PostScript and PDF
@@ -155,6 +159,8 @@ brew "pngcrush"
 brew "poppler"
 # Runtime developer console, interactive debugger and REPL for PHP
 brew "psysh"
+# Generic machine emulator and virtualizer
+brew "qemu"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Terminal multiplexer with VT100/ANSI terminal emulation
