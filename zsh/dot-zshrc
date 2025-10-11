@@ -162,7 +162,7 @@ ssh () {
     command ssh "$@"
   else
     local server
-      server=$(grep -E '^Host ' ~/.ssh/config | awk '{print $2}' | fzf)
+      server=$(grep -E '^Host ' ~/.ssh/config | awk '{print $2}' | fzf --preview "ssh -Gtt \$(echo {}) |head -n +10")
       if [[ -n $server ]] then
         command ssh $server
       fi
