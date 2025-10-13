@@ -77,10 +77,6 @@ brew "harfbuzz"
 brew "tesseract"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
-# Play, record, convert, and stream audio and video
-brew "ffmpeg@5"
-# Play, record, convert, and stream audio and video
-brew "ffmpeg@6"
 # Terminal JSON viewer
 brew "fx"
 # Command-line fuzzy finder written in Go
