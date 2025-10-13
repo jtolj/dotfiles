@@ -107,6 +107,22 @@ local keys = {
 		mods = "CMD|SHIFT",
 		action = act.ActivateCommandPalette,
 	},
+	{
+		key = "o",
+		mods = "CTRL",
+		action = wezterm.action({
+			QuickSelectArgs = {
+				action = wezterm.action_callback(function(window, pane)
+					local selection = window:get_selection_text_for_pane(pane)
+					if selection and selection:match("^https?://") then
+						wezterm.open_with(selection)
+					elseif selection then
+						window:copy_to_clipboard(selection, "Clipboard")
+					end
+				end),
+			},
+		}),
+	},
 }
 
 config.window_padding = {
