@@ -39,8 +39,6 @@ brew "b2-tools"
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
 brew "bat-extras"
-# Secure and free password manager for all of your devices
-brew "bitwarden-cli"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS

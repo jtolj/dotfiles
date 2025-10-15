@@ -1,8 +1,5 @@
 [tools]
 bun = 'latest'
-elixir = "latest"
-erlang = "latest"
-node = '24'
 rust = 'stable'
 
 [settings]
