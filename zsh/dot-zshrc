@@ -302,12 +302,19 @@ pwcopy() {
 brew() {
   if [ -f /opt/homebrew/bin/brew ]; then
     /opt/homebrew/bin/brew "$@"
-    if [[ "$1" == "install"  || "$1" == "remove" ]]; then
+    if [[ "$1" == "install" || "$1" == "uninstall"  || "$1" == "remove" ]]; then
       echo "Updating Brewfile..."
       /opt/homebrew/bin/brew bundle dump --global --force --describe --no-vscode
     fi
   else
     echo "Homebrew not found!"
+  fi
+}
+
+unbrew() {
+  local pkg=$(grep "brew" ~/.Brewfile | awk -F'"' '{print $2}' | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'grep \"{}\" ~/.Brewfile && brew info {}')
+  if [[ $pkg ]]; then
+    brew remove "$pkg"
   fi
 }
 

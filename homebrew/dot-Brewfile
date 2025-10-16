@@ -11,8 +11,6 @@ tap "shivammathur/php"
 tap "sst/tap"
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
-# Run your GitHub Actions locally
-brew "act"
 # Asciicast to GIF converter
 brew "agg"
 # Cryptography and SSL/TLS Toolkit
@@ -127,14 +125,14 @@ brew "utf8proc"
 brew "neovim"
 # Small build system for use with gyp or CMake
 brew "ninja"
+# Platform built on V8 to build network applications
+brew "node"
 # Command-line tool to generate, analyze, convert and manipulate colors
 brew "pastel"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # General-purpose scripting language
 brew "php", restart_service: :changed
-# General-purpose scripting language
-brew "php@8.3", restart_service: :changed
 # Minimal dumb-terminal emulation program
 brew "picocom"
 # Pinentry for GPG on Mac
@@ -237,3 +235,11 @@ cask "tidal"
 cask "tinkerwell"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
+go "github.com/go-delve/delve/cmd/dlv"
+go "golang.org/x/tools/cmd/goimports"
+go "github.com/fatih/gomodifytags"
+go "github.com/haya14busa/goplay/cmd/goplay"
+go "golang.org/x/tools/gopls"
+go "github.com/cweill/gotests/gotests"
+go "github.com/josharian/impl"
+go "honnef.co/go/tools/cmd/staticcheck"
