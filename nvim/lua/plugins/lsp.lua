@@ -99,6 +99,7 @@ return {
         'biome',
         'harper-ls',
         'bashls',
+        'clangd',
       },
     }
 

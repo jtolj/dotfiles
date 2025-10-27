@@ -57,6 +57,8 @@ brew "dnsmasq"
 brew "doctl"
 # Embeddable SQL OLAP Database Management System
 brew "duckdb"
+# Generic library support script
+brew "libtool"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
 # Run arbitrary commands when files change
@@ -145,6 +147,8 @@ brew "plantuml"
 brew "pngcrush"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Framework for managing multi-language pre-commit hooks
+brew "pre-commit"
 # Runtime developer console, interactive debugger and REPL for PHP
 brew "psysh"
 # Generic machine emulator and virtualizer
