@@ -200,6 +200,8 @@ brew "felixkratz/formulae/sketchybar"
 brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 # User-friendly, lightweight TUI for disk imaging
 brew "philocalyst/tap/caligula"
+# General-purpose scripting language
+brew "shivammathur/php/php@8.5"
 # The AI coding agent built for the terminal.
 brew "sst/tap/opencode"
 # AeroSpace is an i3-like tiling window manager for macOS
