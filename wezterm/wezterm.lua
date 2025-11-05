@@ -28,22 +28,22 @@ local keys = {
 		}),
 	},
 	{
-		mods = "LEADER",
+		mods = "OPT|CMD",
 		key = "h",
 		action = act.ActivatePaneDirection("Left"),
 	},
 	{
-		mods = "LEADER",
+		mods = "OPT|CMD",
 		key = "j",
 		action = act.ActivatePaneDirection("Down"),
 	},
 	{
-		mods = "LEADER",
+		mods = "OPT|CMD",
 		key = "k",
 		action = act.ActivatePaneDirection("Up"),
 	},
 	{
-		mods = "LEADER",
+		mods = "OPT|CMD",
 		key = "l",
 		action = act.ActivatePaneDirection("Right"),
 	},
