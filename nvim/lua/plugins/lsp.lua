@@ -97,7 +97,6 @@ return {
         'php-debug-adapter',
         'jq',
         'biome',
-        'harper-ls',
         'bashls',
         'clangd',
       },
@@ -107,19 +106,6 @@ return {
       textDocument = {
         onTypeFormatting = {
           dynamicRegistration = false,
-        },
-      },
-    }
-
-    vim.lsp.config['harper_ls'] = {
-      capabilities = capabilities,
-      filetypes = { 'markdown', 'typst', 'gitcommit' },
-      settings = {
-        ['harper-ls'] = {
-          linters = {
-            SpellCheck = false,
-            SentenceCapitalization = false,
-          },
         },
       },
     }
