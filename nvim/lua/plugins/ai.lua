@@ -40,12 +40,6 @@ return {
           copilot = function()
             return require('codecompanion.adapters').extend('copilot', {
               schema = {
-                -- model = {
-                --   default = 'claude-sonnet-4',
-                -- },
-                temperature = {
-                  default = 0.1,
-                },
                 context_window = {
                   default = 200000,
                 },
