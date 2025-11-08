@@ -87,7 +87,7 @@ local keys = {
 			if overrides.font_size then
 				overrides.font_size = nil
 			else
-				overrides.font_size = 22.0
+				overrides.font_size = 20.0
 			end
 			window:set_config_overrides(overrides)
 		end),
@@ -141,7 +141,7 @@ config.leader = {
 config.front_end = "WebGpu"
 config.audible_bell = "Disabled"
 
-config.font = wezterm.font("SauceCodePro Nerd Font", {
+config.font = wezterm.font("Hasklug Nerd Font Mono", {
 	weight = "Regular",
 	italic = false,
 })
