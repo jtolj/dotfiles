@@ -68,7 +68,7 @@ return {
     },
 
     sources = {
-      default = { 'copilot', 'lsp', 'laravel', 'snippets', 'path', 'buffer' },
+      default = { 'copilot', 'lsp', 'snippets', 'path', 'buffer' },
       providers = {
         snippets = {
           score_offset = -20,
@@ -86,19 +86,19 @@ return {
             end,
           },
         },
-        laravel = {
-          name = 'laravel',
-          module = 'laravel.blink_source',
-          score_offset = -10,
-          transform_items = function(ctx, items)
-            for _, item in ipairs(items) do
-              item.kind_icon = ''
-              item.kind_name = 'Laravel'
-              item.score_offset = -10
-            end
-            return items
-          end,
-        },
+        -- laravel = {
+        --   name = 'laravel',
+        --   module = 'laravel.blink_source',
+        --   score_offset = -10,
+        --   transform_items = function(ctx, items)
+        --     for _, item in ipairs(items) do
+        --       item.kind_icon = ''
+        --       item.kind_name = 'Laravel'
+        --       item.score_offset = -10
+        --     end
+        --     return items
+        --   end,
+        -- },
         copilot = {
           name = 'copilot',
           module = 'blink-copilot',

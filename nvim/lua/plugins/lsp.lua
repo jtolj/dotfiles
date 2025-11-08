@@ -97,6 +97,7 @@ return {
         'php-debug-adapter',
         'jq',
         'biome',
+        'laravel-ls',
         'bashls',
         'clangd',
       },
