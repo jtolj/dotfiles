@@ -116,12 +116,18 @@ function lmk() {
 TIMEW_BIN="$(which timew)"
 timew() {
   "$TIMEW_BIN" "$@"
-  sketchybar --trigger timewarrior_updated ACTIVE="$($TIMEW_BIN get dom.active)" LABEL="$($TIMEW_BIN get dom.tags.1)"
+  local ACTIVE="$($TIMEW_BIN get dom.active)"
+  if [[ $ACTIVE -eq 0 ]]; then
+    sketchybar --trigger timewarrior_updated ACTIVE=0 LABEL=
+    return
+  fi
+  local LABEL="$($TIMEW_BIN get dom.active.tags.1)"
+  sketchybar --trigger timewarrior_updated ACTIVE="$ACTIVE" LABEL="$LABEL"
 }
 
 tw() {
   local tags choice active arg
-  tags=(beebic blog journal learning productivity wasted done)
+  tags=(superfinito beebic blog journal learning productivity wasted done)
 
   if [[ -n "$1" ]]; then
     # Make sure the argument is in the array
@@ -131,7 +137,7 @@ tw() {
   fi
 
   if [[ -z $choice ]]; then
-    choice=$(printf "%s\n" "${tags[@]}" | fzf --layout=reverse --prompt="Select a tag: " --height=10% --border --ansi)
+    choice=$(printf "%s\n" "${tags[@]}" | fzf --layout=reverse --preview="$TIMEW_BIN summary day {-1}" --prompt="Select a tag: " --height=10% --border --ansi)
   fi
 
   if [[ $choice == "" ]]; then
