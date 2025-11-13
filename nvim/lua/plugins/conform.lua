@@ -41,6 +41,7 @@ return { -- Autoformat
       html = { 'prettier', stop_after_first = true },
       css = { 'prettier', stop_after_first = true },
       caddy = { 'caddy' },
+      go = { 'goimports', 'gofmt' },
     },
   },
 }
