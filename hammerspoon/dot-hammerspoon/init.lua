@@ -66,13 +66,17 @@ local remapCapsLock = hs.task.new("/usr/bin/hidutil", taskFinished, {
 
 local unmapCapsLock = hs.task.new("/usr/bin/hidutil", taskFinished, { "property", "--set", '{"UserKeyMapping":[]}' })
 
+local uhk_is_connected = false
 checkForKeyboard = function()
-	local uhk_is_connected = false
+	local prev_state = uhk_is_connected
 	for k, v in pairs(hs.usb.attachedDevices()) do
 		if v.productName == "UHK 60 v2" then
 			uhk_is_connected = true
 			break
 		end
+	end
+	if prev_state == uhk_is_connected then
+		return
 	end
 	if not uhk_is_connected then
 		remapCapsLock:start()
@@ -85,12 +89,10 @@ end
 
 checkForKeyboard()
 
-local usb_watcher = hs.usb.watcher.new(function(event)
-	if event.productName == "UHK 60 v2" then
-		checkForKeyboard()
-	end
-end)
-usb_watcher:start()
+-- usb watcher does not trigger if keyboard is unplugged
+-- when the laptop is asleep, so just poll
+local keyboard_watcher = hs.timer.new(10, checkForKeyboard)
+keyboard_watcher:start()
 
 -- Hyper Mode
 -- A global variable for the Hyper Mode
