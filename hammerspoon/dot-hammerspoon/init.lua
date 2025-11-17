@@ -1,3 +1,5 @@
+require("hs.ipc")
+hs.ipc.cliInstall("/opt/homebrew")
 local log = hs.logger.new("mystuff", "debug")
 
 function slowAlert(message)
@@ -32,6 +34,8 @@ end
 
 -- Set default output to headphones
 toggle_output("CalDigit Thunderbolt 3 Audio")
+
+-- Quake-ish mode for WezTerm
 hs.hotkey.bind({ "ctrl" }, 50, function()
 	local wez = hs.application.get("com.github.wez.wezterm")
 	if wez then
