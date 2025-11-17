@@ -14,7 +14,6 @@ if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-
 # ZSH Packages with znap
 [[ -r ~/.zsh-snap/znap.zsh ]] ||
     git clone --depth 1 -- \
@@ -58,7 +57,6 @@ alias date="gdate"
 alias ll="eza -l --icons"
 alias tree="eza -T --icons"
 alias vs="code"
-alias p="[ -d ~/Projects ] && cd ~/Projects"
 alias a="artisan"
 alias tinker="artisan tinker"
 alias which="/usr/bin/which"
@@ -66,8 +64,41 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias tmp="cd $TMPDIR"
 
+# replace ls with eza
 function ls() {
   eza --icons "$@"
+}
+
+# list projects and cd into selected one
+p() {
+  local projects_dir="/Users/jesse/Projects/"
+  choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
+  cd "$projects_dir$choice" || return
+}
+
+# list projects and open in nvim
+np() {
+  local projects_dir="/Users/jesse/Projects/"
+  choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
+  cd "$projects_dir$choice" && nvim || return
+}
+
+# markdown to pdf with pandoc
+topdf() {
+  if [ -z "$1" ]; then
+    echo "Usage: topdf <file>"
+    return
+  fi
+
+  local input_file="$1"
+  local output_file="${input_file%.*}.pdf"
+
+  if [[ "$input_file" == *.md ]]; then
+    pandoc "$input_file" -o "$output_file"
+    echo "Converted $input_file to $output_file"
+  else
+    echo "Unsupported file type. Currently only supports .md files."
+  fi
 }
 
 # Tail service logs from homebrew.
@@ -262,7 +293,7 @@ nukebranches() {
   done
 }
 
-# Aliases less / more to either fx, bat or icat
+# Aliases less / more to: fx, bat, tdf or imgcat
 maybeitsjsonorsomething() {
   if [[ $1 == *.json ]]; then
     fx "${@}" || bat "${@}"
@@ -302,7 +333,6 @@ pw() {
 pwcopy() {
   bw get password "$@" | pbcopy
 }
-
 
 ## Homebrew
 brew() {
