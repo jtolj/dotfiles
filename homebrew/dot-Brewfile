@@ -45,8 +45,6 @@ brew "caddy", restart_service: :changed
 brew "ccache"
 # Cross-platform make
 brew "cmake"
-# Conventional Commits toolbox
-brew "cocogitto"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Diff that understands syntax
@@ -69,10 +67,10 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@77"
 # OpenType text shaping engine
 brew "harfbuzz"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@77"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
 # Play, record, convert, and stream audio and video
@@ -131,6 +129,8 @@ brew "neovim"
 brew "ninja"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
 # Command-line tool to generate, analyze, convert and manipulate colors
 brew "pastel"
 # CLI for Postgres with auto-completion and syntax highlighting
@@ -195,7 +195,6 @@ brew "yazi"
 brew "zig"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-brew "aviator-co/tap/av"
 # A window border system for macOS
 brew "felixkratz/formulae/borders"
 # Custom macOS statusbar with shell plugin, interaction and graph support
@@ -212,6 +211,8 @@ brew "sst/tap/opencode"
 cask "aerospace"
 # Application launcher and productivity software
 cask "alfred"
+# Compact TeX distribution as alternative to the full TeX Live / MacTeX
+cask "basictex"
 # Scriptable scratchpad for developers
 cask "boop"
 # Open source IDE for exploring and testing APIs
@@ -241,6 +242,8 @@ cask "tableplus"
 cask "tidal"
 # Tinker tool for PHP and Laravel developers
 cask "tinkerwell"
+# Google Chromium, sans integration with Google
+cask "ungoogled-chromium"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm"
 go "github.com/go-delve/delve/cmd/dlv"
