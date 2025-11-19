@@ -1,6 +1,6 @@
 require("hs.ipc")
 hs.ipc.cliInstall("/opt/homebrew")
-local log = hs.logger.new("mystuff", "debug")
+local log = hs.logger.new("debug:", "debug")
 
 function slowAlert(message)
 	hs.alert.closeAll()
@@ -53,7 +53,9 @@ hs.hotkey.bind({ "ctrl" }, 50, function()
 end)
 
 -- Keyboard shortcuts when not connected to UHK
-function taskFinished(exitCode, stdOut, stdErr)
+local capsLockRemapped = false
+function finishedMapping(exitCode, stdOut, stdErr)
+	capsLockRemapped = true
 	if exitCode ~= 0 then
 		log.d(exitCode)
 		log.d(stdOut)
@@ -62,35 +64,41 @@ function taskFinished(exitCode, stdOut, stdErr)
 	end
 end
 
-local remapCapsLock = hs.task.new("/usr/bin/hidutil", taskFinished, {
+function finishedUnMapping(exitCode, stdOut, stdErr)
+	capsLockRemapped = false
+	if exitCode ~= 0 then
+		log.d(exitCode)
+		log.d(stdOut)
+		log.d(stdErr)
+		slowAlert("Error unmapping Caps Lock")
+	end
+end
+
+local remapCapsLock = hs.task.new("/usr/bin/hidutil", finishedMapping, {
 	"property",
 	"--set",
 	'{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x70000006C}]}',
 })
 
-local unmapCapsLock = hs.task.new("/usr/bin/hidutil", taskFinished, { "property", "--set", '{"UserKeyMapping":[]}' })
+local unmapCapsLock =
+	hs.task.new("/usr/bin/hidutil", finishedUnMapping, { "property", "--set", '{"UserKeyMapping":[]}' })
 
-local uhk_is_connected = false
 checkForKeyboard = function()
-	local prev_state = uhk_is_connected
+	local uhk_is_connected = false
 	for k, v in pairs(hs.usb.attachedDevices()) do
 		if v.productName == "UHK 60 v2" then
 			uhk_is_connected = true
 			break
 		end
 	end
-	if prev_state == uhk_is_connected then
-		return
-	end
-	if not uhk_is_connected then
+	if not uhk_is_connected and not capsLockRemapped then
 		remapCapsLock:start()
 		slowAlert("Remapped Caps Lock to Hyper")
-	else
+	elseif uhk_is_connected and capsLockRemapped then
 		unmapCapsLock:start()
 		slowAlert("Unmapped Caps Lock")
 	end
 end
-
 checkForKeyboard()
 
 -- usb watcher does not trigger if keyboard is unplugged
