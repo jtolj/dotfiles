@@ -179,6 +179,8 @@ brew "timewarrior"
 brew "toilet"
 # Lightweight BitTorrent client
 brew "transmission-cli"
+# Parser generator tool
+brew "tree-sitter-cli"
 # Source code spell checker
 brew "typos-cli"
 # Markup-based typesetting system
@@ -219,8 +221,6 @@ cask "boop"
 cask "bruno"
 # API documentation browser and code snippet manager
 cask "dash"
-# Database version management tool
-cask "dbngin"
 cask "font-hasklug-nerd-font"
 cask "font-sf-mono"
 cask "font-sf-pro"
