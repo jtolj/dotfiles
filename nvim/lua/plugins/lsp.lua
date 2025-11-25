@@ -96,6 +96,7 @@ return {
         'phpcs',
         'php-debug-adapter',
         'jq',
+        'prettierd',
         'biome',
         'laravel-ls',
         'bashls',

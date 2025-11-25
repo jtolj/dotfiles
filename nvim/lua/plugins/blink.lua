@@ -84,6 +84,7 @@ return {
             get_cwd = function(_)
               return vim.fn.getcwd()
             end,
+            ignore_root_slash = true,
           },
         },
         copilot = {
