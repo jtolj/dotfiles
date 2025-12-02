@@ -6,13 +6,14 @@ xdg_config_files=(
 	"aerospace"
 	"asciinema"
 	"atuin"
-	"gh-dash"
+	"hl"
 	"infat"
+	"kanata"
+	"karabiner"
 	"mise"
 	"nvim"
 	"oh-my-posh"
 	"sketchybar"
-	"svim"
 	"wezterm"
 )
 
@@ -23,8 +24,8 @@ done
 
 # Files that live in home directory
 home_dir_files=(
-	"hammerspoon"
 	"git"
+	"hammerspoon"
 	"homebrew"
 	"zsh"
 )
