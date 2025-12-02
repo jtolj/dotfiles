@@ -116,11 +116,11 @@ logs() {
   fi
 
   if [ -f "/opt/homebrew/var/log/${name}" ]; then
-    tail ${tail_args} "/opt/homebrew/var/log/${name}"
+    hl ${tail_args} "/opt/homebrew/var/log/${name}"
   elif [ -f "/opt/homebrew/var/log/${name}.log" ]; then
-    tail ${tail_args} "/opt/homebrew/var/log/${name}.log"
+    hl ${tail_args} "/opt/homebrew/var/log/${name}.log"
   elif [ -d "/opt/homebrew/var/log/${name}" ]; then
-    tail ${tail_args} /opt/homebrew/var/log/${name}/*.log
+    hl ${tail_args} /opt/homebrew/var/log/${name}/*.log
   else
     echo "Log file for $name not found."
   fi
