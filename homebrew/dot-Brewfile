@@ -31,8 +31,6 @@ brew "autoconf-archive"
 brew "automake"
 # CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
 brew "aws-sam-cli"
-# B2 Cloud Storage Command-Line Tools
-brew "b2-tools"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
@@ -97,6 +95,8 @@ brew "gnupg"
 brew "grep"
 # Tool for glamorous shell scripts
 brew "gum"
+# Fast and powerful log viewer and processor
+brew "hl"
 # Configurable static site generator
 brew "hugo"
 # Tools and libraries to manipulate images in many formats
@@ -136,7 +136,7 @@ brew "pastel"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # General-purpose scripting language
-brew "php", restart_service: :changed
+brew "php@8.4"
 # Minimal dumb-terminal emulation program
 brew "picocom"
 # Pinentry for GPG on Mac
@@ -151,6 +151,8 @@ brew "pngcrush"
 brew "poppler"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
+# General-purpose scripting language
+brew "php", restart_service: :changed
 # Runtime developer console, interactive debugger and REPL for PHP
 brew "psysh"
 # Generic machine emulator and virtualizer
@@ -206,7 +208,7 @@ brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 # User-friendly, lightweight TUI for disk imaging
 brew "philocalyst/tap/caligula"
 # General-purpose scripting language
-brew "shivammathur/php/php@8.5"
+brew "shivammathur/php/php"
 # The AI coding agent built for the terminal.
 brew "sst/tap/opencode"
 # AeroSpace is an i3-like tiling window manager for macOS
