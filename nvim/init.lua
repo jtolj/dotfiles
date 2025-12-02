@@ -80,24 +80,6 @@ vim.opt.scrolloff = 10
 -- See `:help 'confirm'`
 vim.opt.confirm = true
 
--- Code Folding
-vim.opt.foldtext = ''
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldnestmax = 4
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'v:lua.FileTypeExpr(v:lnum, &filetype)'
-
--- Filetypes
-vim.filetype.add {
-  extension = {
-    caddy = 'caddy',
-  },
-  filename = {
-    Caddyfile = 'caddy',
-  },
-}
-
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
