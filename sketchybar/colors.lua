@@ -20,6 +20,7 @@ return {
 	},
 	bg1 = 0xff363944,
 	bg2 = 0xff414550,
+	bg3 = 0xff4c4f5e,
 
 	with_alpha = function(color, alpha)
 		if alpha > 1.0 or alpha < 0.0 then
