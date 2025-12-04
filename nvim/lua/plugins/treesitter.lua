@@ -17,6 +17,8 @@ return { -- Highlight, edit, and navigate code
       'vim',
       'vimdoc',
       'caddy',
+      'yaml',
+      'regex',
     },
     auto_install = false,
     highlight = {
