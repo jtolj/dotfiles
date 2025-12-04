@@ -174,6 +174,19 @@ config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 
+-- https://github.com/MariaSolOs/dotfiles/blob/daeff7d07e82186a75854ea44b9fd66c3ab50689/.config/wezterm/wezterm.lua#L136
+wezterm.on("format-tab-title", function(tab)
+	-- Get the process name.
+	local process = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
+
+	-- Current working directory.
+	local cwd = tab.active_pane.current_working_dir
+	cwd = cwd and string.format("%s ", cwd.file_path:gsub(os.getenv("HOME"), "~")) or ""
+
+	-- Format and return the title.
+	return string.format("(%d %s) %s", tab.tab_index + 1, process, cwd)
+end)
+
 wezterm.on("update-right-status", function(window, _)
 	local prefix = ""
 
