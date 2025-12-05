@@ -9,6 +9,7 @@ sbar.add("event", "aerospace_started")
 -- Sketchybar doesn't support asynchronously adding items to a bracket, so pre-rendering these to
 -- have control of the order of where this element is added to the bar.
 local aerospace_watcher = sbar.add("item", "aerospace_watcher", {
+	width = 0,
 	drawing = true,
 	label = {
 		drawing = false,
