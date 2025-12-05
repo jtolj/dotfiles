@@ -8,11 +8,6 @@ local timewarrior = sbar.add("item", {
 	padding_left = 6,
 	padding_right = 1,
 	position = "right",
-	background = {
-		color = colors.with_alpha(colors.bg1, 0.6),
-		border_color = colors.black,
-		border_width = 1,
-	},
 	label = {
 		drawing = false,
 		padding_right = 8,

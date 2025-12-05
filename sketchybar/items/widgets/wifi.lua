@@ -68,7 +68,6 @@ local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", {
 	wifi_up.name,
 	wifi_down.name,
 }, {
-	background = { color = colors.with_alpha(colors.bg1, 0.6) },
 	popup = { align = "center", height = 30 },
 })
 
@@ -181,7 +180,7 @@ wifi:subscribe({ "wifi_change", "system_woke" }, function(env)
 		wifi:set({
 			icon = {
 				string = connected and icons.wifi.connected or icons.wifi.disconnected,
-				color = connected and colors.white or colors.red,
+				color = connected and colors.with_alpha(colors.white, 0.8) or colors_with_alpha(colors.red, 0.8),
 			},
 		})
 	end)
