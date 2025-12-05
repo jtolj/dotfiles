@@ -9,7 +9,7 @@ local timewarrior = sbar.add("item", {
 	padding_right = 1,
 	position = "right",
 	background = {
-		color = colors.bg2,
+		color = colors.with_alpha(colors.bg1, 0.6),
 		border_color = colors.black,
 		border_width = 1,
 	},

@@ -29,18 +29,14 @@ local cal = sbar.add("item", {
 	update_freq = 30,
 	padding_left = 1,
 	padding_right = 1,
-	background = {
-		color = colors.bg2,
-		border_color = colors.black,
-		border_width = 1,
-	},
 	click_script = "open -a 'Dato'",
 })
 
 -- Double border for calendar using a single item bracket
 sbar.add("bracket", { cal.name }, {
 	background = {
-		color = colors.bg1,
+
+		color = colors.with_alpha(colors.bg1, 0.6),
 	},
 })
 
