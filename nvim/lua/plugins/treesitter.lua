@@ -5,6 +5,7 @@ return { -- Highlight, edit, and navigate code
   opts = {
     ensure_installed = {
       'php',
+      'blade',
       'bash',
       'c',
       'diff',
