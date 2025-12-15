@@ -64,6 +64,16 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias tmp="cd $TMPDIR"
 
+# maybe less likely to get post-install hacked?
+function npm() {
+  echo 'Use bun!'
+}
+
+# convert markdown to pdf with pandoc
+function md2pdf() {
+  pandoc "$1" -V pagestyle=empty -o "${1%.md}.pdf"
+}
+
 # replace ls with eza
 function ls() {
   eza --icons "$@"
