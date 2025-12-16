@@ -41,6 +41,14 @@ brew "btop"
 brew "caddy", restart_service: :changed
 # Object-file caching compiler wrapper
 brew "ccache"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@78"
+# OpenType text shaping engine
+brew "harfbuzz"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@77"
+# Versatile and fast Unicode/ASCII/ANSI graphics renderer
+brew "chafa"
 # Cross-platform make
 brew "cmake"
 # GNU File, Shell, and Text utilities
@@ -65,12 +73,6 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@78"
-# OpenType text shaping engine
-brew "harfbuzz"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@77"
 # OCR (Optical Character Recognition) engine
 brew "tesseract"
 # Play, record, convert, and stream audio and video
