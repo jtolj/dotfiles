@@ -36,14 +36,3 @@ local function add_all_spelling_mistakes()
 end
 
 vim.keymap.set('n', 'zG', add_all_spelling_mistakes, { desc = 'Add all words to spell list', silent = true })
-
-local function toggle_spell()
-  vim.opt.spell = not vim.opt.spell:get()
-  if vim.opt.spell:get() then
-    vim.notify('Spell checking enabled', vim.log.levels.INFO)
-  else
-    vim.notify('Spell checking disabled', vim.log.levels.INFO)
-  end
-end
-
-vim.keymap.set('n', 'z!', toggle_spell, { desc = 'Toggle spell checking', silent = true })
