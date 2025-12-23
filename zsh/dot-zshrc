@@ -69,11 +69,6 @@ function npm() {
   echo 'Use bun!'
 }
 
-# convert markdown to pdf with pandoc
-function md2pdf() {
-  pandoc "$1" -V pagestyle=empty -o "${1%.md}.pdf"
-}
-
 # replace ls with eza
 function ls() {
   eza --icons "$@"
@@ -102,9 +97,12 @@ topdf() {
 
   local input_file="$1"
   local output_file="${input_file%.*}.pdf"
+  if [ -n "$2" ]; then
+    output_file="${2:r}.pdf"
+  fi
 
   if [[ "$input_file" == *.md ]]; then
-    pandoc "$input_file" -o "$output_file"
+    pandoc "$input_file" -V pagestyle=empty -o "$output_file"
     echo "Converted $input_file to $output_file"
   else
     echo "Unsupported file type. Currently only supports .md files."
