@@ -422,14 +422,14 @@ return {
     {
       '<leader>ss',
       function()
-        Snacks.picker.lsp_symbols()
+        Snacks.picker.lsp_symbols { focus = 'list' }
       end,
       desc = 'LSP Symbols',
     },
     {
       '<leader>sS',
       function()
-        Snacks.picker.lsp_workspace_symbols()
+        Snacks.picker.lsp_workspace_symbols { focus = 'list' }
       end,
       desc = 'LSP Workspace Symbols',
     },
