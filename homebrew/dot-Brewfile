@@ -9,6 +9,7 @@ tap "philocalyst/tap"
 tap "platformsh/tap"
 tap "shivammathur/php"
 tap "sst/tap"
+tap "tonisives/tap"
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
 # Asciicast to GIF converter
@@ -227,6 +228,8 @@ cask "boop"
 cask "bruno"
 # API documentation browser and code snippet manager
 cask "dash"
+# Database version management tool
+cask "dbngin"
 cask "font-hasklug-nerd-font"
 cask "font-sf-mono"
 cask "font-sf-pro"
