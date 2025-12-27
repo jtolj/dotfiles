@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
   { 'mfussenegger/nvim-dap', lazy = true },
   { 'theHamsta/nvim-dap-virtual-text' },

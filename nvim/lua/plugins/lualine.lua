@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 local function get_codecompanion_chat()
   local chat = require('codecompanion').buf_get_chat(vim.api.nvim_get_current_buf())
   if not chat then

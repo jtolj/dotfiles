@@ -1,5 +1,6 @@
--- Copilot.
+---@module "lazy"
 return {
+  ---@type LazySpec
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
@@ -25,6 +26,7 @@ return {
       end
     end,
   },
+  ---@type LazySpec
   {
     'olimorris/codecompanion.nvim',
     opts = {

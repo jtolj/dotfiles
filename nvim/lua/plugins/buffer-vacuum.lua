@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
   'ChuufMaster/buffer-vacuum',
   lazy = false,
