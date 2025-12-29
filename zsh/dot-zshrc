@@ -344,23 +344,34 @@ pwcopy() {
 
 ## Homebrew
 brew() {
-  if [ -f /opt/homebrew/bin/brew ]; then
-    /opt/homebrew/bin/brew "$@"
-    if [[ "$1" == "install" || "$1" == "uninstall"  || "$1" == "remove" ]]; then
-      echo "Updating Brewfile..."
-      /opt/homebrew/bin/brew bundle dump --global --force --describe --no-vscode
+  if [ -z "$1" ]; then
+    local pkg=$(brew formulae | fzf --border --border-label ' Enter to install Homebrew package ' --preview 'echo "" && brew info {}')
+    if [[ $pkg ]]; then
+      brew install "$pkg"
+      brew_sync
     fi
   else
-    echo "Homebrew not found!"
+    command brew "$@"
+    if [[ $1 == "install" || $1 == "remove" || $1 == "uninstall" ]]; then
+      brew_sync
+    fi
   fi
 }
 
 unbrew() {
-  local pkg=$(grep "brew" ~/.Brewfile | awk -F'"' '{print $2}' | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'grep \"{}\" ~/.Brewfile && brew info {}')
+  local pkg=$(brew leaves | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'echo "" && brew info {}')
   if [[ $pkg ]]; then
-    brew remove "$pkg"
+    command brew remove "$pkg"
+    brew_sync
   fi
 }
+
+brew_sync() {
+    echo "Updating Brewfile..."
+    command brew bundle dump --global --force --describe --no-vscode
+}
+
+
 
 # atuin helpers
 atuin_prune_failed() {
