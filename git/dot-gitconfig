@@ -1,7 +1,7 @@
 [user]
 name = Jesse Tolj
 email = jesse@objectfactory.io
-signingkey = 8EB49B4E588676EBD2931DC47904AF0C90B2ABCF
+signingkey = F55AEB54E91DD9A7197EB18733F4AC3B082E6FDF
 [column]
 ui = auto
 [branch]

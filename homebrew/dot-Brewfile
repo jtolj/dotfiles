@@ -141,7 +141,7 @@ brew "pastel"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # General-purpose scripting language
-brew "php@8.4", restart_service: :changed
+brew "php@8.4"
 # Minimal dumb-terminal emulation program
 brew "picocom"
 # Pinentry for GPG on Mac
@@ -184,8 +184,6 @@ brew "terminal-notifier"
 brew "timewarrior"
 # Color-based alternative to figlet (uses libcaca)
 brew "toilet"
-# Lightweight BitTorrent client
-brew "transmission-cli"
 # Parser generator tool
 brew "tree-sitter-cli"
 # Source code spell checker
