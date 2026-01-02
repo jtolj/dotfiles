@@ -32,13 +32,6 @@ return {
     opts = {
       adapters = {
         http = {
-          anthropic = function()
-            return require('codecompanion.adapters').extend('anthropic', {
-              env = {
-                api_key = 'ANTHROPIC_API_KEY',
-              },
-            })
-          end,
           copilot = function()
             return require('codecompanion.adapters').extend('copilot', {
               schema = {

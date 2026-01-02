@@ -61,6 +61,7 @@ return {
       'vim',
       'vimdoc',
       'vue',
+      'yaml',
       'xml',
     }
 
@@ -73,6 +74,8 @@ return {
       'snacks_dashboard',
       'snacks_notif',
       'snacks_win',
+      'snacks_picker_preview',
+      'minifiles',
     }
 
     -- Auto-install parsers and enable highlighting on FileType

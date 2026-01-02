@@ -78,6 +78,7 @@ return {
         'biome',
         'bashls',
         'clangd',
+        'typos-lsp',
       },
     }
 

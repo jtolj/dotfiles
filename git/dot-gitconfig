@@ -8,6 +8,7 @@ ui = auto
 sort = -committerdate
 [tag]
 sort = version:refname
+gpgSign = true
 
 [core]
 fileMode = false
@@ -19,7 +20,7 @@ editor = nvim
 [gpg]
 program = gpg
 [commit]
-gpgsign = true
+gpgSign = true
 [pull]
 rebase = false
 [init]
@@ -45,9 +46,9 @@ repo = /Users/jesse/.znap/zsh-users/zsh-syntax-highlighting
 repo = /Users/jesse/.znap/zsh-users/nvm
 repo = /Users/jesse/.znap/aspirewit/zsh-nvm-auto-switch
 repo = /Users/jesse/.znap/zdharma/fast-syntax-highlighting
-	repo = /Users/jesse/.znap/jeffreytse/zsh-vi-mode
-	repo = /Users/jesse/.znap/jessarcher/zsh-artisan
-	repo = /Users/jesse/.znap/romkatv/powerlevel10k
+repo = /Users/jesse/.znap/jeffreytse/zsh-vi-mode
+repo = /Users/jesse/.znap/jessarcher/zsh-artisan
+repo = /Users/jesse/.znap/romkatv/powerlevel10k
 [interactive]
 diffFilter = delta --color-only
 [delta]

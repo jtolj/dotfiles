@@ -96,7 +96,7 @@ return {
       -- Customization of explorer windows
       windows = {
         -- Maximum number of windows to show side by side
-        max_number = 5,
+        max_number = 3,
         -- Whether to show preview of file/directory under cursor
         preview = true,
         -- Width of focused window

@@ -196,6 +196,8 @@ brew "uv"
 brew "watch"
 # Internet file retriever
 brew "wget"
+# Command-line XML and HTML beautifier and content extractor
+brew "xq"
 # Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
 # Programming language designed for robustness, optimality, and clarity

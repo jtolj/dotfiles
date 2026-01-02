@@ -85,7 +85,9 @@ p() {
 np() {
   local projects_dir="/Users/jesse/Projects/"
   choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
-  cd "$projects_dir$choice" && nvim || return
+  cd "$projects_dir$choice" || return
+  wezterm set-working-directory "$projects_dir$choice"
+  nvim
 }
 
 # markdown to pdf with pandoc
@@ -197,6 +199,18 @@ tw() {
   timew start "$choice"
 }
 
+# Screencasting
+ag4 () {
+  if [ -z "$1" ]; then
+    echo "Convert asciinema to mp4 video."
+    echo "Usage: ag4 <input_file>"
+    return
+  fi
+  agg --font-family 'Hasklug Nerd Font Mono' "$1" /tmp/"${1%.*}".gif
+  ffmpeg -i /tmp/"${1%.*}".gif -c:v libx264 -pix_fmt yuv420p -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -y ~/Documents/Screenshots/"${1%.*}".mp4
+  rm /tmp/"${1%.*}".gif
+}
+
 # Wezterm
 alias icat="wezterm imgcat"
 alias wssh="wezterm ssh"
@@ -305,6 +319,8 @@ nukebranches() {
 maybeitsjsonorsomething() {
   if [[ $1 == *.json ]]; then
     fx "${@}" || bat "${@}"
+  elif [[ $1 == *.xml ]]; then
+    xq "${@}" | bat --file-name "${1}" || bat "${@}"
   elif [[ $1 == *.svg ]];then
     svg2png "${@}" | wezterm imgcat
   elif [[ $1 == *.jpg || $1 == *.png || $1 == *.gif ]]; then
@@ -370,7 +386,6 @@ brew_sync() {
     echo "Updating Brewfile..."
     command brew bundle dump --global --force --describe --no-vscode
 }
-
 
 
 # atuin helpers
