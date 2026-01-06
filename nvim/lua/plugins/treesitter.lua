@@ -74,15 +74,17 @@ return {
       callback = function(event)
         local lang = vim.treesitter.language.get_lang(event.match)
         if not lang then
+          vim.notify('No treesitter parser for ' .. event.match .. ' found')
           return
         end
-        local buf = event.buf
 
+        local buf = event.buf
         -- Start highlighting immediately (works if parser exists)
         pcall(vim.treesitter.start, buf, lang)
 
-        -- Enable treesitter indentation
+        -- Enable indentation
         vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        --
       end,
     })
   end,

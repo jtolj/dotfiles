@@ -97,7 +97,7 @@ return {
     },
   },
   event = { 'VeryLazy' },
-  enabled = function()
+  cond = function()
     return vim.uv.fs_stat(vim.fs.joinpath(vim.uv.cwd(), 'artisan')) ~= nil
   end,
   opts = {
