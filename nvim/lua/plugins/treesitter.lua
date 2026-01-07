@@ -82,9 +82,12 @@ return {
         -- Start highlighting immediately (works if parser exists)
         pcall(vim.treesitter.start, buf, lang)
 
+        -- Enable folding
+        vim.wo[0][0].foldmethod = 'expr'
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
         -- Enable indentation
         vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        --
       end,
     })
   end,

@@ -81,9 +81,9 @@ vim.opt.scrolloff = 10
 vim.opt.confirm = true
 
 -- Folds
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.wo.foldlevel = 99
+vim.opt.foldlevel = 99
+vim.opt.foldnestmax = 8
+
 -- Indents
 vim.opt_local.tabstop = 4
 vim.opt_local.shiftwidth = 4
