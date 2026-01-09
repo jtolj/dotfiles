@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "Stowing mailmate configuration"
+mkdir -p "$HOME/Library/Application Support/MailMate/Resources/KeyBindings" && stow --restow -v -t "$HOME/Library/Application Support/MailMate/Resources/KeyBindings" "mailmate"
+
 # Files that live in $XDG_CONFIG_HOME
 xdg_config_files=(
 	"aerospace"
