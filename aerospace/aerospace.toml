@@ -166,3 +166,7 @@ run = ['move-node-to-workspace 2']
 [[on-window-detected]]
 if.app-id = 'com.tinyapp.TablePlus-setapp'
 run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.globaldelight.Capto-setapp'
+run = ['layout floating']
