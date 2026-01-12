@@ -44,6 +44,7 @@
 		"g" = "selectFirstMessageRow:";
 		"a" = ( "goToMailbox:", "ALL_MESSAGES" );
 		"s" = ( "goToMailbox:", "FLAGGED" );
+		"u" = ( "goToMailbox:", "4B0B62BE-4EFA-42AB-8AF9-88E90AAF041A" ); // Unread
 		// g then c	Go to 'Contacts'	Takes you to your Contacts list.
 		"d" = ( "goToMailbox:", "DRAFTS" );
 		"l" = "goToMailbox:";
