@@ -11,6 +11,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
   group = vim.api.nvim_create_augroup('autoload-session', { clear = true }),
   nested = true,
   callback = function()
+    -- If we explicitly opened a file (like triggered by git rebase -i), don't load the session
+    if next(vim.fn.argv()) ~= nil then
+      return
+    end
     local session_file = get_session_filename()
     if vim.fn.filereadable(session_file) == 1 then
       vim.cmd('source ' .. session_file)
@@ -22,6 +26,10 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
   desc = 'Autosave session if it already exists before quitting',
   group = vim.api.nvim_create_augroup('autosave-session', { clear = true }),
   callback = function()
+    -- If we explicitly opened a file (like triggered by git rebase -i), don't save the session
+    if next(vim.fn.argv()) ~= nil then
+      return
+    end
     local session_file = get_session_filename()
     if vim.fn.filereadable(session_file) == 1 then
       vim.cmd('mksession! ' .. vim.fn.fnameescape(session_file))
