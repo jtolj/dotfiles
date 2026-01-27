@@ -36,7 +36,7 @@ end
 toggle_output("CalDigit Thunderbolt 3 Audio")
 
 -- Quake-ish mode for WezTerm
-hs.hotkey.bind({ "ctrl" }, 50, function()
+function wezterm()
 	local wez = hs.application.get("com.github.wez.wezterm")
 	if wez then
 		if wez:isFrontmost() then
@@ -50,6 +50,9 @@ hs.hotkey.bind({ "ctrl" }, 50, function()
 	else
 		hs.application.launchOrFocus("WezTerm")
 	end
+end
+hs.hotkey.bind({ "ctrl" }, 50, function()
+	wezterm()
 end)
 
 -- Hyper Mode

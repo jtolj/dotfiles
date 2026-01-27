@@ -101,6 +101,12 @@ outer.top = [
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
+# Application launching
+cmd-alt-ctrl-shift-b = ['exec-and-forget open "/Applications/Vivaldi.app"']
+cmd-alt-ctrl-shift-t = ['exec-and-forget open "/Applications/Wezterm.app"']
+cmd-alt-ctrl-shift-s = ['exec-and-forget open "/Applications/Slack.app"']
+cmd-alt-ctrl-shift-m = ['exec-and-forget open "/Applications/Mailmate.app"']
+cmd-alt-ctrl-shift-o = ['exec-and-forget open "/Applications/Obsidian.app"']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-alt-ctrl-shift-slash = 'layout tiles horizontal vertical'
@@ -158,7 +164,12 @@ cmd-alt-ctrl-shift-j = ['join-with down', 'mode main']
 cmd-alt-ctrl-shift-k = ['join-with up', 'mode main']
 cmd-alt-ctrl-shift-l = ['join-with right', 'mode main']
 
+
 # Send utility application to workspace 2
+[[on-window-detected]]
+if.app-id = 'com.kapeli.dash-setapp'
+run = ['move-node-to-workspace 3']
+
 [[on-window-detected]]
 if.app-id = 'de.beyondco.tinkerwell'
 run = ['move-node-to-workspace 2']
