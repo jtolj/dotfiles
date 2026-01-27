@@ -31,4 +31,4 @@ vim.keymap.set({ 'n', 'v' }, '\\', '"_', { desc = 'Black hole register' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Quick save
-vim.keymap.set('n', ',,', ':w<cr>')
+vim.keymap.set('n', ',,', '<cmd>w<CR>')

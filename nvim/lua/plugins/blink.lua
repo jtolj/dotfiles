@@ -80,7 +80,7 @@ return {
       },
 
       sources = {
-        default = { 'copilot', 'supermaven', 'lsp', 'snippets', 'path', 'buffer' },
+        default = { 'copilot', 'lsp', 'snippets', 'path', 'buffer' },
         per_filetype = {
           php = { inherit_defaults = true, 'laravel' },
           blade = { inherit_defaults = true, 'laravel' },
@@ -111,18 +111,6 @@ return {
               for _, item in ipairs(items) do
                 item.kind_icon = ''
                 item.kind_name = 'Laravel'
-              end
-              return items
-            end,
-          },
-          supermaven = {
-            name = 'supermaven',
-            module = 'blink.compat.source',
-            score_offset = 20,
-            transform_items = function(ctx, items)
-              for _, item in ipairs(items) do
-                item.kind_icon = ''
-                item.kind_name = 'Supermaven'
               end
               return items
             end,

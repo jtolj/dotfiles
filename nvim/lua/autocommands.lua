@@ -53,3 +53,30 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank()
   end,
 })
+
+-- Hide command line when not in use
+vim.opt.cmdheight = 0
+local cmdGrp = vim.api.nvim_create_augroup('cmdline_height', { clear = true })
+
+local function set_cmdheight(val)
+  if vim.opt.cmdheight:get() ~= val then
+    vim.opt.cmdheight = val
+    vim.cmd.redrawstatus()
+  end
+end
+
+vim.api.nvim_create_autocmd('CmdlineEnter', {
+  group = cmdGrp,
+  callback = function()
+    if vim.fn.getcmdtype() == ':' then
+      set_cmdheight(1)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  group = cmdGrp,
+  callback = function()
+    set_cmdheight(0)
+  end,
+})

@@ -1,5 +1,6 @@
 require 'settings'
 require 'spelling'
+require 'commands'
 require 'keymaps'
 require 'autocommands'
 
