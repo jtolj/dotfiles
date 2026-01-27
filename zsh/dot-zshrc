@@ -64,6 +64,10 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias tmp="cd $TMPDIR"
 
+
+# Keybinds
+bindkey " " magic-space
+
 # maybe less likely to get post-install hacked?
 function npm() {
   echo 'Use bun!'
@@ -77,14 +81,20 @@ function ls() {
 # list projects and cd into selected one
 p() {
   local projects_dir="/Users/jesse/Projects/"
-  choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
+  choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf -q "$1" --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
+  if [ -z "$choice" ]; then
+    return
+  fi
   cd "$projects_dir$choice" || return
 }
 
 # list projects and open in nvim
 np() {
   local projects_dir="/Users/jesse/Projects/"
-  choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
+  choice=$(for d in $(eza -D --reverse "$projects_dir" );do eza -D -1 --absolute --color=always "$projects_dir$d" | sed -e "s|$projects_dir||g";done | fzf -q "$1" --preview "eza --icons -l --color=always $projects_dir{}" --height=40% --border --ansi --prompt="Select a project: ")
+  if [ -z "$choice" ]; then
+    return
+  fi
   cd "$projects_dir$choice" || return
   wezterm set-working-directory "$projects_dir$choice"
   nvim
