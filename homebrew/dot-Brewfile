@@ -56,8 +56,6 @@ brew "cmake"
 brew "coreutils"
 # Diff that understands syntax
 brew "difftastic"
-# Lightweight DNS forwarder and DHCP server
-brew "dnsmasq"
 # Command-line tool for DigitalOcean
 brew "doctl"
 # Embeddable SQL OLAP Database Management System
@@ -74,9 +72,7 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# OCR (Optical Character Recognition) engine
-brew "tesseract"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Terminal JSON viewer
 brew "fx"
@@ -86,6 +82,8 @@ brew "fzf"
 brew "gdb"
 # GitHub command-line tool
 brew "gh"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
 # Interpreter for PostScript and PDF
 brew "ghostscript"
 # Distributed revision control system
@@ -104,7 +102,7 @@ brew "gum"
 brew "hl"
 # Configurable static site generator
 brew "hugo"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Tool to set default openers for file formats and url schemes on macOS
 brew "infat"
@@ -112,6 +110,8 @@ brew "infat"
 brew "jq"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Text editor with block and binary operations
+brew "le"
 # Powerful, lightweight programming language
 brew "lua"
 # Package manager for the Lua programming language
@@ -217,7 +217,7 @@ brew "shivammathur/php/php"
 # The AI coding agent built for the terminal.
 brew "sst/tap/opencode"
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
 cask "alfred"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
