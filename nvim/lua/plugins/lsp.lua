@@ -74,6 +74,7 @@ return {
         'phpcs',
         'php-debug-adapter',
         'jq',
+        'rust-analyzer',
         'prettierd',
         'biome',
         'bashls',
