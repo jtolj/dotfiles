@@ -1,0 +1,3 @@
+[submodule "sketchybar/helpers/event_providers/sketchybar-system-stats"]
+	path = sketchybar/helpers/event_providers/sketchybar-system-stats
+	url = git@github.com:jtolj/sketchybar-system-stats.git
