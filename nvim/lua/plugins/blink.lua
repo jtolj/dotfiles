@@ -1,5 +1,15 @@
 ---@module "lazy"
 ---@type LazySpec
+local CopilotEnabled = false
+
+vim.api.nvim_create_user_command('CopilotEnable', function()
+  CopilotEnabled = true
+end, { desc = 'Enable Copilot suggestions' })
+
+vim.api.nvim_create_user_command('CopilotDisable', function()
+  CopilotEnabled = false
+end, { desc = 'Disable Copilot suggestions' })
+
 return {
   {
     'saghen/blink.compat',
@@ -117,6 +127,10 @@ return {
           },
           copilot = {
             name = 'copilot',
+            enabled = function()
+              return CopilotEnabled
+            end,
+
             module = 'blink-copilot',
             score_offset = 20,
             async = true,
