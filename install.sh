@@ -32,7 +32,12 @@ home_dir_files=(
 	"homebrew"
 	"zsh"
 )
+
 for pkg in "${home_dir_files[@]}"; do
 	echo "Stowing $pkg contents in home directory"
 	stow --dotfiles --restow -v -t ~ "$pkg"
 done
+
+# scripts for ~/.local/bin
+echo "Stowing scripts in ~/.local/bin"
+mkdir -p "$HOME/.local/bin" && stow --restow -v -t "$HOME/.local/bin/" "local-bin"

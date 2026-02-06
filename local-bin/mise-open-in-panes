@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+commands=("$@")
+
+if [ ${#commands[@]} -eq 0 ]; then
+    echo "Usage: mise-open-in-panes \"command1\" \"command2\" ..."
+    exit 1
+fi
+
+pane_count=${#commands[@]}
+cols=$(echo "sqrt($pane_count) + 0.5" | bc | cut -d. -f1)
+rows=$(( (pane_count + cols - 1) / cols))
+
+declare -a pane_ids
+
+run_command() {
+    local pane_id
+    local command_to_run
+    pane_id="$1"
+    command_to_run="$2"
+
+    # https://github.com/wez/wezterm/discussions/2202#discussioncomment-3052321
+    echo -e "$command_to_run\n" | wezterm cli send-text --no-paste --pane-id "$pane_id"
+}
+
+declare -a pane_ids
+
+# Create initial pane
+pane_ids[0]=$(wezterm cli spawn --cwd "$MISE_PROJECT_ROOT")
+
+# Create columns (top-level horizontal splits)
+for ((col=1; col<cols; col++)); do
+    remaining=$((cols - col + 1))
+    percent=$((100 / remaining))
+    pane_ids[col]=$(wezterm cli split-pane --top-level --right --percent "$percent" --pane-id "${pane_ids[0]}")
+done
+
+# Create rows within each column
+pane_index=$cols
+for ((col=0; col<cols; col++)); do
+    for ((row=1; row<rows; row++)); do
+        if [ "$pane_index" -ge "$pane_count" ]; then
+            break 2
+        fi
+
+        remaining=$((rows - row + 1))
+        percent=$((100 / remaining))
+        pane_ids[pane_index]=$(wezterm cli split-pane --bottom --percent "$percent" --pane-id "${pane_ids[$col]}")
+
+        ((pane_index++))
+    done
+done
+
+# Send commands to all panes
+for ((i=0; i<${#commands[@]}; i++)); do
+    run_command "${pane_ids[$i]}" "${commands[$i]}"
+done
