@@ -80,3 +80,11 @@ vim.api.nvim_create_autocmd('CmdlineLeave', {
     set_cmdheight(0)
   end,
 })
+
+vim.api.nvim_create_autocmd('Filetype', {
+  group = vim.api.nvim_create_augroup('format-options', { clear = true }),
+  callback = function()
+    -- Format options
+    vim.opt.formatoptions:remove { 'o' }
+  end,
+})
