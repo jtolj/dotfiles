@@ -8,7 +8,7 @@ if [ ${#commands[@]} -eq 0 ]; then
 fi
 
 pane_count=${#commands[@]}
-cols=$(echo "sqrt($pane_count) + 0.5" | bc | cut -d. -f1)
+cols=$(echo "scale=0;sqrt($pane_count) + 0.5/1" | bc )
 rows=$(( (pane_count + cols - 1) / cols))
 
 declare -a pane_ids
