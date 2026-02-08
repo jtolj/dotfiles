@@ -23,6 +23,33 @@ return {
   {
     'saghen/blink.cmp',
     dependencies = {
+      ---@type LazySpec
+      {
+        'zbirenbaum/copilot.lua',
+        cmd = 'Copilot',
+        event = 'InsertEnter',
+        opts = {
+          panel = { enabled = false },
+          suggestion = { enabled = false },
+          server_opts_overrides = {
+            settings = {
+              telemetry = {
+                telemetryLevel = 'off',
+              },
+            },
+          },
+          filetypes = { markdown = true },
+        },
+        config = function(_, opts)
+          require('copilot').setup(opts)
+
+          local function set_trigger(trigger)
+            vim.b.copilot_suggestion_auto_trigger = trigger
+            vim.b.copilot_suggestion_hidden = not trigger
+          end
+        end,
+      },
+      ---@type LazySpec
       {
         'fang2hou/blink-copilot',
         opts = {
