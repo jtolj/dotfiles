@@ -74,12 +74,14 @@ return {
         'phpcs',
         'php-debug-adapter',
         'jq',
-        'rust-analyzer',
+        { 'rust-analyzer', version = '2026-02-02' },
         'prettierd',
         'biome',
         'bashls',
         'clangd',
         'typos-lsp',
+        'svelte-language-server',
+        'typescript-language-server',
       },
     }
 
