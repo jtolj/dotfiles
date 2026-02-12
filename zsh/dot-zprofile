@@ -17,7 +17,7 @@ export QUOTING_STYLE=literal
 
 # Default Programs
 export EDITOR="nvim"
-
+export LAUNCH_EDITOR="launch-editor-nvim"
 
 # Program Config
 export FZF_DEFAULT_OPTS="--style minimal --color 16 --layout=reverse --height 30% --preview='bat -p --color=always {}'"
