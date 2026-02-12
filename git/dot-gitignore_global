@@ -6,7 +6,6 @@
 
 # Packages
 node_modules/
-vendor/
 
 
 # Environment files
