@@ -17,7 +17,10 @@ vim.api.nvim_create_autocmd('VimEnter', {
     end
     local session_file = get_session_filename()
     if vim.fn.filereadable(session_file) == 1 then
-      vim.cmd('source ' .. session_file)
+      local success, result = pcall(vim.cmd, 'silent source ' .. session_file)
+      if not success then
+        vim.notify 'Failed to restore session'
+      end
     end
   end,
 })
@@ -40,10 +43,18 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
 local function save_session()
   local session_file = get_session_filename()
   vim.cmd('mksession! ' .. vim.fn.fnameescape(session_file))
-  print('Session saved to: ' .. session_file)
+  vim.notify('Session saved to: ' .. session_file)
 end
 
 vim.api.nvim_create_user_command('SessionSave', save_session, {})
+
+local function delete_session()
+  local session_file = get_session_filename()
+  vim.fn.delete(session_file)
+  vim.notify('Session deleted: ' .. session_file)
+end
+
+vim.api.nvim_create_user_command('SessionDelete', delete_session, {})
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd('TextYankPost', {
