@@ -183,8 +183,14 @@ wezterm.on("format-tab-title", function(tab)
 	local cwd = tab.active_pane.current_working_dir
 	cwd = cwd and string.format("%s ", cwd.file_path:gsub(os.getenv("HOME"), "~")) or ""
 
+	-- Zoomed state
+	local zoomed = ""
+	if tab.active_pane.is_zoomed then
+		zoomed = "+"
+	end
+
 	-- Format and return the title.
-	return string.format("(%d %s) %s", tab.tab_index + 1, process, cwd)
+	return string.format("(%s%d %s) %s", zoomed, tab.tab_index + 1, process, cwd)
 end)
 
 wezterm.on("update-right-status", function(window, _)
