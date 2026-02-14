@@ -97,7 +97,7 @@ np() {
   fi
   cd "$projects_dir$choice" || return
   wezterm set-working-directory "$projects_dir$choice"
-  nvim
+  nvim .
 }
 
 # markdown to pdf with pandoc
