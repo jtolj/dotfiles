@@ -1,8 +1,11 @@
+tap "acsandmann/tap"
 tap "adembc/tap"
 tap "aviator-co/tap"
 tap "charmbracelet/tap"
 tap "felixkratz/formulae"
 tap "jandedobbeleer/oh-my-posh"
+tap "jsattler/tap"
+tap "lgug2z/tap"
 tap "nikitabobko/tap"
 tap "nikolaeu/numi"
 tap "philocalyst/tap"
@@ -39,15 +42,13 @@ brew "bat-extras"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
-brew "caddy", restart_service: :changed
+brew "caddy"
 # Object-file caching compiler wrapper
 brew "ccache"
 # C/C++ and Java libraries for Unicode and globalization
 brew "icu4c@78"
 # OpenType text shaping engine
 brew "harfbuzz"
-# C/C++ and Java libraries for Unicode and globalization
-brew "icu4c@77"
 # Versatile and fast Unicode/ASCII/ANSI graphics renderer
 brew "chafa"
 # Cross-platform make
@@ -56,8 +57,6 @@ brew "cmake"
 brew "coreutils"
 # Diff that understands syntax
 brew "difftastic"
-# Command-line tool for DigitalOcean
-brew "doctl"
 # Embeddable SQL OLAP Database Management System
 brew "duckdb"
 # Generic library support script
@@ -102,6 +101,8 @@ brew "gum"
 brew "hl"
 # Configurable static site generator
 brew "hugo"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@77"
 # Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # Tool to set default openers for file formats and url schemes on macOS
@@ -120,6 +121,8 @@ brew "luarocks"
 brew "media-control"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
+# Media player based on MPlayer and mplayer2
+brew "mpv"
 # Open source relational database management system
 brew "mysql-client"
 # Open source relational database management system
@@ -204,12 +207,16 @@ brew "yazi"
 brew "zig"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Tiling window manager for macOS
+brew "acsandmann/tap/rift"
 # A window border system for macOS
 brew "felixkratz/formulae/borders"
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar"
 # Prompt theme engine for any shell
 brew "jandedobbeleer/oh-my-posh/oh-my-posh"
+# Tiling window manager for macOS
+brew "lgug2z/tap/komorebi-for-mac"
 # User-friendly, lightweight TUI for disk imaging
 brew "philocalyst/tap/caligula"
 # General-purpose scripting language
@@ -222,6 +229,8 @@ cask "nikitabobko/tap/aerospace"
 cask "alfred"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
+# The macOS screen recorder you deserve - always free and open source
+cask "jsattler/tap/bettercapture"
 # Scriptable scratchpad for developers
 cask "boop"
 # Open source IDE for exploring and testing APIs
@@ -263,3 +272,5 @@ go "golang.org/x/tools/gopls"
 go "github.com/cweill/gotests/gotests"
 go "github.com/josharian/impl"
 go "honnef.co/go/tools/cmd/staticcheck"
+cargo "komorebi"
+cargo "komorebic"
