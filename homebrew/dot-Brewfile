@@ -33,8 +33,6 @@ brew "autoconf"
 brew "autoconf-archive"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
-# CLI tool to build, test, debug, and deploy Serverless applications using AWS SAM
-brew "aws-sam-cli"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
@@ -175,8 +173,6 @@ brew "shellcheck"
 brew "siege"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
-# Command-line tool for Stripe
-brew "stripe-cli"
 # SVG to PNG converter
 brew "svg2png"
 # Feature-rich console based todo list manager
@@ -248,6 +244,8 @@ cask "hammerspoon"
 cask "keyclu"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
+# Desktop client for the Matrix protocol
+cask "nheko"
 # Simple application that will prevent iTunes or Apple Music from launching
 cask "notunes"
 # Replacement for Docker Desktop
