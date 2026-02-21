@@ -76,7 +76,7 @@ outer.bottom = 16
 outer.right = 16
 outer.top = [
     {monitor.main = 50},
-    0,
+    2,
 ]
 
 # 'main' binding mode declaration
