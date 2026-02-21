@@ -103,6 +103,11 @@ local keys = {
 		action = act.ShowTabNavigator,
 	},
 	{
+		key = "s",
+		mods = "CMD",
+		action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+	},
+	{
 		key = "P",
 		mods = "CMD|SHIFT",
 		action = act.ActivateCommandPalette,
@@ -120,6 +125,36 @@ local keys = {
 						window:copy_to_clipboard(selection, "Clipboard")
 					end
 				end),
+			},
+		}),
+	},
+	-- Workspaces
+	{
+		key = "q",
+		mods = "LEADER",
+		action = act.SwitchToWorkspace({
+			name = "default",
+		}),
+	},
+	{
+		key = "p",
+		mods = "LEADER",
+		action = act.SwitchToWorkspace({
+			name = "podminer",
+			spawn = {
+				cwd = os.getenv("HOME") .. "/Projects/native/podminer",
+				args = { "nvim" },
+			},
+		}),
+	},
+	{
+		key = "d",
+		mods = "LEADER",
+		action = act.SwitchToWorkspace({
+			name = "dotfiles",
+			spawn = {
+				cwd = os.getenv("HOME") .. "/Projects/dotfiles",
+				args = { "nvim" },
 			},
 		}),
 	},
@@ -194,22 +229,19 @@ wezterm.on("format-tab-title", function(tab)
 end)
 
 wezterm.on("update-right-status", function(window, _)
-	local prefix = ""
+	local items = {}
 
-	if window:leader_is_active() then
-		prefix = "    L    "
+	if window:active_workspace() ~= "default" then
+		table.insert(items, { Background = { Color = "#1C1E26" } })
+		table.insert(items, { Text = "  " .. window:active_workspace() .. "   " })
 	end
 
-	window:set_right_status(wezterm.format({
-		{
-			Background = {
-				Color = "red",
-			},
-		},
-		{
-			Text = prefix,
-		},
-	}))
+	if window:leader_is_active() then
+		table.insert(items, { Foreground = { Color = "red" } })
+		table.insert(items, { Text = "  L  " })
+	end
+
+	window:set_right_status(wezterm.format(items))
 end)
 
 return config
