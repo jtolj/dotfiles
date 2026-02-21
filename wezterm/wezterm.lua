@@ -143,7 +143,7 @@ local keys = {
 			name = "podminer",
 			spawn = {
 				cwd = os.getenv("HOME") .. "/Projects/native/podminer",
-				args = { "nvim" },
+				args = { os.getenv("SHELL"), "-lc", "nvim" },
 			},
 		}),
 	},
@@ -154,7 +154,7 @@ local keys = {
 			name = "dotfiles",
 			spawn = {
 				cwd = os.getenv("HOME") .. "/Projects/dotfiles",
-				args = { "nvim" },
+				args = { os.getenv("SHELL"), "-lc", "nvim" },
 			},
 		}),
 	},
