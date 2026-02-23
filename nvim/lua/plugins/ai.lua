@@ -127,7 +127,17 @@ return {
           ask = false,
         },
       },
-      provider = wez,
+      server = {
+        start = function()
+          wez:start()
+        end,
+        stop = function()
+          wez:stop()
+        end,
+        toggle = function()
+          wez:toggle()
+        end,
+      },
     }
 
     -- Required for `opts.events.reload`.
