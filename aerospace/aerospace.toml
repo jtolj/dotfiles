@@ -110,7 +110,7 @@ cmd-alt-ctrl-shift-o = ['exec-and-forget open "/Applications/Obsidian.app"']
 cmd-alt-ctrl-shift-i = ['exec-and-forget open "/System/Applications/Messages.app"']
 
 # "Zen mode" todo: minimize windows on other monitors.
-cmd-alt-ctrl-shift-z = ['macos-native-fullscreen']
+cmd-alt-ctrl-shift-z = ['exec-and-forget ~/.config/aerospace/zen-mode.sh', 'macos-native-fullscreen']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-alt-ctrl-shift-slash = 'layout tiles horizontal vertical'
