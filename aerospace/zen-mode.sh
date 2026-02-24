@@ -19,7 +19,7 @@ function restore_workspace_windows() {
         return 0
     fi
     while IFS= read -r window_id; do
-        aerospace move-node-to-workspace --window-id "$window_id" $workspace_id
+        aerospace move-node-to-workspace --window-id "$window_id" "$workspace_id"
     done <<< "$window_ids"
 }
 
@@ -33,7 +33,7 @@ else
     all_monitors=$(aerospace list-monitors --format '%{monitor-id}')
     focused_monitor=$(aerospace list-monitors --focused --format '%{monitor-id}')
     while IFS= read -r monitor; do
-        if [ $monitor -ne $focused_monitor ]; then
+        if [ "$monitor" -ne "$focused_monitor" ]; then
             workspace=$(aerospace list-workspaces --monitor "$monitor" --visible)
             echo "$workspace" > "$STATE_FILE"
             hide_workspace_windows "$workspace"
