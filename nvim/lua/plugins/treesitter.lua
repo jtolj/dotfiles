@@ -28,6 +28,18 @@ return {
   config = function()
     local ts = require 'nvim-treesitter'
 
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'TSUpdate',
+      callback = function()
+        require('nvim-treesitter.parsers').svelte = {
+          install_info = {
+            url = 'https://github.com/jtolj/tree-sitter-svelte',
+            branch = 'v1.0.3',
+          },
+        }
+      end,
+    })
+
     -- Install core parsers at startup
     ts.install {
       'bash',
