@@ -46,15 +46,19 @@ return {
       'blade',
       'caddy',
       'comment',
+      'cpp',
       'css',
       'diff',
       'git_config',
       'git_rebase',
       'gitcommit',
       'gitignore',
+      'go',
       'html',
+      'java',
       'javascript',
       'json',
+      'kotlin',
       'lua',
       'luadoc',
       'make',
@@ -62,10 +66,12 @@ return {
       'markdown_inline',
       'python',
       'php',
+      'ruby',
       'query',
       'regex',
       'rust',
       'scss',
+      'swift',
       'svelte',
       'toml',
       'tsx',
@@ -79,7 +85,6 @@ return {
     }
 
     local group = vim.api.nvim_create_augroup('TreesitterSetup', { clear = true })
-
     -- Enable highlighting on FileType
     vim.api.nvim_create_autocmd('FileType', {
       group = group,
