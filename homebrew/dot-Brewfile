@@ -135,6 +135,8 @@ brew "neovim"
 brew "ninja"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Prompt theme engine for any shell
+brew "oh-my-posh"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Command-line tool to generate, analyze, convert and manipulate colors
@@ -203,16 +205,10 @@ brew "yazi"
 brew "zig"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
-# Tiling window manager for macOS
-brew "acsandmann/tap/rift"
 # A window border system for macOS
 brew "felixkratz/formulae/borders"
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar"
-# Prompt theme engine for any shell
-brew "jandedobbeleer/oh-my-posh/oh-my-posh"
-# Tiling window manager for macOS
-brew "lgug2z/tap/komorebi-for-mac"
 # User-friendly, lightweight TUI for disk imaging
 brew "philocalyst/tap/caligula"
 # General-purpose scripting language
@@ -261,7 +257,7 @@ cask "tinkerwell"
 # Google Chromium, sans integration with Google
 cask "ungoogled-chromium"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
-cask "wezterm"
+cask "wezterm@nightly"
 go "github.com/go-delve/delve/cmd/dlv"
 go "golang.org/x/tools/cmd/goimports"
 go "github.com/fatih/gomodifytags"
