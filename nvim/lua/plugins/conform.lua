@@ -85,6 +85,7 @@ return {
       css = { 'prettierd', stop_after_first = true },
       caddy = { 'caddy' },
       go = { 'goimports', 'gofmt' },
+      clojure = { 'cljfmt' },
     },
   },
 }

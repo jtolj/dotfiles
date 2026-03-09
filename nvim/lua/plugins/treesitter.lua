@@ -46,6 +46,7 @@ return {
       'blade',
       'caddy',
       'comment',
+      'clojure',
       'cpp',
       'css',
       'diff',

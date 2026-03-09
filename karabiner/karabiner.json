@@ -1,9 +1,36 @@
 {
-    "profiles": [
-        {
-            "name": "Default profile",
-            "selected": true,
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
-        }
-    ]
+  "profiles" : [ {
+    "name" : "Default",
+    "selected" : true,
+    "virtual_hid_keyboard" : {
+      "keyboard_type_v2" : "ansi"
+    },
+    "complex_modifications" : {
+      "parameters" : {
+        "basic.simultaneous_threshold_milliseconds" : 30,
+        "basic.to_delayed_action_delay_milliseconds" : 110,
+        "basic.to_if_alone_timeout_milliseconds" : 109,
+        "basic.to_if_held_down_threshold_milliseconds" : 110
+      },
+      "rules" : [ {
+        "description" : "caps_lock to f17 on kb_internal",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "caps_lock"
+          },
+          "to" : [ {
+            "key_code" : "f17"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 834
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        } ]
+      } ]
+    }
+  } ]
 }

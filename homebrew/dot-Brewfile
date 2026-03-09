@@ -13,6 +13,7 @@ tap "platformsh/tap"
 tap "shivammathur/php"
 tap "sst/tap"
 tap "tonisives/tap"
+tap "yqrashawn/goku"
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
 # Asciicast to GIF converter
@@ -215,6 +216,8 @@ brew "philocalyst/tap/caligula"
 brew "shivammathur/php/php"
 # The AI coding agent built for the terminal.
 brew "sst/tap/opencode"
+# karabiner configurator
+brew "yqrashawn/goku/goku"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
