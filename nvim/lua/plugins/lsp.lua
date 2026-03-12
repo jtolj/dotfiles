@@ -82,6 +82,7 @@ return {
         'typos-lsp',
         'svelte-language-server',
         'typescript-language-server',
+        'clojure-lsp',
       },
     }
 

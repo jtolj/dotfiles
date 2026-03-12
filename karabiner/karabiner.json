@@ -2,10 +2,10 @@
   "profiles" : [ {
     "complex_modifications" : {
       "parameters" : {
-        "basic.simultaneous_threshold_milliseconds" : 30,
-        "basic.to_delayed_action_delay_milliseconds" : 110,
-        "basic.to_if_alone_timeout_milliseconds" : 109,
-        "basic.to_if_held_down_threshold_milliseconds" : 110
+        "basic.simultaneous_threshold_milliseconds" : 50,
+        "basic.to_delayed_action_delay_milliseconds" : 500,
+        "basic.to_if_alone_timeout_milliseconds" : 2000,
+        "basic.to_if_held_down_threshold_milliseconds" : 250
       },
       "rules" : [ {
         "description" : "caps_lock to f17 on kb_internal",
@@ -15,6 +15,27 @@
           },
           "to" : [ {
             "key_code" : "f17"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 834
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "fn space to backspace on kb_internal",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "spacebar",
+            "modifiers" : {
+              "mandatory" : [ "fn" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "delete_or_backspace"
           } ],
           "conditions" : [ {
             "identifiers" : [ {

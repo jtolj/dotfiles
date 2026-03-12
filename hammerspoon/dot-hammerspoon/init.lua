@@ -109,6 +109,7 @@ local keyMap = {
 	"down",
 	"left",
 	"right",
+	"space",
 }
 
 -- Look through the keyMap table and bind each key to Hyper+Key
