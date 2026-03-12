@@ -8,4 +8,7 @@
            :kb_uhk [{:vendor_id 14248 :product_id 3}]
            :kb_togkey [{:vendor_id 65261 :product_id 34439}]}
 
- :main [{:des "caps_lock to f17 on kb_internal" :rules [[:caps_lock :f17 :kb_internal]]}]}
+ :main [{:des "caps_lock to f17 on kb_internal" :rules [[:caps_lock :f17 :kb_internal]]},
+        {:des "fn to arrow keys on kb_internal" :rules [[:!Fl  :right_arrow :kb_internal],[:!Fh :left_arrow :kb_internal],[:!Fj :down_arrow :kb_internal],[:!Fk :up_arrow :kb_internal]]},
+        {:des "tab to fn when held"
+         :rules [[:##tab :fn nil {:alone :tab}]]}]}
