@@ -116,6 +116,8 @@ brew "le"
 brew "lua"
 # Package manager for the Lua programming language
 brew "luarocks"
+# Toolchain for PHP to help developers write better code
+brew "mago"
 # Control and observe media playback from the command-line
 brew "media-control"
 # Polyglot runtime manager (asdf rust clone)
