@@ -2,10 +2,6 @@
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 vim.keymap.set('n', '<leader>Q', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
 
--- Move when in visual mode
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move selected text down' })
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move selected text up' })
-
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --
@@ -26,4 +22,4 @@ vim.keymap.set({ 'n', 'v' }, '\\', '"_', { desc = 'Black hole register' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Quick save
-vim.keymap.set('n', '<Tab><Tab>', '<cmd>silent w<CR>')
+vim.keymap.set('n', '99', '<cmd>silent w<CR>')

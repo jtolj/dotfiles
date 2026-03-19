@@ -11,7 +11,6 @@ xdg_config_files=(
 	"atuin"
 	"hl"
 	"infat"
-	"kanata"
 	"karabiner"
 	"mise"
 	"nvim"

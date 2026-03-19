@@ -122,7 +122,35 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "tab to fn when held",
+        "description" : "double shift to caps_lock on kb_internal",
+        "manipulators" : [ {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "left_shift"
+            }, {
+              "key_code" : "right_shift"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "key_code" : "caps_lock"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 834
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "tab to fn when held on kb_internal",
         "manipulators" : [ {
           "to_if_alone" : [ {
             "key_code" : "tab"
@@ -135,6 +163,13 @@
           },
           "to" : [ {
             "key_code" : "fn"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 834
+            } ],
+            "type" : "device_if"
           } ],
           "type" : "basic"
         } ]

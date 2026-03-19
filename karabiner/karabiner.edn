@@ -10,6 +10,7 @@
 
  :main [{:des "caps_lock to f17 on kb_internal" :rules [[:caps_lock :f17 :kb_internal]]},
         {:des "fn space to backspace on kb_internal" :rules [[:!Fspacebar :delete_or_backspace :kb_internal]]},
-        {:des "fn to arrow keys on kb_internal" :rules [[:!Fl  :right_arrow :kb_internal],[:!Fh :left_arrow :kb_internal],[:!Fj :down_arrow :kb_internal],[:!Fk :up_arrow :kb_internal]]},
-        {:des "tab to fn when held"
-         :rules [[:##tab :fn nil {:alone :tab}]]}]}
+        {:des "fn to arrow keys on kb_internal" :rules [[:condi :kb_internal] [:!Fl  :right_arrow],[:!Fh :left_arrow],[:!Fj :down_arrow],[:!Fk :up_arrow]]},
+        {:des "double shift to caps_lock on kb_internal" :rules [[[:left_shift :right_shift] :caps_lock :kb_internal]]},
+        {:des "tab to fn when held on kb_internal"
+         :rules [[:condi :kb_internal],[:##tab :fn nil {:alone :tab}]]}]}
