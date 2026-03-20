@@ -23,3 +23,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Quick save
 vim.keymap.set('n', '99', '<cmd>silent w<CR>')
+
+-- Lazygit
+vim.keymap.set('n', '<leader>gg', '<cmd>silent !wezterm cli spawn --cwd ' .. vim.fn.getcwd() .. ' lazygit<CR>', { desc = 'Open Lazygit' })
