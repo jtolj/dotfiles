@@ -1,66 +1,5 @@
 ---@module "lazy"
 ---@type LazySpec
-local function get_codecompanion_chat()
-  local chat = require('codecompanion').buf_get_chat(vim.api.nvim_get_current_buf())
-  if not chat then
-    return nil
-  end
-  return chat
-end
-
-local status = 0
-
-local group = vim.api.nvim_create_augroup('CodeCompanionHooks', {})
-vim.api.nvim_create_autocmd({ 'User' }, {
-  pattern = 'CodeCompanionRequest*',
-  group = group,
-  callback = function(request)
-    local previous_status = status
-    if request.match == 'CodeCompanionRequestStarted' then
-      status = 1
-    elseif request.match == 'CodeCompanionRequestStreaming' then
-      status = 2
-    elseif request.match == 'CodeCompanionRequestFinished' then
-      status = 0
-    else
-      status = 0
-    end
-    if status ~= previous_status then
-      require('lualine').refresh()
-    end
-  end,
-})
-
-local codecompanion = {
-  adapter_name = function()
-    local chat = get_codecompanion_chat()
-    if not chat then
-      return nil
-    end
-
-    return ' ' .. chat.adapter.formatted_name
-  end,
-
-  model_name = function()
-    local chat = get_codecompanion_chat()
-    if not chat then
-      return nil
-    end
-
-    return ' ' .. chat.settings.model
-  end,
-
-  status = function()
-    if status == 0 then
-      return ''
-    elseif status == 1 then
-      return '󱎫'
-    elseif status == 2 then
-      return '󰍦'
-    end
-    return ''
-  end,
-}
 
 local dmode_enabled = false
 vim.api.nvim_create_autocmd('User', {
@@ -90,27 +29,6 @@ return {
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
-    },
-    extensions = {
-      {
-        filetypes = { 'codecompanion' },
-        sections = {
-          lualine_a = { mode },
-          lualine_b = { codecompanion.adapter_name },
-          lualine_c = { codecompanion.status },
-          lualine_x = { codecompanion.model_name },
-          lualine_y = {},
-          lualine_z = { 'location' },
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = { codecompanion.adapter_name },
-          lualine_c = {},
-          lualine_x = { codecompanion.model_name },
-          lualine_y = {},
-          lualine_z = {},
-        },
-      },
     },
   },
 }
