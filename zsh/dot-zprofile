@@ -21,3 +21,7 @@ export LAUNCH_EDITOR="launch-editor-nvim"
 
 # Program Config
 export FZF_DEFAULT_OPTS="--style minimal --color 16 --layout=reverse --height 30% --preview='bat -p --color=always {}'"
+export MCFLY_INTERFACE_VIEW=BOTTOM
+export MCFLY_RESULTS_SORT=LAST_RUN
+export MCFLY_FUZZY=2
+export MCFLY_KEY_SCHEME=vim

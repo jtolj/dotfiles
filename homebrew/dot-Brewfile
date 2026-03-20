@@ -26,8 +26,6 @@ brew "ansible"
 brew "asciinema"
 # MPEG-4 command-line tool
 brew "atomicparsley"
-# Improved shell history for zsh, bash, fish and nushell
-brew "atuin", restart_service: :changed
 # Automatic configure script builder
 brew "autoconf"
 # Collection of over 500 reusable autoconf macros
@@ -118,6 +116,8 @@ brew "lua"
 brew "luarocks"
 # Toolchain for PHP to help developers write better code
 brew "mago"
+# Fly through your shell history
+brew "mcfly"
 # Control and observe media playback from the command-line
 brew "media-control"
 # Polyglot runtime manager (asdf rust clone)

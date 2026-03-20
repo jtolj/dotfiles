@@ -8,7 +8,6 @@ mkdir -p "$HOME/Library/Application Support/MailMate/Resources/KeyBindings" && s
 xdg_config_files=(
 	"aerospace"
 	"asciinema"
-	"atuin"
 	"hl"
 	"infat"
 	"karabiner"
@@ -27,6 +26,7 @@ done
 # Files that live in home directory
 home_dir_files=(
 	"git"
+	"mcfly"
 	"hammerspoon"
 	"homebrew"
 	"zsh"
