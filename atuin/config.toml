@@ -5,3 +5,11 @@ history_filter = [
    "^ls",
    "^git status",
 ]
+[daemon]
+enabled = true
+
+[ai]
+enabled=false
+
+[sync]
+records = true
