@@ -21,3 +21,5 @@ export LAUNCH_EDITOR="launch-editor-nvim"
 
 # Program Config
 export FZF_DEFAULT_OPTS="--style minimal --color 16 --layout=reverse --height 30% --preview='bat -p --color=always {}'"
+export FZF_CTRL_R_OPTS="${FZF_CTRL_R_OPTS:+$FZF_CTRL_R_OPTS }--preview  'tldr {2} 2>/dev/null || command -V {2}' --preview-window down:5:hidden:wrap --bind '?:toggle-preview' --header '?:toggle-tldr · enter:select'"
+export ZSH_CLEAN_HISTORY_AUTO_CLEAN=true

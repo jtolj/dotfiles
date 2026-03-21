@@ -6,6 +6,10 @@
 # zmodload zsh/zprof
 # setopt xtrace prompt_subst
 
+# History ignore sensitive and noisy commands
+setopt EXTENDED_GLOB
+export HISTORY_IGNORE='(#i)(exit|cd ..|l[alsh]#( *)#|more *|nvim# *|*_key*|*token*|*bearer*)'
+
 # Disable freeze
 stty -ixon
 
@@ -31,6 +35,7 @@ znap source ohmyzsh/ohmyzsh plugins/vi-mode
 znap source reegnz/jq-zsh-plugin
 znap source Aloxaf/fzf-tab
 znap source zdharma/fast-syntax-highlighting
+znap source automaat/zsh-clean-history
 znap eval mise 'mise activate'
 znap eval fzf 'fzf --zsh'
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml)"
