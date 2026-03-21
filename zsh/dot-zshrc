@@ -31,8 +31,8 @@ znap source ohmyzsh/ohmyzsh plugins/vi-mode
 znap source reegnz/jq-zsh-plugin
 znap source Aloxaf/fzf-tab
 znap source zdharma/fast-syntax-highlighting
-znap eval mcfly "mcfly init zsh"
 znap eval mise 'mise activate'
+znap eval fzf 'fzf --zsh'
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml)"
 
 # disable sort when completing `git checkout`

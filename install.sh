@@ -26,7 +26,6 @@ done
 # Files that live in home directory
 home_dir_files=(
 	"git"
-	"mcfly"
 	"hammerspoon"
 	"homebrew"
 	"zsh"
