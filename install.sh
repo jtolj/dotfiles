@@ -10,7 +10,6 @@ xdg_config_files=(
 	"asciinema"
 	"hl"
 	"infat"
-	"karabiner"
 	"mise"
 	"nvim"
 	"oh-my-posh"
@@ -39,3 +38,6 @@ done
 # scripts for ~/.local/bin
 echo "Stowing scripts in ~/.local/bin"
 mkdir -p "$HOME/.local/bin" && stow --restow -v -t "$HOME/.local/bin/" "local-bin"
+
+#karabiner requires symlinking the whole directory :(
+ln -s "$(pwd)/karabiner" "$HOME/.config/karabiner"

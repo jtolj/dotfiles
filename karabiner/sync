@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn goku
