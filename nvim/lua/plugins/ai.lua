@@ -142,6 +142,11 @@ return {
 
     -- Required for `opts.events.reload`.
     vim.o.autoread = true
+    vim.api.nvim_create_autocmd('VimLeavePre', {
+      callback = function()
+        wez:stop()
+      end,
+    })
 
     -- Recommended keymaps.
     vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
