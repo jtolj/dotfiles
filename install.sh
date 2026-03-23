@@ -40,4 +40,9 @@ echo "Stowing scripts in ~/.local/bin"
 mkdir -p "$HOME/.local/bin" && stow --restow -v -t "$HOME/.local/bin/" "local-bin"
 
 #karabiner requires symlinking the whole directory :(
-ln -s "$(pwd)/karabiner" "$HOME/.config/karabiner"
+if [ -L "$HOME/.config/karabiner" ]; then
+	echo "Symlink for karabiner already exists"
+else
+	echo "Creating symlink for karabiner"
+	ln -s "$(pwd)/karabiner" "$HOME/.config/karabiner"
+fi
