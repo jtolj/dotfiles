@@ -116,8 +116,7 @@ cmd-alt-ctrl-shift-i = ['exec-and-forget open "/System/Applications/Messages.app
 cmd-alt-ctrl-shift-z = ['exec-and-forget ~/.config/aerospace/zen-mode.sh', 'macos-native-fullscreen']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-cmd-alt-ctrl-shift-slash = 'layout h_tiles'
-cmd-alt-ctrl-shift-comma = 'layout h_accordion'
+cmd-alt-ctrl-shift-semicolon = 'layout h_accordion h_tiles'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 cmd-alt-ctrl-shift-h = 'focus left'
