@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Accept one or more files as an argument and open them in Dropover
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: shelf <file1> <file2> ..."
+    exit 1
+fi
+
+open -b me.damir.dropover-mac $@
