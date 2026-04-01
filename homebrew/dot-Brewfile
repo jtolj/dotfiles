@@ -136,8 +136,6 @@ brew "utf8proc"
 brew "neovim"
 # Small build system for use with gyp or CMake
 brew "ninja"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
 # Swiss-army knife of markup format conversion
