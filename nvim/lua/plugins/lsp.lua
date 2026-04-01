@@ -13,6 +13,10 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if not client then
+          return
+        end
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
           vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
@@ -30,10 +34,18 @@ return {
         --  For example, in C this would take you to the header.
         map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-        if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
           map('<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oggle Inlay [H]ints')
+        end
+
+        if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentColor) then
+          vim.lsp.document_color.enable(true, nil, { style = 'virtual' })
+
+          map('grc', function()
+            vim.lsp.document_color.color_presentation()
+          end, 'vim.lsp.document_color.color_presentation()', { 'n', 'x' })
         end
       end,
     })
@@ -74,14 +86,15 @@ return {
         'phpcs',
         'php-debug-adapter',
         'jq',
-        { 'rust-analyzer', version = '2026-02-02' },
+        'rust-analyzer',
         'prettierd',
         'biome',
         'bashls',
         'clangd',
         'typos-lsp',
         'svelte-language-server',
-        'typescript-language-server',
+        'tsgo',
+        'css-lsp',
         'clojure-lsp',
       },
     }
