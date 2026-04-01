@@ -1,4 +1,5 @@
 [tools]
+node = 'lts'
 bun = 'latest'
 rust = 'stable'
 
