@@ -26,11 +26,14 @@
 	"I"	= ( "setTag:", "\\Seen", "nextMessage:");
 	"U"	= ( "removeTag:", "\\Seen");
 
+    "J" = "scrollPageDown:";
+    "K" = "scrollPageUp:";
+
 	// Only in MailMate
- 	"N"	= "moveDownAndModifySelection:";
-	"P"	= "moveUpAndModifySelection:";
-	"J"	= "moveDownAndModifySelection:";
-	"K"	= "moveUpAndModifySelection:";
+    "^n"	= "moveDownAndModifySelection:";
+	"^p"	= "moveUpAndModifySelection:";
+	"^j"	= "moveDownAndModifySelection:";
+	"^k"	= "moveUpAndModifySelection:";
 	"Z"	= "redo:";
 
 	// Combo keys
