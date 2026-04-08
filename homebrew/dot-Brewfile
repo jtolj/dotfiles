@@ -92,8 +92,6 @@ brew "pinentry"
 brew "gnupg"
 # GNU grep, egrep and fgrep
 brew "grep"
-# Tool for glamorous shell scripts
-brew "gum"
 # Fast and powerful log viewer and processor
 brew "hl"
 # Configurable static site generator
@@ -122,8 +120,6 @@ brew "mcfly"
 brew "media-control"
 # Polyglot runtime manager (asdf rust clone)
 brew "mise"
-# Media player based on MPlayer and mplayer2
-brew "mpv"
 # Open source relational database management system
 brew "mysql-client"
 # Open source relational database management system
