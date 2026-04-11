@@ -276,11 +276,14 @@ alias gap="git add -p"
 alias gcm="git commit -m"
 alias gco="git checkout"
 alias gcod="git checkout develop"
-alias gcom="git checkout master"
 alias grhh="git reset --hard HEAD"
 alias grro="git reset --hard @{u}"
 # History search with wildcards - ex ghs "*filename.ext"
 alias ghs="git log --all --full-history --"
+
+gcom() {
+  git branch --list main >/dev/null 2>&1 && git checkout main || git checkout master
+}
 
 gfo() {
   git fetch origin $1:$1
