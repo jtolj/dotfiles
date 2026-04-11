@@ -406,10 +406,6 @@ brew_sync() {
 }
 
 
-# atuin helpers
-atuin_prune_failed() {
-  atuin search --delete -e 1 ""
-}
 
 if [ -f "$HOME/.zshrc_local" ]; then
   source "$HOME/.zshrc_local"
