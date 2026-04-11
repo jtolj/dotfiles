@@ -5,7 +5,6 @@ return {
   dependencies = {
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
-    'nvim-treesitter/nvim-treesitter',
     'olimorris/neotest-phpunit',
     'V13Axel/neotest-pest',
   },
