@@ -40,6 +40,11 @@ znap eval mise 'mise activate'
 znap eval fzf 'fzf --zsh'
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml)"
 
+#Edit command in $EDITOR
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
@@ -50,7 +55,6 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
-
 
 # Set up GPG
 export GPG_TTY=$(tty)
@@ -68,15 +72,23 @@ alias which="/usr/bin/which"
 alias ..="cd .."
 alias ...="cd ../.."
 alias tmp="cd $TMPDIR"
+alias -g man="batman"
+alias npm="npm --ignore-scripts"
 
+# Filetype aliases
+alias -s json=fx
+alias -s xml=xq
+alias -s {toml,html,txt}=bat
+wez_svg() {
+  svg2png $1 | wezterm imgcat
+}
+alias -s svg=wez_svg
+alias -s {jpg,jpeg,png,gif,webp}="wezterm imgcat"
+alias -s pdf="tdf -m 1"
+alias -s log="hl"
 
 # Keybinds
 bindkey " " magic-space
-
-# maybe less likely to get post-install hacked?
-function npm() {
-  echo 'Use bun!'
-}
 
 # replace ls with eza
 function ls() {
@@ -183,7 +195,7 @@ timew() {
 
 tw() {
   local tags choice active arg
-  tags=(superfinito beebic blog journal learning productivity wasted done)
+  tags=(podmin beebic blog journal learning productivity wasted done)
 
   if [[ -n "$1" ]]; then
     # Make sure the argument is in the array
@@ -333,26 +345,6 @@ nukebranches() {
   done
 }
 
-# Aliases less / more to: fx, bat, tdf or imgcat
-maybeitsjsonorsomething() {
-  if [[ $1 == *.json ]]; then
-    fx "${@}" || bat "${@}"
-  elif [[ $1 == *.xml ]]; then
-    xq "${@}" | bat --file-name "${1}" || bat "${@}"
-  elif [[ $1 == *.svg ]];then
-    svg2png "${@}" | wezterm imgcat
-  elif [[ $1 == *.jpg || $1 == *.png || $1 == *.gif ]]; then
-    wezterm imgcat "${@}"
-  elif [[ $1 == *.pdf ]]; then
-    tdf -m 1 "${@}"
-  else
-    bat "${@}"
-  fi
-}
-
-alias -g more="maybeitsjsonorsomething"
-alias -g less="maybeitsjsonorsomething"
-alias -g man="batman"
 
 ## Kill all processes matching a grep pattern
 killgrep() {
