@@ -27,6 +27,7 @@ return {
       ts.parsers.svelte = {
         url = 'https://github.com/jtolj/tree-sitter-svelte',
         rev = 'v1.0.3',
+        requires = { 'typescript', 'javascript', 'html' },
       }
       ts.parsers.blade = {
         url = 'https://github.com/EmranMR/tree-sitter-blade',
@@ -103,6 +104,29 @@ return {
         location = 'xml',
       }
 
+      -- Register the is-not? predicate handler for Neovim 0.12.1
+      vim.treesitter.query.add_predicate('is-not?', function(match, pattern, bufnr, pred)
+        local capture_id = pred[2]
+        if not capture_id then
+          return true
+        end
+
+        local nodes = match[capture_id]
+        if not nodes then
+          return true
+        end
+
+        -- Check metadata set by locals.scm
+        for _, node in ipairs(nodes) do
+          local metadata = match.metadata[node]
+          if metadata and metadata[pred[3]] then
+            return false
+          end
+        end
+
+        return true
+      end, { force = true })
+
       ts.setup {
         auto_install = true,
         ensure_installed = {
@@ -164,9 +188,9 @@ return {
           pcall(vim.treesitter.start, buf, lang)
 
           -- Enable folding
-          vim.wo[0][0].foldmethod = 'expr'
-          vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-
+          -- vim.wo[0][0].foldmethod = 'expr'
+          -- vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          --
           -- Enable indentation
           -- TODO: extract this fn from nvim-treesitte?
           -- vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
