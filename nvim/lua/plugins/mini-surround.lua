@@ -3,9 +3,8 @@
 return {
   'nvim-mini/mini.surround',
   version = '*',
-  config = function()
-    require('mini.surround').setup {
-      highlight_duration = 2000,
-    }
-  end,
+  lazy = false,
+  opts = {
+    highlight_duration = 2000,
+  },
 }

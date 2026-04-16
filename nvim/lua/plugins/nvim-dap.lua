@@ -9,7 +9,6 @@ return {
     -- as a way to quickly test-drive the plugin without configuring debug adapters
     dependencies = {
       'mason-org/mason.nvim',
-      'theHamsta/nvim-dap-virtual-text',
       'jay-babu/mason-nvim-dap.nvim',
       'mfussenegger/nvim-dap',
       'jbyuki/one-small-step-for-vimkind',
@@ -104,11 +103,6 @@ return {
         ensure_installed = { 'codelldb', 'js-debug-adapter' },
         automatic_installation = false,
         handlers = nil,
-      }
-
-      require('nvim-dap-virtual-text').setup {
-        enabled = true,
-        enable_autocmd = false,
       }
 
       vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
