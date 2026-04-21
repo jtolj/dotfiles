@@ -16,10 +16,16 @@ tap "tonisives/tap"
 tap "yqrashawn/goku"
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
-# Asciicast to GIF converter
-brew "agg"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@3"
+# Passphrase entry dialog utilizing the Assuan protocol
+brew "pinentry"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# Email client that runs in your terminal
+brew "aerc"
+# Asciicast to GIF converter
+brew "agg"
 # Automate deployment, configuration, and upgrading
 brew "ansible"
 # Record and share terminal sessions
@@ -39,7 +45,7 @@ brew "bat-extras"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
-brew "caddy"
+brew "caddy", restart_service: :changed
 # Object-file caching compiler wrapper
 brew "ccache"
 # C/C++ and Java libraries for Unicode and globalization
@@ -86,10 +92,6 @@ brew "ghostscript"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
-# Passphrase entry dialog utilizing the Assuan protocol
-brew "pinentry"
-# GNU Privacy Guard (OpenPGP)
-brew "gnupg"
 # GNU grep, egrep and fgrep
 brew "grep"
 # Fast and powerful log viewer and processor
@@ -132,6 +134,10 @@ brew "neovim"
 brew "ninja"
 # Prompt theme engine for any shell
 brew "oh-my-posh"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# AI coding agent, built for the terminal
+brew "opencode"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Command-line tool to generate, analyze, convert and manipulate colors
@@ -160,8 +166,6 @@ brew "php", restart_service: :changed
 brew "psysh"
 # Generic machine emulator and virtualizer
 brew "qemu"
-# Search tool like grep and The Silver Searcher
-brew "ripgrep"
 # Terminal multiplexer with VT100/ANSI terminal emulation
 brew "screen"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -190,6 +194,8 @@ brew "typos-cli"
 brew "typst"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
+# Pager/text based browser
+brew "w3m"
 # Executes a program periodically, showing output fullscreen
 brew "watch"
 # Internet file retriever
@@ -210,8 +216,6 @@ brew "felixkratz/formulae/sketchybar"
 brew "philocalyst/tap/caligula"
 # General-purpose scripting language
 brew "shivammathur/php/php"
-# The AI coding agent built for the terminal.
-brew "sst/tap/opencode"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
@@ -235,6 +239,8 @@ cask "font-sf-pro"
 cask "hammerspoon"
 # Find shortcuts for any installed application
 cask "keyclu"
+# GPU-based terminal emulator
+cask "kitty"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Desktop client for the Matrix protocol
