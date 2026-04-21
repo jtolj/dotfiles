@@ -95,6 +95,7 @@ return {
         'svelte-language-server',
         'tsgo',
         'css-lsp',
+        'lua_ls',
         'clojure-lsp',
       },
     }
