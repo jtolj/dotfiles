@@ -74,6 +74,7 @@ alias ...="cd ../.."
 alias tmp="cd $TMPDIR"
 alias -g man="batman"
 alias npm="npm --ignore-scripts"
+alias lg="lazygit"
 
 # Filetype aliases
 alias -s json=fx
