@@ -1,14 +1,5 @@
 ---@module "lazy"
 ---@type LazySpec
-local CopilotEnabled = false
-
-vim.api.nvim_create_user_command('CopilotEnable', function()
-  CopilotEnabled = true
-end, { desc = 'Enable Copilot suggestions' })
-
-vim.api.nvim_create_user_command('CopilotDisable', function()
-  CopilotEnabled = false
-end, { desc = 'Disable Copilot suggestions' })
 
 return {
   {
@@ -24,47 +15,6 @@ return {
     'saghen/blink.cmp',
     dependencies = {
       ---@type LazySpec
-      {
-        'zbirenbaum/copilot.lua',
-        cmd = 'Copilot',
-        event = 'InsertEnter',
-        opts = {
-          panel = { enabled = false },
-          suggestion = { enabled = false },
-          server_opts_overrides = {
-            settings = {
-              telemetry = {
-                telemetryLevel = 'off',
-              },
-            },
-          },
-          filetypes = { markdown = true },
-        },
-        config = function(_, opts)
-          require('copilot').setup(opts)
-
-          local function set_trigger(trigger)
-            vim.b.copilot_suggestion_auto_trigger = trigger
-            vim.b.copilot_suggestion_hidden = not trigger
-          end
-        end,
-      },
-      ---@type LazySpec
-      {
-        'fang2hou/blink-copilot',
-        opts = {
-          max_completions = 1,
-          max_attempts = 3,
-          kind_name = 'Copilot', ---@type string | false
-          kind_icon = '', ---@type string | false
-          kind_hl = false, ---@type string | false
-          debounce = 300, ---@type integer | false
-          auto_refresh = {
-            backward = true,
-            forward = true,
-          },
-        },
-      },
       {
         'L3MON4D3/LuaSnip',
         dependencies = {
@@ -117,7 +67,7 @@ return {
       },
 
       sources = {
-        default = { 'copilot', 'lsp', 'snippets', 'path', 'buffer' },
+        default = { 'lsp', 'snippets', 'path', 'buffer' },
         per_filetype = {
           php = { inherit_defaults = true, 'laravel' },
           blade = { inherit_defaults = true, 'laravel' },
@@ -151,16 +101,6 @@ return {
               end
               return items
             end,
-          },
-          copilot = {
-            name = 'copilot',
-            enabled = function()
-              return CopilotEnabled
-            end,
-
-            module = 'blink-copilot',
-            score_offset = 20,
-            async = true,
           },
         },
       },
