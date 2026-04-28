@@ -386,7 +386,7 @@ brew() {
 }
 
 unbrew() {
-  local pkg=$(brew leaves | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'echo "" && brew info {}')
+  local pkg=$(brew list --installed-on-request | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'echo "" && brew info {}')
   if [[ $pkg ]]; then
     command brew remove "$pkg"
     brew_sync

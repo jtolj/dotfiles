@@ -1,19 +1,10 @@
-tap "acsandmann/tap"
-tap "adembc/tap"
-tap "aviator-co/tap"
-tap "charmbracelet/tap"
 tap "felixkratz/formulae"
 tap "jandedobbeleer/oh-my-posh"
 tap "jsattler/tap"
-tap "lgug2z/tap"
 tap "nikitabobko/tap"
-tap "nikolaeu/numi"
 tap "philocalyst/tap"
-tap "platformsh/tap"
 tap "shivammathur/php"
 tap "sst/tap"
-tap "tonisives/tap"
-tap "yqrashawn/goku"
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
 # Cryptography and SSL/TLS Toolkit
@@ -45,7 +36,7 @@ brew "bat-extras"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
-brew "caddy", restart_service: :changed
+brew "caddy"
 # Object-file caching compiler wrapper
 brew "ccache"
 # C/C++ and Java libraries for Unicode and globalization
