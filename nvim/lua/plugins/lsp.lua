@@ -131,6 +131,16 @@ return {
       },
     }
 
+    vim.lsp.config['rust_analyzer'] = {
+      settings = {
+        ['rust-analyzer'] = {
+          check = {
+            command = 'clippy',
+          },
+        },
+      },
+    }
+
     require('mason-lspconfig').setup {
       ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
     }
