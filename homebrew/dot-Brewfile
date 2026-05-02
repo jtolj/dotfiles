@@ -57,8 +57,6 @@ brew "duckdb"
 brew "libtool"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
-# Run arbitrary commands when files change
-brew "entr"
 # Modern, maintained replacement for ls
 brew "eza"
 # Like neofetch, but much faster because written mostly in C
@@ -67,6 +65,8 @@ brew "fastfetch"
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Monitor a directory for changes and run a shell command
+brew "fswatch"
 # Terminal JSON viewer
 brew "fx"
 # Command-line fuzzy finder written in Go
