@@ -66,7 +66,7 @@ function wez:toggle()
     else
       table.insert(cmd_parts, '--zoom')
     end
-    local result = vim.fn.system(table.concat(cmd_parts, ' '))
+    vim.fn.system(table.concat(cmd_parts, ' '))
   else
     self:start()
   end
@@ -76,21 +76,22 @@ function wez:start()
   local pane_id = self:get_pane_id()
 
   if not pane_id then
+    local result
     if self:is_zoomed() then
       local cmd_parts = { 'wezterm', 'cli', 'zoom-pane', '--pane-id', vim.env.WEZTERM_PANE, '--unzoom' }
-      local result = vim.fn.system(table.concat(cmd_parts, ' '))
+      result = vim.fn.system(table.concat(cmd_parts, ' '))
+    else
+      local cmd_parts = { 'wezterm', 'cli', 'split-pane', '--right', '--percent', '30', '--top-level' }
+
+      table.insert(cmd_parts, '--')
+      table.insert(cmd_parts, self.cmd)
+
+      result = vim.fn.system(table.concat(cmd_parts, ' '))
     end
-
-    local cmd_parts = { 'wezterm', 'cli', 'split-pane', '--right', '--percent', '30', '--top-level' }
-
-    table.insert(cmd_parts, '--')
-    table.insert(cmd_parts, self.cmd)
-
-    local result = vim.fn.system(table.concat(cmd_parts, ' '))
-
-    focus_pane(vim.env.WEZTERM_PANE)
-
-    self.pane_id = result:match '^%d+'
+    if result ~= '' then
+      self.pane_id = result:match '^%d+'
+      focus_pane(vim.env.WEZTERM_PANE)
+    end
   end
 end
 
@@ -102,7 +103,7 @@ function wez:stop()
     self.pane_id = nil
     if self:is_zoomed() then
       local cmd_parts = { 'wezterm', 'cli', 'zoom-pane', '--pane-id', vim.env.WEZTERM_PANE, '--unzoom' }
-      local result = vim.fn.system(table.concat(cmd_parts, ' '))
+      vim.fn.system(table.concat(cmd_parts, ' '))
     end
   end
 end
