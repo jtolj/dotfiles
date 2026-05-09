@@ -14,8 +14,15 @@ vim.keymap.set('n', '<leader>Q', vim.diagnostic.open_float, { desc = 'Open diagn
 -- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 vim.keymap.set('n', '<leader>wc', '<C-w>c', { desc = 'Close current window' })
 
+-- System clipboard mappings
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>p', '"+p', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>y', '"+y', { noremap = true, silent = true })
+
 -- Map Backhole Register to `\`
-vim.keymap.set({ 'n', 'v' }, '\\', '"_', { desc = 'Black hole register' })
+vim.keymap.set({ 'n', 'x', 'o' }, '\\', '"_', { desc = 'Black hole register' })
+
+-- Pasting over selection goes to Blackhole Register
+vim.keymap.set('x', 'p', '"_dP', { noremap = true, silent = true })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
