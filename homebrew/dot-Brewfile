@@ -1,6 +1,7 @@
 tap "felixkratz/formulae"
 tap "jandedobbeleer/oh-my-posh"
 tap "jsattler/tap"
+tap "lgug2z/tap"
 tap "nikitabobko/tap"
 tap "philocalyst/tap"
 tap "shivammathur/php"
@@ -157,6 +158,8 @@ brew "php", restart_service: :changed
 brew "psysh"
 # Generic machine emulator and virtualizer
 brew "qemu"
+# Spreadsheet program for the terminal, using ncurses
+brew "sc-im"
 # Terminal multiplexer with VT100/ANSI terminal emulation
 brew "screen"
 # Static analysis and lint tool, for (ba)sh scripts
