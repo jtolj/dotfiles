@@ -220,7 +220,6 @@ config.disable_default_key_bindings = false
 config.use_dead_keys = false
 config.scrollback_lines = 10000
 config.adjust_window_size_when_changing_font_size = false
-config.hide_tab_bar_if_only_one_tab = true
 config.send_composed_key_when_right_alt_is_pressed = false
 
 config.window_frame = {
@@ -233,7 +232,8 @@ config.window_frame = {
 
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = true
-config.hide_tab_bar_if_only_one_tab = false
+config.switch_to_last_active_tab_when_closing_tab = true
+config.hide_tab_bar_if_only_one_tab = true
 
 -- https://github.com/MariaSolOs/dotfiles/blob/daeff7d07e82186a75854ea44b9fd66c3ab50689/.config/wezterm/wezterm.lua#L136
 wezterm.on("format-tab-title", function(tab)
