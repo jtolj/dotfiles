@@ -286,12 +286,22 @@ ax () {
 alias gcb="git checkout -b"
 alias gap="git add -p"
 alias gcm="git commit -m"
-alias gco="git checkout"
 alias gcod="git checkout develop"
 alias grhh="git reset --hard HEAD"
 alias grro="git reset --hard @{u}"
 # History search with wildcards - ex ghs "*filename.ext"
 alias ghs="git log --all --full-history --"
+
+gco() {
+  if [ -z "$1" ]; then
+    git branch --color=always \
+    | fzf --ansi --preview 'git log $(echo {} | sed "s/^[* ]*//") --oneline --color=always' \
+      | sed 's/^[* ]*//' \
+      | xargs git checkout
+  else
+    git checkout "$@"
+  fi
+}
 
 gcom() {
   git branch --list main >/dev/null 2>&1 && git checkout main || git checkout master
