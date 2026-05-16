@@ -1,3 +1,5 @@
+vim.pack.add { 'https://github.com/nickjvandyke/opencode.nvim' }
+
 local function focus_pane(pane_id)
   vim.fn.system(string.format('wezterm cli activate-pane --pane-id %d', pane_id))
 end
@@ -112,77 +114,67 @@ function wez:health()
   return vim.env.WEZTERM_PANE ~= nil
 end
 
-return {
-  'nickjvandyke/opencode.nvim',
-  dependencies = {
-    ---@module 'snacks'
-    { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
+vim.g.opencode_opts = {
+  prompts = {
+    grammar = {
+      prompt = '@buffer Can you check this content for spelling and grammar errors? Please also check for consistent tone. Be sure to reference specific line numbers, and give a summary of each change after providing the old and new lines. Do not change anything, just make suggestions.',
+      submit = true,
+      ask = false,
+    },
   },
-  config = function()
-    ---@type opencode.Opts
-    vim.g.opencode_opts = {
-      prompts = {
-        grammar = {
-          prompt = '@buffer Can you check this content for spelling and grammar errors? Please also check for consistent tone. Be sure to reference specific line numbers, and give a summary of each change after providing the old and new lines. Do not change anything, just make suggestions.',
-          submit = true,
-          ask = false,
-        },
-      },
-      server = {
-        start = function()
-          wez:start()
-        end,
-        stop = function()
-          wez:stop()
-        end,
-        toggle = function()
-          wez:toggle()
-        end,
-      },
-    }
-
-    -- Required for `opts.events.reload`.
-    vim.o.autoread = true
-    vim.api.nvim_create_autocmd('VimLeavePre', {
-      callback = function()
-        wez:stop()
-      end,
-    })
-
-    -- Recommended keymaps.
-    vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
-      require('opencode').ask('@this: ', { submit = true })
-    end, { desc = 'Ask opencode' })
-
-    vim.keymap.set({ 'n', 't' }, '<leader>ac', function()
-      require('opencode').toggle()
-    end, { desc = 'Toggle opencode' })
-
-    vim.keymap.set({ 'n', 't' }, '<leader>aC', function()
-      local provider = require('opencode.config').provider
-      if provider and provider.pane_id then
-        focus_pane(provider.pane_id)
-      end
-    end, { desc = 'Focus opencode' })
-
-    vim.keymap.set('n', '<leader>as', function()
-      require('opencode').select_session()
-    end, { desc = 'Select opencode session' })
-
-    vim.keymap.set({ 'n', 'x' }, '<leader>ap', function()
-      require('opencode').select()
-    end, { desc = 'Pick opencode action' })
-
-    vim.keymap.set({ 'n', 'x' }, '<leader>ao', function()
-      return require('opencode').operator '@this '
-    end, { desc = 'Add range to opencode', expr = true })
-
-    vim.keymap.set('n', '<leader>ak', function()
-      require('opencode').command 'session.half.page.up'
-    end, { desc = 'Scroll opencode up' })
-
-    vim.keymap.set('n', '<leader>aj', function()
-      require('opencode').command 'session.half.page.down'
-    end, { desc = 'Scroll opencode down' })
-  end,
+  server = {
+    start = function()
+      wez:start()
+    end,
+    stop = function()
+      wez:stop()
+    end,
+    toggle = function()
+      wez:toggle()
+    end,
+  },
 }
+
+-- Required for `opts.events.reload`.
+vim.o.autoread = true
+vim.api.nvim_create_autocmd('VimLeavePre', {
+  callback = function()
+    wez:stop()
+  end,
+})
+
+-- TODO: the picker needs some help
+vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
+  require('opencode').ask('@this: ', { submit = true })
+end, { desc = 'Ask opencode' })
+
+vim.keymap.set({ 'n', 't' }, '<leader>ac', function()
+  require('opencode').toggle()
+end, { desc = 'Toggle opencode' })
+
+vim.keymap.set({ 'n', 't' }, '<leader>aC', function()
+  local provider = require('opencode.config').provider
+  if provider and provider.pane_id then
+    focus_pane(provider.pane_id)
+  end
+end, { desc = 'Focus opencode' })
+
+vim.keymap.set('n', '<leader>as', function()
+  require('opencode').select_session()
+end, { desc = 'Select opencode session' })
+
+vim.keymap.set({ 'n', 'x' }, '<leader>ap', function()
+  require('opencode').select()
+end, { desc = 'Pick opencode action' })
+
+vim.keymap.set({ 'n', 'x' }, '<leader>ao', function()
+  return require('opencode').operator '@this '
+end, { desc = 'Add range to opencode', expr = true })
+
+vim.keymap.set('n', '<leader>ak', function()
+  require('opencode').command 'session.half.page.up'
+end, { desc = 'Scroll opencode up' })
+
+vim.keymap.set('n', '<leader>aj', function()
+  require('opencode').command 'session.half.page.down'
+end, { desc = 'Scroll opencode down' })

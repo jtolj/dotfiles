@@ -1,0 +1,47 @@
+vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
+
+local actions = require 'diffview.actions'
+require('diffview').setup {
+  enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
+  view = {
+    merge_tool = {
+      layout = 'diff3_mixed',
+    },
+  },
+  keymaps = {
+    view = {
+      { 'n', 'q', actions.close },
+      { 'n', '<Tab>', actions.select_next_entry },
+      { 'n', '<S-Tab>', actions.select_prev_entry },
+      { 'n', '<localleader>a', actions.focus_files },
+      { 'n', '<localleader>e', actions.toggle_files },
+    },
+    file_panel = {
+      { 'n', 'q', actions.close },
+      { 'n', 'h', actions.prev_entry },
+      { 'n', 'o', actions.focus_entry },
+      { 'n', 'gf', actions.goto_file },
+      { 'n', 'sg', actions.goto_file_split },
+      { 'n', 'st', actions.goto_file_tab },
+      { 'n', '<C-r>', actions.refresh_files },
+      { 'n', '<localleader>e', actions.toggle_files },
+    },
+    file_history_panel = {
+      { 'n', 'q', '<cmd>DiffviewClose<CR>' },
+      { 'n', 'o', actions.focus_entry },
+      { 'n', 'O', actions.options },
+    },
+  },
+}
+
+vim.keymap.set('n', '<leader>gD', '<cmd>DiffviewFileHistory %<CR>', { desc = 'Diff File' })
+vim.keymap.set('n', '<leader>gv', '<cmd>DiffviewOpen<CR>', { desc = 'Diff View' })
+
+vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+  group = vim.api.nvim_create_augroup('rafi.diffview', {}),
+  pattern = 'diffview:///panels/*',
+  callback = function()
+    vim.opt_local.cursorline = true
+    vim.opt_local.winhighlight = 'CursorLine:WildMenu'
+  end,
+})

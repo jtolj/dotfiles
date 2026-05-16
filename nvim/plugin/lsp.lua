@@ -1,0 +1,145 @@
+vim.pack.add {
+  'https://github.com/mason-org/mason.nvim',
+  'https://github.com/mason-org/mason-lspconfig.nvim',
+  'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
+  'https://github.com/j-hui/fidget.nvim',
+  'https://github.com/saghen/blink.cmp',
+  'https://github.com/neovim/nvim-lspconfig',
+}
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('on-lsp-attach', { clear = true }),
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if not client then
+      return
+    end
+    local map = function(keys, func, desc, mode)
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+    end
+
+    -- Rename the variable under your cursor.
+    --  Most Language Servers support renaming across files, etc.
+    map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+
+    -- Execute a code action, usually your cursor needs to be on top of an error
+    -- or a suggestion from your LSP for this to activate.
+    map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+
+    -- WARN: This is not Goto Definition, this is Goto Declaration.
+    --  For example, in C this would take you to the header.
+    map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+      map('<leader>th', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+      end, '[T]oggle Inlay [H]ints')
+    end
+
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentColor) then
+      vim.lsp.document_color.enable(true, nil, { style = 'virtual' })
+
+      map('grc', function()
+        vim.lsp.document_color.color_presentation()
+      end, 'vim.lsp.document_color.color_presentation()', { 'n', 'x' })
+    end
+  end,
+})
+
+vim.diagnostic.config {
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+  signs = vim.g.have_nerd_font and {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '󰅚 ',
+      [vim.diagnostic.severity.WARN] = '󰀪 ',
+      [vim.diagnostic.severity.INFO] = '󰋽 ',
+      [vim.diagnostic.severity.HINT] = '󰌶 ',
+    },
+  } or {},
+  virtual_text = {
+    source = 'if_many',
+    spacing = 2,
+    format = function(diagnostic)
+      local diagnostic_message = {
+        [vim.diagnostic.severity.ERROR] = diagnostic.message,
+        [vim.diagnostic.severity.WARN] = diagnostic.message,
+        [vim.diagnostic.severity.INFO] = diagnostic.message,
+        [vim.diagnostic.severity.HINT] = diagnostic.message,
+      }
+      return diagnostic_message[diagnostic.severity]
+    end,
+  },
+}
+require('mason').setup()
+
+require('mason-tool-installer').setup {
+  ensure_installed = {
+    'stylua',
+    'intelephense',
+    'tailwindcss-language-server',
+    'blade-formatter',
+    'phpcs',
+    'php-debug-adapter',
+    'jq',
+    'rust-analyzer',
+    'prettierd',
+    'biome',
+    'bashls',
+    'clangd',
+    'typos-lsp',
+    'svelte-language-server',
+    'tsgo',
+    'css-lsp',
+    'lua_ls',
+    'clojure-lsp',
+  },
+}
+
+local capabilities = require('blink.cmp').get_lsp_capabilities {
+  textDocument = {
+    onTypeFormatting = {
+      dynamicRegistration = false,
+    },
+  },
+}
+
+vim.lsp.config['lua_ls'] = {
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = 'Replace',
+      },
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
+vim.lsp.config['rust_analyzer'] = {
+  capabilities = capabilities,
+  settings = {
+    ['rust-analyzer'] = {
+      check = {
+        command = 'clippy',
+      },
+    },
+  },
+}
+
+require('mason-lspconfig').setup {
+  ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+}
