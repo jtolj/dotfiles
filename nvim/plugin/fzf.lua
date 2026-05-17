@@ -65,6 +65,10 @@ end, {
   desc = 'Search registers',
 })
 
+vim.keymap.set('n', '<leader>s?', function()
+  fzf.builtin()
+end, { desc = 'Search pickers' })
+
 vim.keymap.set('n', 'gd', function()
   fzf.lsp_definitions { jump1 = true }
 end, {
