@@ -8,7 +8,7 @@ local dapview = require 'dap-view'
 
 -- make sure you don't have any other keymaps that starts with "<leader>d" to avoid delay
 -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
-vim.keymap.set({ 'n', 'v' }, '<leader>dv', dapview.toggle, { nowait = true, desc = '[D]ebug [V]iew Toggle' })
+vim.keymap.set({ 'n', 'v' }, '<leader>dv', dapview.toggle, { nowait = true, desc = 'Toggle debug view' })
 
 dapview.setup {}
 
@@ -26,10 +26,10 @@ dap.configurations.rust = {
   },
 }
 
-vim.keymap.set({ 'n' }, '<leader>db', dap.toggle_breakpoint, { desc = '[D]ebug Toggle [b]reakpoint' })
-vim.keymap.set({ 'n' }, '<leader>dc', dap.continue, { desc = '[D]ebug [c]ontinue' })
-vim.keymap.set({ 'n' }, '<leader>dso', dap.step_over, { desc = '[D]ebug [s]tep [o]ver' })
-vim.keymap.set({ 'n' }, '<leader>dsi', dap.step_over, { desc = '[D]ebug [s]tep [i]into' })
+vim.keymap.set({ 'n' }, '<leader>db', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
+vim.keymap.set({ 'n' }, '<leader>dc', dap.continue, { desc = 'Debug continue' })
+vim.keymap.set({ 'n' }, '<leader>dso', dap.step_over, { desc = 'Debug step over' })
+vim.keymap.set({ 'n' }, '<leader>dsi', dap.step_over, { desc = 'Debug step into' })
 
 -- From https://github.com/StevanFreeborn/nvim-config/blob/main/lua/plugins/debugging.lua#L111-L123
 for _, adapterType in ipairs { 'node', 'chrome', 'msedge' } do
@@ -103,7 +103,7 @@ end
 
 vim.keymap.set('n', '<leader>dl', function()
   require('osv').launch { port = 8086 }
-end, { noremap = true })
+end, { noremap = true, desc = 'Start Lua debug server' })
 
 require('mason-nvim-dap').setup {
   ensure_installed = { 'codelldb', 'js-debug-adapter' },

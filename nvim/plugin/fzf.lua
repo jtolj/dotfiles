@@ -65,6 +65,12 @@ end, {
   desc = 'Search registers',
 })
 
+vim.keymap.set('n', '<leader>su', function()
+  fzf.undotree()
+end, {
+  desc = 'Search undotree',
+})
+
 vim.keymap.set('n', '<leader>s?', function()
   fzf.builtin()
 end, { desc = 'Search pickers' })
@@ -80,3 +86,23 @@ vim.keymap.set('n', 'gD', function()
 end, {
   desc = 'LSP declaration',
 })
+
+vim.keymap.set({ 'n' }, '<leader>dsr', function()
+  fzf.dap_commands()
+end, { desc = 'Debug search commands' })
+
+vim.keymap.set({ 'n' }, '<leader>dsc', function()
+  fzf.dap_commands()
+end, { desc = 'Debug search configs' })
+
+vim.keymap.set({ 'n' }, '<leader>dsb', function()
+  fzf.dap_breakpoints()
+end, { desc = 'Debug search breakpoints' })
+
+vim.keymap.set({ 'n' }, '<leader>dsv', function()
+  fzf.dap_breakpoints()
+end, { desc = 'Debug search variables' })
+
+vim.keymap.set({ 'n' }, '<leader>dsf', function()
+  fzf.dap_breakpoints()
+end, { desc = 'Debug jump to frame' })
