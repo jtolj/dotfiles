@@ -22,6 +22,10 @@ vim.keymap.set('n', '<leader>/', function()
 end, {
   desc = 'Live grep',
 })
+vim.keymap.set('n', '<leader>sn', function()
+  -- TODO: fzf_exec with get_all()
+  require('mini.notify').show_history()
+end, { desc = 'Search notification history' })
 
 vim.keymap.set('n', '<leader>,', function()
   fzf.buffers()
