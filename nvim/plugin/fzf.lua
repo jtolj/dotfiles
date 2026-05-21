@@ -22,10 +22,24 @@ vim.keymap.set('n', '<leader>/', function()
 end, {
   desc = 'Live grep',
 })
+
 vim.keymap.set('n', '<leader>sn', function()
-  -- TODO: fzf_exec with get_all()
-  require('mini.notify').show_history()
+  local notifications_raw = Snacks.notifier.get_history()
+  local notifications = {}
+  for _, n in ipairs(notifications_raw) do
+    table.insert(notifications, n.msg)
+  end
+  fzf.fzf_exec(notifications)
 end, { desc = 'Search notification history' })
+
+vim.keymap.set('n', '<leader>sm', function()
+  local messages_raw = vim.api.nvim_exec2('messages', { output = true })
+  local messages = {}
+  for s in messages_raw.output:gmatch '[^\r\n]+' do
+    table.insert(messages, s)
+  end
+  fzf.fzf_exec(messages)
+end, { desc = 'Search message history' })
 
 vim.keymap.set('n', '<leader>,', function()
   fzf.buffers()
@@ -57,7 +71,7 @@ end, {
   desc = 'Search diagnostics (workspace)',
 })
 
-vim.keymap.set('n', '<leader>sm', function()
+vim.keymap.set('n', '<leader>sM', function()
   fzf.marks()
 end, {
   desc = 'Search marks',
