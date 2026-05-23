@@ -381,7 +381,7 @@ pwcopy() {
 ## Homebrew
 brew() {
   if [ -z "$1" ]; then
-    local pkg=$(brew formulae | fzf --border --border-label ' Enter to install Homebrew package ' --preview 'echo "" && brew info {}')
+    local pkg=$(brew formulae | fzf --border --border-label ' Enter to install Homebrew package ' --preview 'sleep 1 && echo "" && brew info {}')
     if [[ $pkg ]]; then
       brew install "$pkg"
       brew_sync
@@ -395,7 +395,7 @@ brew() {
 }
 
 unbrew() {
-  local pkg=$(brew list --installed-on-request | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'echo "" && brew info {}')
+  local pkg=$(brew list --installed-on-request | fzf --border --border-label ' Enter to remove Homebrew package ' --preview 'sleep 1 && echo "" && brew info {}')
   if [[ $pkg ]]; then
     command brew remove "$pkg"
     brew_sync
