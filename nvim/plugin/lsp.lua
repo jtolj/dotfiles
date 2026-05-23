@@ -94,6 +94,8 @@ require('mason-tool-installer').setup {
     'css-lsp',
     'lua_ls',
     'clojure-lsp',
+    'json-lsp',
+    'yaml-language-server',
   },
 }
 

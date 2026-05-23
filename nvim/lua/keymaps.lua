@@ -33,3 +33,7 @@ vim.keymap.set('n', '99', '<cmd>silent w<CR>')
 
 -- Lazygit
 vim.keymap.set('n', '<leader>gg', '<cmd>silent !wezterm cli spawn --cwd ' .. vim.fn.getcwd() .. ' lazygit<CR>', { desc = 'Open Lazygit' })
+
+-- Hide spammy undo/redo messages
+vim.keymap.set('n', 'u', ':silent undo <cr>', { silent = true })
+vim.keymap.set('n', 'U', ':silent redo <cr>', { silent = true })

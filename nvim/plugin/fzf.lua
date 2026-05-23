@@ -24,10 +24,10 @@ end, {
 })
 
 vim.keymap.set('n', '<leader>sn', function()
-  local notifications_raw = Snacks.notifier.get_history()
+  local notifications_raw = require('mini.notify').get_all()
   local notifications = {}
   for _, n in ipairs(notifications_raw) do
-    table.insert(notifications, n.msg)
+    table.insert(notifications, string.format('[%s] %s', n.level, n.msg))
   end
   fzf.fzf_exec(notifications)
 end, { desc = 'Search notification history' })

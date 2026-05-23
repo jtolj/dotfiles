@@ -9,7 +9,7 @@ snacks.setup {
   indent = { enabled = true },
   input = { enabled = true },
   picker = { enabled = false },
-  notifier = { enabled = true },
+  notifier = { enabled = false },
   quickfile = { enabled = false },
   scope = { enabled = false },
   scroll = { enabled = false },
