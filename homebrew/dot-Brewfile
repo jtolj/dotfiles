@@ -6,6 +6,7 @@ tap "nikitabobko/tap"
 tap "philocalyst/tap"
 tap "shivammathur/php"
 tap "sst/tap"
+tap "symfony-cli/tap"
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
 # Cryptography and SSL/TLS Toolkit
@@ -208,6 +209,8 @@ brew "felixkratz/formulae/sketchybar"
 brew "philocalyst/tap/caligula"
 # General-purpose scripting language
 brew "shivammathur/php/php"
+# Symfony CLI helps Symfony developers manage projects, from local code to remote infrastructure
+brew "symfony-cli/tap/symfony-cli"
 # AeroSpace is an i3-like tiling window manager for macOS
 cask "nikitabobko/tap/aerospace"
 # Application launcher and productivity software
