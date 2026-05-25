@@ -5,4 +5,9 @@ require('mini.notify').setup {
     -- Whether to enable showing
     enable = false,
   },
+  content = {
+    format = function(n)
+      return '\n' .. '   ' .. n.msg .. '   \n'
+    end,
+  },
 }
