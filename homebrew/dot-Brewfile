@@ -139,6 +139,10 @@ brew "pgcli"
 brew "php@8.4"
 # Minimal dumb-terminal emulation program
 brew "picocom"
+# General-purpose scripting language
+brew "php", restart_service: :changed
+# PHP Installer for Extensions
+brew "pie"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Package compiler and linker metadata toolkit
@@ -151,8 +155,6 @@ brew "pngcrush"
 brew "poppler"
 # Framework for managing multi-language pre-commit hooks
 brew "pre-commit"
-# General-purpose scripting language
-brew "php", restart_service: :changed
 # Runtime developer console, interactive debugger and REPL for PHP
 brew "psysh"
 # Generic machine emulator and virtualizer
