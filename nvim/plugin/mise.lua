@@ -28,6 +28,9 @@ vim.api.nvim_create_user_command('MisePick', function(args)
 
   require('fzf-lua').fzf_exec(tasks, {
     prompt = 'mise task > ',
+    fzf_opts = {
+      ['--header'] = '[enter] run in nvim  |  [ctrl-r] run in wezterm tab',
+    },
     actions = {
       ['default'] = function(selected, opts)
         if selected[1] == nil then
@@ -38,6 +41,19 @@ vim.api.nvim_create_user_command('MisePick', function(args)
         -- vim.notify(vim.inspect(task_details))
         -- TODO: handle providing argument(s) with vim.ui.input
         vim.cmd('term mise run ' .. task:match '(.+)%s*$')
+      end,
+
+      ['ctrl-r'] = function(selected, opts)
+        if selected[1] == nil then
+          return
+        end
+        local task_details = task_data[selected[1]]
+        local task = string.sub(selected[1], 1, 30)
+        local cwd = vim.env.MISE_PROJECT_ROOT or vim.fn.getcwd()
+        vim.fn.jobstart(
+          { 'wezterm', 'cli', 'spawn', '--cwd', cwd, '--', 'zsh', '-lc', 'mise run ' .. task:match '(.+)%s*$' .. '; exec zsh -l' },
+          { detach = true }
+        )
       end,
     },
   })
