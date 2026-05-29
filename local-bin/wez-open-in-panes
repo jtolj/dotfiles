@@ -9,7 +9,7 @@ fi
 commands=("$@")
 
 if [ ${#commands[@]} -eq 0 ]; then
-    echo "Usage: mise-open-in-panes [-v] \"command1\" \"command2\" ..."
+    echo "Usage: wez-open-in-panes [-v] \"command1\" \"command2\" ..."
     exit 1
 fi
 
