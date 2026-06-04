@@ -16,6 +16,7 @@ vim.keymap.set('n', '<leader>wc', '<C-w>c', { desc = 'Close current window' })
 
 -- System clipboard mappings
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>p', '"+p', { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x', 'o' }, '<leader>P', '"+P', { noremap = true, silent = true })
 vim.keymap.set({ 'n', 'x', 'o' }, '<leader>y', '"+y', { noremap = true, silent = true })
 
 -- Map Backhole Register to `\`
