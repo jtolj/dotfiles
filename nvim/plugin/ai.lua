@@ -1,180 +1,37 @@
-vim.pack.add { 'https://github.com/nickjvandyke/opencode.nvim' }
+vim.pack.add { 'https://github.com/folke/sidekick.nvim' }
 
-local function focus_pane(pane_id)
-  vim.fn.system(string.format('wezterm cli activate-pane --pane-id %d', pane_id))
-end
-
-local wez = {}
-wez.name = 'wezterm-custom'
-wez.cmd = 'opencode --port'
-wez.pane_id = nil
-
-function wez:get_pane_id()
-  if self.pane_id == nil then
-    return nil
-  end
-
-  local result = vim.fn.system 'wezterm cli list --format json 2>&1'
-
-  if result == nil or result == '' or result:match 'error' then
-    self.pane_id = nil
-    return nil
-  end
-
-  local success, panes = pcall(vim.json.decode, result)
-  if not success or type(panes) ~= 'table' then
-    self.pane_id = nil
-    return nil
-  end
-
-  -- Search for the pane in the list
-  for _, pane in ipairs(panes) do
-    if tostring(pane.pane_id) == tostring(self.pane_id) then
-      return self.pane_id
-    end
-  end
-
-  -- Pane was not found in the list
-  self.pane_id = nil
-  return nil
-end
-
-function wez:is_zoomed()
-  local result = vim.fn.system 'wezterm cli list --format json 2>&1'
-  if result == nil or result == '' or result:match 'error' then
-    vim.notify 'Could not determine zoomed status.'
-    return
-  end
-
-  local success, panes = pcall(vim.json.decode, result)
-  if not success or type(panes) ~= 'table' then
-    vim.notify 'Could not decode results.'
-    return
-  end
-  for _, pane in ipairs(panes) do
-    if tostring(pane.pane_id) == tostring(vim.env.WEZTERM_PANE) then
-      return pane.is_zoomed
-    end
-  end
-  vim.notify 'Could not find pane.'
-end
-
-function wez:toggle()
-  local pane_id = self:get_pane_id()
-  if pane_id then
-    local cmd_parts = { 'wezterm', 'cli', 'zoom-pane', '--pane-id', vim.env.WEZTERM_PANE }
-    if self:is_zoomed() then
-      table.insert(cmd_parts, '--unzoom')
-    else
-      table.insert(cmd_parts, '--zoom')
-    end
-    vim.fn.system(table.concat(cmd_parts, ' '))
-  else
-    self:start()
-  end
-end
-
-function wez:start()
-  local pane_id = self:get_pane_id()
-
-  if not pane_id then
-    local result
-    if self:is_zoomed() then
-      local cmd_parts = { 'wezterm', 'cli', 'zoom-pane', '--pane-id', vim.env.WEZTERM_PANE, '--unzoom' }
-      result = vim.fn.system(table.concat(cmd_parts, ' '))
-    else
-      local cmd_parts = { 'wezterm', 'cli', 'split-pane', '--right', '--percent', '30', '--top-level' }
-
-      table.insert(cmd_parts, '--')
-      table.insert(cmd_parts, self.cmd)
-
-      result = vim.fn.system(table.concat(cmd_parts, ' '))
-    end
-    if result ~= '' then
-      self.pane_id = result:match '^%d+'
-      focus_pane(vim.env.WEZTERM_PANE)
-    end
-  end
-end
-
-function wez:stop()
-  local pane_id = self:get_pane_id()
-
-  if pane_id then
-    vim.fn.system(string.format('wezterm cli kill-pane --pane-id %d', pane_id))
-    self.pane_id = nil
-    if self:is_zoomed() then
-      local cmd_parts = { 'wezterm', 'cli', 'zoom-pane', '--pane-id', vim.env.WEZTERM_PANE, '--unzoom' }
-      vim.fn.system(table.concat(cmd_parts, ' '))
-    end
-  end
-end
-
-function wez:health()
-  return vim.env.WEZTERM_PANE ~= nil
-end
-
-vim.g.opencode_opts = {
-  prompts = {
-    grammar = {
-      prompt = '@buffer Can you check this content for spelling and grammar errors? Please also check for consistent tone. Be sure to reference specific line numbers, and give a summary of each change after providing the old and new lines. Do not change anything, just make suggestions.',
-      submit = true,
-      ask = false,
+require('sidekick').setup {
+  nes = { enabled = false },
+  copilot = { status = { enabled = false } },
+  cli = {
+    win = {
+      split = {
+        width = 0.4,
+      },
     },
-  },
-  server = {
-    start = function()
-      wez:start()
-    end,
-    stop = function()
-      wez:stop()
-    end,
-    toggle = function()
-      wez:toggle()
-    end,
   },
 }
 
--- Required for `opts.events.reload`.
-vim.o.autoread = true
-vim.api.nvim_create_autocmd('VimLeavePre', {
-  callback = function()
-    wez:stop()
-  end,
-})
+vim.keymap.set({ 'n', 'v' }, '<leader>ac', function()
+  require('sidekick.cli').toggle { name = 'opencode', focus = true }
+end, { desc = 'Sidekick Toggle CLI' })
 
--- TODO: the picker needs some help
-vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
-  require('opencode').ask('@this: ', { submit = true })
-end, { desc = 'Ask opencode' })
+vim.keymap.set('n', '<leader>ad', function()
+  require('sidekick.cli').close()
+end, { desc = 'Detach a CLI Session' })
 
-vim.keymap.set({ 'n', 't' }, '<leader>ac', function()
-  require('opencode').toggle()
-end, { desc = 'Toggle opencode' })
+vim.keymap.set({ 'n', 'x' }, '<leader>at', function()
+  require('sidekick.cli').send { msg = '{this}' }
+end, { desc = 'Send This' })
 
-vim.keymap.set({ 'n', 't' }, '<leader>aC', function()
-  local provider = require('opencode.config').provider
-  if provider and provider.pane_id then
-    focus_pane(provider.pane_id)
-  end
-end, { desc = 'Focus opencode' })
+vim.keymap.set('n', '<leader>af', function()
+  require('sidekick.cli').send { msg = '{file}' }
+end, { desc = 'Send File' })
 
-vim.keymap.set('n', '<leader>as', function()
-  require('opencode').select_session()
-end, { desc = 'Select opencode session' })
+vim.keymap.set('x', '<leader>av', function()
+  require('sidekick.cli').send { msg = '{selection}' }
+end, { desc = 'Send Visual Selection' })
 
 vim.keymap.set({ 'n', 'x' }, '<leader>ap', function()
-  require('opencode').select()
-end, { desc = 'Pick opencode action' })
-
-vim.keymap.set({ 'n', 'x' }, '<leader>ao', function()
-  return require('opencode').operator '@this '
-end, { desc = 'Add range to opencode', expr = true })
-
-vim.keymap.set('n', '<leader>ak', function()
-  require('opencode').command 'session.half.page.up'
-end, { desc = 'Scroll opencode up' })
-
-vim.keymap.set('n', '<leader>aj', function()
-  require('opencode').command 'session.half.page.down'
-end, { desc = 'Scroll opencode down' })
+  require('sidekick.cli').prompt()
+end, { desc = 'Sidekick Select Prompt' })
