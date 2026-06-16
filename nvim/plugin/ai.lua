@@ -1,37 +1,46 @@
-vim.pack.add { 'https://github.com/folke/sidekick.nvim' }
-
-require('sidekick').setup {
-  nes = { enabled = false },
-  copilot = { status = { enabled = false } },
-  cli = {
-    win = {
-      split = {
-        width = 0.4,
-      },
-    },
+vim.pack.add {
+  {
+    src = 'https://github.com/nickjvandyke/opencode.nvim',
+    version = vim.version.range '*',
   },
 }
 
-vim.keymap.set({ 'n', 'v' }, '<leader>ac', function()
-  require('sidekick.cli').toggle { name = 'opencode', focus = true }
-end, { desc = 'Sidekick Toggle CLI' })
+local opencode_cmd = 'opencode --port'
+---@type snacks.terminal.Opts
+local snacks_terminal_opts = {
+  win = {
+    position = 'right',
+    enter = false,
+  },
+}
 
-vim.keymap.set('n', '<leader>ad', function()
-  require('sidekick.cli').close()
-end, { desc = 'Detach a CLI Session' })
+---@type opencode.Opts
+vim.g.opencode_opts = {
+  server = {
+    start = function()
+      require('snacks.terminal').open(opencode_cmd, snacks_terminal_opts)
+    end,
+  },
+}
 
-vim.keymap.set({ 'n', 'x' }, '<leader>at', function()
-  require('sidekick.cli').send { msg = '{this}' }
-end, { desc = 'Send This' })
-
-vim.keymap.set('n', '<leader>af', function()
-  require('sidekick.cli').send { msg = '{file}' }
-end, { desc = 'Send File' })
-
-vim.keymap.set('x', '<leader>av', function()
-  require('sidekick.cli').send { msg = '{selection}' }
-end, { desc = 'Send Visual Selection' })
+vim.keymap.set({ 'n', 't' }, '<C-.>', function()
+  require('snacks.terminal').toggle(opencode_cmd, snacks_terminal_opts)
+end, { desc = 'Toggle OpenCode' })
 
 vim.keymap.set({ 'n', 'x' }, '<leader>ap', function()
-  require('sidekick.cli').prompt()
-end, { desc = 'Sidekick Select Prompt' })
+  require('opencode').select()
+end, { desc = 'Select Prompt' })
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = { 'OpencodeEvent:tui.command.execute' },
+  callback = function(args)
+    ---@type opencode.server.Event
+    local event = args.data.event
+    if event.properties.command == 'prompt.submit' then
+      local win = require('snacks.terminal').get(opencode_cmd, { create = false })
+      if win then
+        win:show()
+      end
+    end
+  end,
+})
