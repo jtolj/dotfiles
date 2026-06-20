@@ -21,6 +21,13 @@ vim.g.opencode_opts = {
       require('snacks.terminal').open(opencode_cmd, snacks_terminal_opts)
     end,
   },
+  events = {
+    permissions = {
+      edits = {
+        enabled = false,
+      },
+    },
+  },
 }
 
 vim.keymap.set({ 'n', 't' }, '<C-.>', function()
