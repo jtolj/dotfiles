@@ -2,6 +2,10 @@ vim.pack.add { 'https://github.com/ibhagwan/fzf-lua' }
 local fzf = require 'fzf-lua'
 
 fzf.setup {
+  files = {
+    rg_opts = [[--color=never --files -g "!.git" -g "!.jj" -g "!.sqlx"]],
+    fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --exclude .sqlx]],
+  },
   keymap = {
     fzf = {
       ['ctrl-q'] = 'select-all+accept',
@@ -87,6 +91,12 @@ vim.keymap.set('n', '<leader>su', function()
   fzf.undotree()
 end, {
   desc = 'Search undotree',
+})
+
+vim.keymap.set('n', '<leader>sk', function()
+  fzf.keymaps()
+end, {
+  desc = 'Search keymaps',
 })
 
 vim.keymap.set('n', '<leader>s?', function()
