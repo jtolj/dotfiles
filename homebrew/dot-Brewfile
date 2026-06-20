@@ -1,10 +1,9 @@
+tap "anomalyco/tap"
 tap "felixkratz/formulae", trusted: true
 tap "jandedobbeleer/oh-my-posh", trusted: true
 tap "jsattler/tap", trusted: true
 tap "nikitabobko/tap", trusted: true
-tap "s-sigdel/tap"
 tap "shivammathur/php", trusted: true
-tap "sst/tap", trusted: true
 tap "symfony-cli/tap", trusted: true
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
@@ -265,5 +264,6 @@ go "golang.org/x/tools/gopls"
 go "github.com/cweill/gotests/gotests"
 go "github.com/josharian/impl"
 go "honnef.co/go/tools/cmd/staticcheck"
+cargo "caligula"
 cargo "komorebi"
 cargo "komorebic"
