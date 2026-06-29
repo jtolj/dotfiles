@@ -6,7 +6,7 @@ snacks.setup {
   bigfile = { enabled = true },
   dashboard = { enabled = false },
   explorer = { enabled = false },
-  indent = { enabled = true },
+  indent = { enabled = false },
   input = { enabled = true },
   picker = { enabled = false },
   notifier = { enabled = false },
