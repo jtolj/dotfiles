@@ -158,7 +158,6 @@ local function split_nav(resize_or_move, key)
 					local tab = pane:tab()
 					if tab:get_pane_direction("Right") == nil and key == "l" then
 						win:perform_action({ SendKey = { key = "l", mods = "CTRL" } }, pane)
-						act.SendKey({ key = "l", mods = "CTRL" })
 					else
 						win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
 					end
