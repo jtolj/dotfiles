@@ -38,6 +38,10 @@ vim.keymap.set({ 'n', 'x' }, '<leader>ap', function()
   require('opencode').select()
 end, { desc = 'Select Prompt' })
 
+vim.keymap.set({ 'n', 'x' }, '<leader>aa', function()
+  require('opencode').ask()
+end, { desc = 'Ask Opencode' })
+
 vim.api.nvim_create_autocmd('User', {
   pattern = { 'OpencodeEvent:tui.command.execute' },
   callback = function(args)
