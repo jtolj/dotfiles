@@ -1,5 +1,6 @@
-tap "anomalyco/tap"
-tap "felixkratz/formulae", trusted: true
+tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
+tap "basuev/parket"
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "jandedobbeleer/oh-my-posh", trusted: true
 tap "jsattler/tap", trusted: true
 tap "nikitabobko/tap", trusted: true
@@ -7,12 +8,12 @@ tap "shivammathur/php", trusted: true
 tap "symfony-cli/tap", trusted: true
 # GNU compiler collection for aarch64-elf
 brew "aarch64-elf-gcc"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
 # Passphrase entry dialog utilizing the Assuan protocol
 brew "pinentry"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
 # Email client that runs in your terminal
 brew "aerc"
 # Asciicast to GIF converter
@@ -89,6 +90,8 @@ brew "grep"
 brew "hl"
 # Configurable static site generator
 brew "hugo"
+# Review-first terminal diff viewer for agent-authored changesets
+brew "hunk"
 # C/C++ and Java libraries for Unicode and globalization
 brew "icu4c@77"
 # Tools and libraries to manipulate images in select formats
@@ -244,6 +247,10 @@ cask "nheko"
 cask "notunes"
 # Replacement for Docker Desktop
 cask "orbstack"
+# Native GUI for Apple Containers
+cask "orchard"
+# Minimal dwm-like tiling window manager
+cask "basuev/parket/parket", trusted: true
 # Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 # Native GUI tool for relational databases
