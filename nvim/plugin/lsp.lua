@@ -85,7 +85,6 @@ require('mason-tool-installer').setup {
     'jq',
     'rust-analyzer',
     'prettierd',
-    'biome',
     'bashls',
     'clangd',
     'typos-lsp',
@@ -125,6 +124,17 @@ vim.lsp.config['lua_ls'] = {
       },
       telemetry = {
         enable = false,
+      },
+    },
+  },
+}
+
+vim.lsp.config['intelephense'] = {
+  capabilities = capabilities,
+  settings = {
+    ['intelephense'] = {
+      diagnostics = {
+        argumentCount = 'declared',
       },
     },
   },
