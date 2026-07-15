@@ -3,8 +3,9 @@ local fzf = require 'fzf-lua'
 
 fzf.setup {
   files = {
-    rg_opts = [[--color=never --files -g "!.git" -g "!.jj" -g "!.sqlx"]],
-    fd_opts = [[--color=never --type f --type l --exclude .git --exclude .jj --exclude .sqlx]],
+    hidden = false,
+    rg_opts = [[--color=never --files -g "!.agents" "!.git" -g "!.jj" -g "!.sqlx"]],
+    fd_opts = [[--color=never --type f --type l --exclude .agents --exclude .git --exclude .jj --exclude .sqlx]],
   },
   keymap = {
     fzf = {
