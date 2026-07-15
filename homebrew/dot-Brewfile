@@ -2,7 +2,6 @@ tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: t
 tap "basuev/parket"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "jandedobbeleer/oh-my-posh", trusted: true
-tap "jsattler/tap", trusted: true
 tap "nikitabobko/tap", trusted: true
 tap "shivammathur/php", trusted: true
 tap "symfony-cli/tap", trusted: true
@@ -37,7 +36,7 @@ brew "bat-extras"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
-brew "caddy"
+brew "caddy", restart_service: :changed
 # Object-file caching compiler wrapper
 brew "ccache"
 # C/C++ and Java libraries for Unicode and globalization
@@ -60,8 +59,6 @@ brew "libtool"
 brew "elixir"
 # Modern, maintained replacement for ls
 brew "eza"
-# Powerful, lightweight programming language
-brew "lua"
 # Like neofetch, but much faster because written mostly in C
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
@@ -104,6 +101,8 @@ brew "jq"
 brew "lazygit"
 # Text editor with block and binary operations
 brew "le"
+# Powerful, lightweight programming language
+brew "lua"
 # Package manager for the Lua programming language
 brew "luarocks"
 # Toolchain for PHP to help developers write better code
@@ -220,8 +219,6 @@ cask "nikitabobko/tap/aerospace"
 cask "alfred"
 # Compact TeX distribution as alternative to the full TeX Live / MacTeX
 cask "basictex"
-# The macOS screen recorder you deserve - always free and open source
-cask "jsattler/tap/bettercapture"
 # Scriptable scratchpad for developers
 cask "boop"
 # Open source IDE for exploring and testing APIs
