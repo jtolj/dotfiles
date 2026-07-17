@@ -76,38 +76,29 @@ require('mason').setup()
 
 require('mason-tool-installer').setup {
   ensure_installed = {
-    'stylua',
-    'intelephense',
-    'tailwindcss-language-server',
-    'blade-formatter',
-    'phpcs',
-    'php-debug-adapter',
-    'jq',
-    'rust-analyzer',
-    'prettierd',
     'bashls',
+    'blade-formatter',
     'clangd',
-    'typos-lsp',
-    'svelte-language-server',
-    'tsgo',
-    'css-lsp',
-    'lua_ls',
     'clojure-lsp',
+    'css-lsp',
+    'intelephense',
+    'jq',
     'json-lsp',
+    'lua_ls',
+    'php-debug-adapter',
+    'phpcs',
+    'prettierd',
+    'rust-analyzer',
+    'stylua',
+    'svelte-language-server',
+    'tailwindcss-language-server',
+    'tsgo',
+    'typos-lsp',
     'yaml-language-server',
   },
 }
 
-local capabilities = require('blink.cmp').get_lsp_capabilities {
-  textDocument = {
-    onTypeFormatting = {
-      dynamicRegistration = false,
-    },
-  },
-}
-
 vim.lsp.config['lua_ls'] = {
-  capabilities = capabilities,
   settings = {
     Lua = {
       completion = {
@@ -130,7 +121,6 @@ vim.lsp.config['lua_ls'] = {
 }
 
 vim.lsp.config['intelephense'] = {
-  capabilities = capabilities,
   settings = {
     ['intelephense'] = {
       diagnostics = {
@@ -141,7 +131,6 @@ vim.lsp.config['intelephense'] = {
 }
 
 vim.lsp.config['rust_analyzer'] = {
-  capabilities = capabilities,
   settings = {
     ['rust-analyzer'] = {
       check = {
