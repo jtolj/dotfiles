@@ -14,6 +14,8 @@ local icons = {
 			on = "􁏮",
 			off = "􁏯",
 		},
+		headphones = "􀑈",
+		airpods = "􀪷",
 		volume = {
 			_100 = "􀊩",
 			_66 = "􀊧",
@@ -58,6 +60,8 @@ local icons = {
 			on = "󱨥",
 			off = "󱨦",
 		},
+		headphones = "󰋋",
+		airpods = "󰥰",
 		volume = {
 			_100 = "",
 			_66 = "",
