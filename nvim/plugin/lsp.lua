@@ -85,7 +85,6 @@ require('mason-tool-installer').setup {
     'jq',
     'json-lsp',
     'lua_ls',
-    'php-debug-adapter',
     'prettierd',
     'rust-analyzer',
     'stylua',

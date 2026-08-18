@@ -10,26 +10,79 @@ local dapview = require 'dap-view'
 -- Alternative keybindings to "<leader>d" could be: "<leader>m", "<leader>;"
 vim.keymap.set({ 'n', 'v' }, '<leader>dv', dapview.toggle, { nowait = true, desc = 'Toggle debug view' })
 
-dapview.setup {}
+dapview.setup {
+  winbar = {
+    controls = {
+      buttons = {
+        'play',
+        'step_into',
+        'step_over',
+        'step_out',
+        -- 'step_back',
+        -- 'run_last',
+        'terminate',
+        -- 'disconnect',
+      },
+      enabled = true,
+    },
+    default_section = 'scopes',
+    sections = { 'scopes', 'exceptions', 'breakpoints' }, -- watches, threads, repl
+    base_sections = {
+      -- Labels can be set dynamically with functions
+      -- Each function receives the window's width and the current section as arguments
+      breakpoints = { label = 'Break', keymap = 'B' },
+      scopes = { label = 'Scopes', keymap = 'S' },
+      exceptions = { label = 'Except', keymap = 'E' },
+      watches = { label = 'Watches', keymap = 'W' },
+      threads = { label = 'Threads', keymap = 'T' },
+      repl = { label = 'REPL', keymap = 'R' },
+      sessions = { label = 'Sessions', keymap = 'K' },
+      console = { label = 'Console', keymap = 'C' },
+    },
+  },
+  virtual_text = { enabled = true },
+  windows = {
+    size = 0.35,
+    position = 'right',
+  },
+}
 
 local dap = require 'dap'
+
+vim.keymap.set({ 'n' }, '<leader>db', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
+vim.keymap.set({ 'n' }, '<leader>dc', dap.continue, { desc = 'Debug continue' })
+vim.keymap.set({ 'n' }, '<leader>do', dap.step_over, { desc = 'Debug step over' })
+vim.keymap.set({ 'n' }, '<leader>di', dap.step_into, { desc = 'Debug step into' })
+
+dap.adapters.php = {
+  type = 'executable',
+  command = 'node',
+  args = { '/Users/jesse/.local/share/vscode-php-debug/out/phpDebug.js' },
+}
+
+dap.configurations.php = {
+  {
+    name = 'Listen for Xdebug',
+    type = 'php',
+    request = 'launch',
+    port = '9003',
+    log = true,
+    cwd = '${workspaceFolder}',
+  },
+}
+
 dap.configurations.rust = {
   {
     name = 'Launch file (Tauri)',
-    type = 'codelldb',
+    type = 'lldb',
     request = 'launch',
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. 'src-tauri/target/debug/', 'file')
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/src-tauri/target/debug/', 'file')
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
   },
 }
-
-vim.keymap.set({ 'n' }, '<leader>db', dap.toggle_breakpoint, { desc = 'Toggle breakpoint' })
-vim.keymap.set({ 'n' }, '<leader>dc', dap.continue, { desc = 'Debug continue' })
-vim.keymap.set({ 'n' }, '<leader>dso', dap.step_over, { desc = 'Debug step over' })
-vim.keymap.set({ 'n' }, '<leader>dsi', dap.step_over, { desc = 'Debug step into' })
 
 -- From https://github.com/StevanFreeborn/nvim-config/blob/main/lua/plugins/debugging.lua#L111-L123
 for _, adapterType in ipairs { 'node', 'chrome', 'msedge' } do
@@ -89,6 +142,11 @@ for _, language in ipairs { 'typescript', 'javascript', 'typescriptreact', 'java
     },
   }
 end
+
+dap.adapters.nlua = function(callback, config)
+  callback { type = 'server', host = config.host or '127.0.0.1', port = config.port or 8086 }
+end
+
 dap.configurations.lua = {
   {
     type = 'nlua',
@@ -97,9 +155,15 @@ dap.configurations.lua = {
   },
 }
 
-dap.adapters.nlua = function(callback, config)
-  callback { type = 'server', host = config.host or '127.0.0.1', port = config.port or 8086 }
-end
+local codelldb_path = vim.fn.stdpath 'data' .. '/mason/packages/codelldb/codelldb'
+dap.adapters.lldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = codelldb_path,
+    args = { '--port', '${port}' },
+  },
+}
 
 vim.keymap.set('n', '<leader>dl', function()
   require('osv').launch { port = 8086 }
