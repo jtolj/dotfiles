@@ -1,8 +1,8 @@
 vim.pack.add { 'https://github.com/MunifTanjim/nui.nvim' }
 vim.pack.add { 'https://github.com/nvim-lua/plenary.nvim' }
 vim.pack.add { 'https://github.com/nvim-neotest/nvim-nio' }
--- vim.pack.add { 'https://github.com/adalessa/laravel.nvim' }
-vim.cmd.packadd 'laravel.nvim'
+vim.pack.add { 'https://github.com/adalessa/laravel.nvim' }
+-- vim.cmd.packadd 'laravel.nvim'
 
 local function is_laravel_project()
   return vim.uv.fs_stat(vim.fs.joinpath(vim.uv.cwd(), 'artisan')) ~= nil
