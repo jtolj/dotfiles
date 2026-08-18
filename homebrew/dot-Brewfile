@@ -1,6 +1,7 @@
 tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
 tap "basuev/parket"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "floatpane/matcha", trusted: { casks: ["matcha@v1"] }
 tap "jandedobbeleer/oh-my-posh", trusted: true
 tap "nikitabobko/tap", trusted: true
 tap "shivammathur/php", trusted: true
@@ -36,7 +37,7 @@ brew "bat-extras"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
-brew "caddy", restart_service: :changed
+brew "caddy"
 # Object-file caching compiler wrapper
 brew "ccache"
 # C/C++ and Java libraries for Unicode and globalization
@@ -57,6 +58,8 @@ brew "duckdb"
 brew "libtool"
 # Functional metaprogramming aware language built on Erlang VM
 brew "elixir"
+# Command-line tool to interact with exercism.io
+brew "exercism"
 # Modern, maintained replacement for ls
 brew "eza"
 # Like neofetch, but much faster because written mostly in C
@@ -83,12 +86,12 @@ brew "git"
 brew "git-delta"
 # GNU grep, egrep and fgrep
 brew "grep"
-# Fast and powerful log viewer and processor
-brew "hl"
 # Configurable static site generator
 brew "hugo"
 # Review-first terminal diff viewer for agent-authored changesets
 brew "hunk"
+# Command-line benchmarking tool
+brew "hyperfine"
 # C/C++ and Java libraries for Unicode and globalization
 brew "icu4c@77"
 # Tools and libraries to manipulate images in select formats
@@ -161,8 +164,6 @@ brew "pre-commit"
 brew "psysh"
 # Generic machine emulator and virtualizer
 brew "qemu"
-# Spreadsheet program for the terminal, using ncurses
-brew "sc-im"
 # Terminal multiplexer with VT100/ANSI terminal emulation
 brew "screen"
 # Static analysis and lint tool, for (ba)sh scripts
