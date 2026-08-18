@@ -297,9 +297,9 @@ gmes() {
 | pbcopy
 }
 glog() {
-  opencode run "Give me a summary (bullet list) of what was done yesterday in this project based on these git commit messages: $(git log --stat --since=\"yesterday\" --until=\"today\" --all)" \
+  opencode run "Give me a summary (bullet list) of what was done yesterday in this project based on these git commit messages - DO NOT make any tool calls, you should only use the following input from the git log: $(git log --stat --since=\"yesterday\" --until=\"today\" --all)" \
 | sed 's/\x1B\[[0-9;]*[a-zA-Z]//g' \
-| pbcopy
+| tee >(pbcopy)
 }
 
 gco() {
@@ -414,7 +414,7 @@ unbrew() {
 
 brew_sync() {
     echo "Updating Brewfile..."
-    command brew bundle dump --global --force --describe --no-vscode
+    command brew bundle dump --global --force --no-vscode
 }
 
 
