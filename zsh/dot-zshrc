@@ -23,7 +23,7 @@ fi
     git clone --depth 1 -- \
         git@github.com:marlonrichert/zsh-snap.git ~/.zsh-snap
 zstyle ':znap:*' repos-dir ~/.znap
-zstyle ':znap:*' server git@github.com
+# zstyle ':znap:*' server git@github.com
 source ~/.zsh-snap/znap.zsh
 znap eval zoxide 'zoxide init --cmd z zsh'
 export ARTISAN_OPEN_ON_MAKE_EDITOR=nvim
