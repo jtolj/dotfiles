@@ -34,6 +34,8 @@ brew "automake"
 brew "bat"
 # Bash scripts that integrate bat with various command-line tools
 brew "bat-extras"
+# Parser generator
+brew "bison"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
 brew "btop"
 # Powerful, enterprise-ready, open source web server with automatic HTTPS
@@ -139,11 +141,11 @@ brew "pastel"
 # CLI for Postgres with auto-completion and syntax highlighting
 brew "pgcli"
 # General-purpose scripting language
+brew "php", restart_service: :changed
+# General-purpose scripting language
 brew "php@8.4"
 # Minimal dumb-terminal emulation program
 brew "picocom"
-# General-purpose scripting language
-brew "php", restart_service: :changed
 # PHP Installer for Extensions
 brew "pie"
 # Pinentry for GPG on Mac
@@ -164,6 +166,8 @@ brew "pre-commit"
 brew "psysh"
 # Generic machine emulator and virtualizer
 brew "qemu"
+# Generate C-based recognizers from regular expressions
+brew "re2c"
 # Terminal multiplexer with VT100/ANSI terminal emulation
 brew "screen"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -211,7 +215,7 @@ brew "felixkratz/formulae/borders"
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar"
 # General-purpose scripting language
-brew "shivammathur/php/php"
+brew "shivammathur/php/php@8.3", trusted: true
 # Symfony CLI helps Symfony developers manage projects, from local code to remote infrastructure
 brew "symfony-cli/tap/symfony-cli"
 # AeroSpace is an i3-like tiling window manager for macOS
