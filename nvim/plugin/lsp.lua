@@ -90,7 +90,7 @@ require('mason-tool-installer').setup {
     'stylua',
     'svelte-language-server',
     'tailwindcss-language-server',
-    'tsgo',
+    'tsc',
     'typos-lsp',
     'yaml-language-server',
   },
