@@ -44,6 +44,8 @@ repo = /Users/jesse/.znap/reegnz/jq-zsh-plugin
 repo = /Users/jesse/.znap/zsh-users/zsh-autosuggestions
 repo = /Users/jesse/.znap/zsh-users/zsh-completions
 repo = /Users/jesse/.znap/zdharma/fast-syntax-highlighting
+repo = /Users/jesse/.znap/Aloxaf/fzf-tab
+repo = /Users/jesse/.znap/automaat/zsh-clean-history
 
 [interactive]
 diffFilter = delta --color-only
