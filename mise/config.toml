@@ -1,9 +1,9 @@
 [tools]
 node = 'lts'
+php = '8.5'
 rust = 'stable'
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
 
 [tool_alias]
-php = "asdf:https://github.com/jtolj/asdf-php-brew.git"
