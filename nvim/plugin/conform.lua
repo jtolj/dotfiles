@@ -28,6 +28,8 @@ conform.setup {
     php = { 'pint', 'mago_format', stop_after_first = true },
     blade = { 'blade-formatter', stop_after_first = true },
     javascript = { 'prettierd', stop_after_first = true },
+    typescript = { 'prettierd', stop_after_first = true },
+    svelte = { 'prettierd', stop_after_first = true },
     json = { 'prettierd', stop_after_first = true },
     html = { 'prettierd', stop_after_first = true },
     css = { 'prettierd', stop_after_first = true },
