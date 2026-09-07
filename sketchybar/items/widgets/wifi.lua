@@ -147,6 +147,15 @@ local router = sbar.add("item", {
 	},
 })
 
+local ping = sbar.add("item", {
+	position = "popup." .. wifi_bracket.name,
+	label = {
+		string = "???",
+		width = popup_width,
+		align = "right",
+	},
+})
+
 sbar.add("item", { position = "right", width = settings.group_paddings })
 
 wifi_up:subscribe("system_stats", function(env)
@@ -207,6 +216,9 @@ local function toggle_details()
 	local should_draw = wifi_bracket:query().popup.drawing == "off"
 	if should_draw then
 		wifi_bracket:set({ popup = { drawing = true } })
+		sbar.exec("ping -c 3 9.9.9.9 | tail -1 | sed 's/.*stddev = \\(.*\\)/\\1/'", function(result)
+			ping:set({ label = result })
+		end)
 		sbar.exec("networksetup -getcomputername", function(result)
 			hostname:set({ label = result })
 		end)
