@@ -1,4 +1,5 @@
 [tools]
+go = "1.27.1"
 node = 'lts'
 php = '8.5'
 rust = 'stable'
