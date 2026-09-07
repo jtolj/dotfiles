@@ -92,7 +92,7 @@ bindkey " " magic-space
 
 # replace ls with eza
 function ls() {
-  eza --icons "$@"
+  eza  "$@" --icons
 }
 
 # list projects and cd into selected one
