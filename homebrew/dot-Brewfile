@@ -253,6 +253,8 @@ cask "orbstack"
 cask "orchard"
 # Minimal dwm-like tiling window manager
 cask "basuev/parket/parket", trusted: true
+# Open-source application manager and system cleaner
+cask "puremac"
 # Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
 # Native GUI tool for relational databases
@@ -265,14 +267,8 @@ cask "tinkerwell"
 cask "ungoogled-chromium"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
-go "github.com/go-delve/delve/cmd/dlv"
-go "golang.org/x/tools/cmd/goimports"
-go "github.com/fatih/gomodifytags"
-go "github.com/haya14busa/goplay/cmd/goplay"
-go "golang.org/x/tools/gopls"
-go "github.com/cweill/gotests/gotests"
-go "github.com/josharian/impl"
-go "honnef.co/go/tools/cmd/staticcheck"
+go "cmd/go"
+go "cmd/gofmt"
 cargo "caligula"
 cargo "komorebi"
 cargo "komorebic"
