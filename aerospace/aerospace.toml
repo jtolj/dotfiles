@@ -1,13 +1,16 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
-# You can use it to add commands that run after login to macOS user session.
-# 'start-at-login' needs to be 'true' for 'after-login-command' to work
-# Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-login-command = []
+# Config version for compatibility and deprecations
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
+# List of workspaces that should stay alive even when they contain no windows,
+# even when they are invisible.
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version-2
+persistent-workspaces = ['1', '2', '3', '4', '5']
 
 # You can use it to add commands that run after AeroSpace startup.
-# 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
     # JankyBorders has a built-in detection of already running process,
@@ -173,17 +176,17 @@ cmd-alt-ctrl-shift-l = ['join-with right', 'mode main']
 
 # Send utility application to workspace 2
 [[on-window-detected]]
-if.app-id = 'com.kapeli.dash-setapp'
+if = 'test %{app-bundle-id} = com.kapeli.dash-setapp'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-id = 'de.beyondco.tinkerwell'
+if = 'test %{app-bundle-id} = de.beyondco.tinkerwell'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.tinyapp.TablePlus-setapp'
+if = 'test %{app-bundle-id} = com.tinyapp.TablePlus-setapp'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-id = 'com.globaldelight.Capto-setapp'
+if = 'test %{app-bundle-id} = com.globaldelight.Capto-setapp'
 run = ['layout floating']
