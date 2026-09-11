@@ -30,7 +30,7 @@ vim.keymap.set('x', 'p', '"_dP', { noremap = true, silent = true })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Quick save
-vim.keymap.set('n', '99', '<cmd>silent w<CR>')
+vim.keymap.set('n', '44', '<cmd>silent w<CR>')
 
 -- Lazygit
 vim.keymap.set('n', '<leader>gg', '<cmd>silent !wezterm cli spawn --cwd ' .. vim.fn.getcwd() .. ' lazygit<CR>', { desc = 'Open Lazygit' })
