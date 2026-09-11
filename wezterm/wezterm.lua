@@ -204,8 +204,7 @@ config.window_padding = {
 }
 
 config.leader = {
-	key = ";",
-	mods = "ALT",
+	key = "F11",
 	timeout_milliseconds = 10000,
 }
 
