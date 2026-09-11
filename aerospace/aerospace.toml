@@ -112,7 +112,8 @@ cmd-alt-ctrl-shift-b = ['exec-and-forget open "/Applications/Zen.app"']
 cmd-alt-ctrl-shift-t = ['exec-and-forget open "/Applications/Wezterm.app"']
 cmd-alt-ctrl-shift-s = ['exec-and-forget open "/Applications/Slack.app"']
 cmd-alt-ctrl-shift-m = ['exec-and-forget open "/System/Applications/Mail.app"']
-cmd-alt-ctrl-shift-f = ['exec-and-forget open "/System/Library/CoreServices/Finder.app"']
+# cmd-alt-ctrl-shift-f = ['exec-and-forget open "/System/Library/CoreServices/Finder.app"']
+cmd-alt-ctrl-shift-f = ['exec-and-forget open "/Applications/Marta.app"']
 cmd-alt-ctrl-shift-o = ['exec-and-forget open "/Applications/Obsidian.app"']
 cmd-alt-ctrl-shift-i = ['exec-and-forget open "/System/Applications/Messages.app"']
 
@@ -174,19 +175,6 @@ cmd-alt-ctrl-shift-k = ['join-with up', 'mode main']
 cmd-alt-ctrl-shift-l = ['join-with right', 'mode main']
 
 
-# Send utility application to workspace 2
-[[on-window-detected]]
-if = 'test %{app-bundle-id} = com.kapeli.dash-setapp'
-run = ['move-node-to-workspace 3']
-
-[[on-window-detected]]
-if = 'test %{app-bundle-id} = de.beyondco.tinkerwell'
-run = ['move-node-to-workspace 2']
-
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.tinyapp.TablePlus-setapp'
 run = ['move-node-to-workspace 2']
-
-[[on-window-detected]]
-if = 'test %{app-bundle-id} = com.globaldelight.Capto-setapp'
-run = ['layout floating']
