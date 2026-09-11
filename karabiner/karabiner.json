@@ -8,6 +8,31 @@
                 },
                 "rules": [
                     {
+                        "description": "Hyper and mouse movement to scroll",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": ["left_command", "left_control", "left_option", "left_shift"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "type": "mouse_motion_to_scroll"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "enable_mouse_motion_to_scroll",
+                                        "type": "variable_if",
+                                        "value": true
+                                    }
+                                ],
+                                "from": { "modifiers": { "optional": ["any"] } },
+                                "type": "mouse_motion_to_scroll"
+                            }
+                        ]
+                    },
+                    {
                         "description": "caps_lock to escape | hyper when held",
                         "manipulators": [
                             {
@@ -27,6 +52,13 @@
                                     {
                                         "key_code": "left_shift",
                                         "modifiers": ["left_command", "left_control", "left_option"]
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "key_up_value": false,
+                                            "name": "enable_mouse_motion_to_scroll",
+                                            "value": true
+                                        }
                                     }
                                 ],
                                 "to_if_alone": [{ "key_code": "escape" }],
@@ -236,6 +268,40 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 666,
+                        "vendor_id": 1452
+                    },
+                    "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 19685,
+                        "vendor_id": 20547
+                    },
+                    "ignore": false
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 19685,
+                        "vendor_id": 20547
+                    },
+                    "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "vendor_id": 65261
+                    },
+                    "ignore": false
+                }
+            ],
             "name": "Default",
             "selected": true,
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
