@@ -118,6 +118,16 @@ local keys = {
 			},
 		}),
 	},
+	{
+		key = "m",
+		mods = "LEADER",
+		action = act.SwitchToWorkspace({
+			name = "markerseven",
+			spawn = {
+				cwd = os.getenv("HOME") .. "/Projects/markerseven",
+			},
+		}),
+	},
 }
 
 -- neovim integration
@@ -194,8 +204,8 @@ config.window_padding = {
 }
 
 config.leader = {
-	key = "F18",
-	mods = "SUPER",
+	key = ";",
+	mods = "ALT",
 	timeout_milliseconds = 10000,
 }
 
