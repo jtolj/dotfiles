@@ -241,6 +241,8 @@ cask "hammerspoon"
 cask "keyclu"
 # GPU-based terminal emulator
 cask "kitty"
+# Extensible two-pane file manager
+cask "marta"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # Desktop client for the Matrix protocol
