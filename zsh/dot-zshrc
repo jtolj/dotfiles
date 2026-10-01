@@ -16,6 +16,8 @@ stty -ixon
 # Init Homebrew
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  # let zsh's built-in completions (incl. _git) win, keep brew-only ones as fallback
+  fpath=("${(@)fpath:#/opt/homebrew/share/zsh/site-functions}" /opt/homebrew/share/zsh/site-functions)
 fi
 
 # ZSH Packages with znap
@@ -45,14 +47,29 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 
-# disable sort when completing `git checkout`
+# disable sort when completing `git checkout` / `git switch`
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:git-switch:*' sort false
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 # set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# preview branches/refs and changed files when completing `git checkout` / `git switch`
+zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-preview '
+  case "$group" in
+    (*"modified file"*|*"tree file"*)
+      git diff --color=always -- $word 2>/dev/null ;;
+    (*"branch name"*|*"remote branch name"*|*"local head"*|*"remote head"*|*"recent branches"*)
+      git log --color=always --graph --decorate --oneline -20 $word 2>/dev/null ;;
+    (*"commit"*|*"commit tag"*)
+      git show --stat --color=always $word 2>/dev/null ;;
+  esac'
+# preview window sizing for `git checkout` / `git switch`
+zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-flags \
+  --preview-window=right:60%:wrap --height=70%
+zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-min-height 20
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
@@ -71,6 +88,7 @@ alias which="/usr/bin/which"
 alias ..="cd .."
 alias ...="cd ../.."
 alias tmp="cd $TMPDIR"
+alias icloud="cd \"$HOME/Library/Mobile Documents/com~apple~CloudDocs\""
 alias -g man="batman"
 alias npm="npm --ignore-scripts"
 alias lg="lazygit"
@@ -85,7 +103,6 @@ wez_svg() {
 alias -s svg=wez_svg
 alias -s {jpg,jpeg,png,gif,webp}="wezterm imgcat"
 alias -s pdf="tdf -m 1"
-alias -s log="hl"
 
 # Keybinds
 bindkey " " magic-space
@@ -153,11 +170,11 @@ logs() {
   fi
 
   if [ -f "/opt/homebrew/var/log/${name}" ]; then
-    hl ${tail_args} "/opt/homebrew/var/log/${name}"
+    tail ${tail_args} "/opt/homebrew/var/log/${name}"
   elif [ -f "/opt/homebrew/var/log/${name}.log" ]; then
-    hl ${tail_args} "/opt/homebrew/var/log/${name}.log"
+    tail ${tail_args} "/opt/homebrew/var/log/${name}.log"
   elif [ -d "/opt/homebrew/var/log/${name}" ]; then
-    hl ${tail_args} /opt/homebrew/var/log/${name}/*.log
+    tail ${tail_args} /opt/homebrew/var/log/${name}/*.log
   else
     echo "Log file for $name not found."
   fi
@@ -283,43 +300,34 @@ ax () {
 }
 
 # Git stuff
+alias gco="git checkout"
+alias gsw="git switch"
 alias gcb="git checkout -b"
 alias gap="git add -p"
 alias gcm="git commit -m"
-alias gcod="git checkout develop"
-alias grhh="git reset --hard HEAD"
-alias grro="git reset --hard @{u}"
 # History search with wildcards - ex ghs "*filename.ext"
 alias ghs="git log --all --full-history --"
+
 gmes() {
   opencode run "Write a conventional commit message for this diff, following Conventional Commits format with a concise subject line and optional body only if needed. Do not use code blocks, output only the raw commit message: $(git diff --cached)" \
 | sed 's/\x1B\[[0-9;]*[a-zA-Z]//g' \
 | pbcopy
 }
+
 glog() {
   opencode run "Give me a summary (bullet list) of what was done yesterday in this project based on these git commit messages - DO NOT make any tool calls, you should only use the following input from the git log: $(git log --stat --since=\"yesterday\" --until=\"today\" --all)" \
 | sed 's/\x1B\[[0-9;]*[a-zA-Z]//g' \
 | tee >(pbcopy)
 }
 
-gco() {
-  if [ -z "$1" ]; then
-    git branch --color=always \
-    | fzf --ansi --preview 'git log $(echo {} | sed "s/^[* ]*//") --oneline --color=always' \
-      | sed 's/^[* ]*//' \
-      | xargs git checkout
-  else
-    git checkout "$@"
-  fi
+gcod() {
+  git branch --list develop >/dev/null 2>&1 && git checkout develop || git checkout dev
 }
 
 gcom() {
   git branch --list main >/dev/null 2>&1 && git checkout main || git checkout master
 }
 
-gfo() {
-  git fetch origin $1:$1
-}
 
 # Resets the timestamp for the most recent commit to the current time
 gtnow() {
@@ -349,7 +357,7 @@ nukebranches() {
     fi
 
     # Skip protected branches
-    if [[ "$branch" == "main" || "$branch" == "master" || "$branch" == "develop" || "$branch" == "staging" ]]; then
+    if [[ "$branch" == "main" || "$branch" == "master" || "$branch" == "develop"  || "$branch" == "dev" || "$branch" == "staging" ]]; then
       continue
     fi
 
