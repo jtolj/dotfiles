@@ -8,10 +8,60 @@
                 },
                 "rules": [
                     {
-                        "description": "super + mouse movement to scroll on ploopy",
+                        "description": "Scroll Lock toggles Ploopy scroll mode",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
+                                    {
+                                        "name": "ploopy_scroll_mode",
+                                        "type": "variable_if",
+                                        "value": 0
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "scroll_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "ploopy_scroll_mode",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "ploopy_scroll_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "scroll_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "ploopy_scroll_mode",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "ploopy_scroll_mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    },
                                     {
                                         "identifiers": [
                                             {
@@ -22,12 +72,7 @@
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": {
-                                    "modifiers": {
-                                        "mandatory": ["left_command"],
-                                        "optional": ["any"]
-                                    }
-                                },
+                                "from": { "modifiers": { "optional": ["any"] } },
                                 "options": {
                                     "momentum_scroll_enabled": true,
                                     "speed_multiplier": 1.0
@@ -46,7 +91,8 @@
                                             {
                                                 "product_id": 834,
                                                 "vendor_id": 1452
-                                            }
+                                            },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_if"
                                     }
@@ -73,7 +119,8 @@
                                             {
                                                 "product_id": 834,
                                                 "vendor_id": 1452
-                                            }
+                                            },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_if"
                                     }
@@ -97,7 +144,8 @@
                                             {
                                                 "product_id": 834,
                                                 "vendor_id": 1452
-                                            }
+                                            },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_if"
                                     }
@@ -216,7 +264,8 @@
                                             {
                                                 "product_id": 834,
                                                 "vendor_id": 1452
-                                            }
+                                            },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_if"
                                     }
@@ -248,7 +297,8 @@
                                             {
                                                 "product_id": 834,
                                                 "vendor_id": 1452
-                                            }
+                                            },
+                                            { "is_built_in_keyboard": true }
                                         ],
                                         "type": "device_if"
                                     }
@@ -281,7 +331,7 @@
                         "product_id": 19685,
                         "vendor_id": 20547
                     },
-                    "ignore": false,
+                    "ignore": true,
                     "manipulate_caps_lock_led": false
                 }
             ],
