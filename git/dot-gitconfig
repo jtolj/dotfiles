@@ -95,6 +95,3 @@ dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@; }; f"
 co = checkout
 rb = rebase
 rbc = rebase --continue
-
-[url "git@github.com:"]
-insteadOf = https://github.com/
