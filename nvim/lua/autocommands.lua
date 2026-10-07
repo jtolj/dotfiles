@@ -65,6 +65,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Mirror yanks to the system clipboard',
+  group = vim.api.nvim_create_augroup('clipboard-yank', { clear = true }),
+  callback = function()
+    if vim.v.event.operator ~= 'y' then
+      return
+    end
+    local reg = vim.v.event.regname ~= '' and vim.v.event.regname or '"'
+    vim.fn.setreg('+', vim.fn.getreg(reg), vim.v.event.regtype)
+  end,
+})
+
 -- Hide command line when not in use
 vim.opt.cmdheight = 0
 local cmdGrp = vim.api.nvim_create_augroup('cmdline_height', { clear = true })
