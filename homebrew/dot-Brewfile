@@ -1,9 +1,7 @@
-tap "acsandmann/tap", trusted: { formulae: ["rift"] }
 tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git", trusted: true
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 tap "jandedobbeleer/oh-my-posh", trusted: true
 tap "nikitabobko/tap", trusted: true
-tap "open-cli-collective/tap", trusted: { casks: ["cfl"] }
 tap "shivammathur/php", trusted: true
 tap "symfony-cli/tap", trusted: true
 # GNU compiler collection for aarch64-elf
@@ -110,6 +108,8 @@ brew "jq"
 brew "lazygit"
 # Text editor with block and binary operations
 brew "le"
+# LLM inference in C/C++
+brew "llama.cpp"
 # Powerful, lightweight programming language
 brew "lua"
 # Package manager for the Lua programming language
@@ -251,14 +251,14 @@ cask "kitty"
 cask "marta"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
+# Open-source software for live streaming and screen recording
+cask "obs"
 # Replacement for Docker Desktop
 cask "orbstack"
 # Open-source application manager and system cleaner
 cask "puremac"
 # Tool that provides consistent, highly configurable symbols for apps
 cask "sf-symbols"
-# Google Chromium, sans integration with Google
-cask "ungoogled-chromium"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
 go "cmd/go"
