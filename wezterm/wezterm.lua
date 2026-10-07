@@ -97,13 +97,13 @@ local keys = {
 		}),
 	},
 	{
-		key = "p",
+		key = "b",
 		mods = "LEADER",
 		action = act.SwitchToWorkspace({
-			name = "podminer",
+			name = "bellows",
 			spawn = {
-				cwd = os.getenv("HOME") .. "/Projects/native/podminer",
-				args = { os.getenv("SHELL"), "-lc", "nvim" },
+				cwd = os.getenv("HOME") .. "/Projects/native/bellows",
+				args = { os.getenv("SHELL"), "-lic", "nvim" },
 			},
 		}),
 	},
@@ -114,7 +114,7 @@ local keys = {
 			name = "dotfiles",
 			spawn = {
 				cwd = os.getenv("HOME") .. "/Projects/dotfiles",
-				args = { os.getenv("SHELL"), "-lc", "nvim" },
+				args = { os.getenv("SHELL"), "-lic", "nvim" },
 			},
 		}),
 	},
