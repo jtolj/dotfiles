@@ -166,13 +166,9 @@ wifi_up:subscribe("system_stats", function(env)
 	local down_color = (download == 0) and colors.grey or colors.blue
 
 	local function format_speed(val)
-		if val > 999 then
+		if val > 1024 then
 			local mbps = val / 1024
-			if mbps > 99 then
-				return string.format("%03d mbps", mbps)
-			else
-				return string.format("%04.1f mbps", mbps)
-			end
+			return string.format("%03.0f mbps", mbps)
 		else
 			return string.format("%03d kbps", val)
 		end
