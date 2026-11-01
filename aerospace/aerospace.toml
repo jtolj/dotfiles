@@ -27,7 +27,7 @@ exec-on-workspace-change = [
 
 
 # Start AeroSpace at login
-start-at-login = true
+start-at-login = false
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -178,3 +178,19 @@ cmd-alt-ctrl-shift-l = ['join-with right', 'mode main']
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.tinyapp.TablePlus-setapp'
 run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if = 'test %{app-name} = bellows'
+run = ['move-node-to-monitor built-in main']
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = md.obsidian'
+run = ['move-node-to-monitor built-in main']
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.google.chrome.for.testing'
+run = ['move-node-to-monitor built-in main']
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap'
+run = ['move-node-to-monitor built-in main']
