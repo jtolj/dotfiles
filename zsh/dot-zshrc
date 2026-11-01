@@ -6,12 +6,14 @@
 # zmodload zsh/zprof
 # setopt xtrace prompt_subst
 
-# History ignore sensitive and noisy commands
-setopt EXTENDED_GLOB
-export HISTORY_IGNORE='(#i)(exit|cd ..|l[alsh]#( *)#|more *|nvim# *|*_key*|*token*|*bearer*)'
-
 # Disable freeze
 stty -ixon
+
+# History ignore sensitive and noisy commands
+setopt EXTENDED_GLOB
+HISTORY_IGNORE='(#i)(exit|cd( *)#|..|l[alsh]#( *)#|more( *)#|nvim( *)#|*_key*|*token*|*bearer*)'
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
 
 # Init Homebrew
 if [ -f /opt/homebrew/bin/brew ]; then
@@ -25,7 +27,7 @@ fi
     git clone --depth 1 -- \
         git@github.com:marlonrichert/zsh-snap.git ~/.zsh-snap
 zstyle ':znap:*' repos-dir ~/.znap
-# zstyle ':znap:*' server git@github.com
+zstyle ':znap:clone: default-server' 'git@github.com:'
 source ~/.zsh-snap/znap.zsh
 znap eval zoxide 'zoxide init --cmd z zsh'
 export ARTISAN_OPEN_ON_MAKE_EDITOR=nvim
@@ -38,6 +40,9 @@ znap source reegnz/jq-zsh-plugin
 znap source Aloxaf/fzf-tab
 znap source zdharma/fast-syntax-highlighting
 znap source automaat/zsh-clean-history
+znap source larkery/zsh-histdb
+FZF_HISTDB_LITE_DEFAULT_DIR=1
+source ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/histdb-fzf.zsh
 znap eval mise 'mise activate'
 znap eval fzf 'fzf --zsh'
 eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/omp-simple.toml)"
@@ -66,10 +71,27 @@ zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-preview '
     (*"commit"*|*"commit tag"*)
       git show --stat --color=always $word 2>/dev/null ;;
   esac'
+
 # preview window sizing for `git checkout` / `git switch`
 zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-flags \
   --preview-window=right:60%:wrap --height=70%
 zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-min-height 20
+
+# zsh's _git offers the same ref in several groups (local head, remote head,
+# refs decorated in recent commits, DWIM remote branch name), so fzf-tab lists
+# it once per group. Keep only the first occurrence of each candidate.
+_ftb_dedup() {
+  local line word
+  local -A seen
+  while IFS= read -r line; do
+    # keep fzf-tab's header lines (they have no NUL-separated fields)
+    [[ $line == *$'\0'* ]] || { print -r -- "$line"; continue }
+    word=${${line#*$'\0'}%%$'\0'*}
+    (( seen[${(q)word}]++ )) || print -r -- "$line"
+  done | command fzf "$@"
+}
+zstyle ':fzf-tab:complete:git-(checkout|switch):*' fzf-command _ftb_dedup
+
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
@@ -106,6 +128,7 @@ alias -s pdf="tdf -m 1"
 
 # Keybinds
 bindkey " " magic-space
+bindkey '^r' _fzf_histdb_widget
 
 # replace ls with eza
 function ls() {
@@ -373,6 +396,24 @@ nukebranches() {
   done
 }
 
+# https://junegunn.github.io/fzf/tips/ripgrep-integration/
+fzg() (
+  RELOAD='reload:rg --column --color=always --smart-case {q} || :'
+  OPENER='if [[ $FZF_SELECT_COUNT -eq 0 ]]; then
+            nvim {1} +{2}     # No selection. Open the current line in Vim.
+          else
+            nvim +cw -q {+f}  # Build quickfix list for the selected items.
+          fi'
+  fzf --disabled --ansi --multi \
+      --bind "start:$RELOAD" --bind "change:$RELOAD" \
+      --bind "enter:become:$OPENER" \
+      --bind "ctrl-o:execute:$OPENER" \
+      --bind 'alt-a:select-all,alt-d:deselect-all,ctrl-/:toggle-preview' \
+      --delimiter : \
+      --preview 'bat --style=full --color=always --highlight-line {2} {1}' \
+      --preview-window '~4,+{2}+4/3,<80(up)' \
+      --query "$*"
+)
 
 ## Kill all processes matching a grep pattern
 killgrep() {
@@ -389,7 +430,7 @@ killgrep() {
 ## Bitwarden get password and print to stdout
 pw() {
   bw get password "$@"
-}
+:}
 
 ## Bitwarden get password and copy to clipboard
 pwcopy() {
