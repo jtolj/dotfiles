@@ -16,6 +16,7 @@ xdg_config_files=(
 	"sketchybar"
 	"wezterm"
 	"rainfrog"
+	"finicky"
 )
 
 for pkg in "${xdg_config_files[@]}"; do
