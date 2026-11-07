@@ -3,7 +3,7 @@
 
 # Editor configuration
 .vscode/
-
+.opencode/
 # Packages
 node_modules/
 
