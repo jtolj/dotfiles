@@ -8,15 +8,16 @@ mkdir -p "$HOME/Library/Application Support/MailMate/Resources/KeyBindings" && s
 xdg_config_files=(
 	"aerospace"
 	"asciinema"
+	"finicky"
 	"hl"
 	"infat"
 	"mise"
 	"nvim"
 	"oh-my-posh"
+	"rainfrog"
+	"rift"
 	"sketchybar"
 	"wezterm"
-	"rainfrog"
-	"finicky"
 )
 
 for pkg in "${xdg_config_files[@]}"; do

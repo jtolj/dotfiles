@@ -1,0 +1,166 @@
+[settings]
+animate = true
+default_disable = false
+mouse_follows_focus = false
+mouse_hides_on_focus = false
+focus_follows_mouse = false
+auto_focus_blacklist = ['bellows']
+hot_reload = true
+
+# run_on_start is only evaluated when Rift starts.
+run_on_start = [
+	"/opt/homebrew/bin/borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=4 blacklist=\"Orbstack\"",
+	# Rift's per-display gaps are keyed by UUID, with no "main display" key.
+	# This moves the SketchyBar top gap onto whichever display macOS is using
+	# as its main display right now.
+	"/bin/sh /Users/jesse/.config/rift/rift-helper.sh sync-main-gap",
+	# Keep SketchyBar's workspace indicator in sync. The Lua handler re-queries
+	# the focused display's workspaces instead of trusting a single event.
+	"/opt/homebrew/bin/rift-cli subscribe cli --event workspace_changed --command /bin/sh --args -c --args '/opt/homebrew/bin/sketchybar --trigger rift_refresh'",
+	"/opt/homebrew/bin/rift-cli subscribe cli --event focused_window_changed --command /bin/sh --args -c --args '/opt/homebrew/bin/sketchybar --trigger rift_refresh'",
+]
+
+[settings.layout]
+mode = "stack"
+window_insertion_point = "next_to_selection"
+
+[settings.layout.master_stack]
+master_ratio = 0.6
+master_count = 1
+master_side = "left"
+new_window_placement = "stack"
+
+[settings.layout.stack]
+stack_offset = 15.0
+default_orientation = "horizontal"
+
+[settings.layout.traditional]
+equalize_nodes = true
+
+[settings.layout.bsp]
+window_insertion_point = "next_to_selection"
+
+[settings.layout.gaps.outer]
+# Fallback for external displays before `sync-main-gap` runs. The helper sets
+# the same 50pt top gap on the current main display and the normal 16pt top gap
+# on every other connected display, whatever their UUIDs are.
+top = 50
+left = 16
+bottom = 16
+right = 16
+
+[settings.layout.gaps.inner]
+horizontal = 16
+vertical = 16
+
+[settings.layout.gaps.per_display."37D8832A-2D66-02CA-B9F7-8F30A301B230"]
+outer= { bottom = 16.0, left = 16.0, right = 16.0, top = 16 }
+
+[settings.layout.gaps.per_display.6DFB9735-A09D-4A66-9B9B-1F860343DC94]
+outer = { bottom = 16.0, left = 16.0, right = 16.0, top = 50 }
+
+[settings.layout.gaps.per_display.73B9EE9F-6C85-4DA5-A990-0705A4423896]
+outer = { bottom = 16.0, left = 16.0, right = 16.0, top = 50 }
+
+[settings.ui.menu_bar]
+enabled = true
+show_empty = false
+show_binding_mode = true
+mode = "all"
+active_label = "index"
+display_style = "layout"
+layout_folder = "~/.config/rift/layouts"
+
+[settings.ui.stack_line]
+enabled = false
+
+[settings.ui.mission_control]
+enabled = false
+
+[settings.gestures]
+enabled = false
+
+[settings.drag_drop]
+enabled = true
+modifier = "fn"
+action1 = "move"
+drop_action = "swap"
+drop_zone_fraction = 0.25
+preview = true
+
+[virtual_workspaces]
+enabled = true
+default_workspace_count = 5
+auto_assign_windows = true
+preserve_focus_per_workspace = true
+workspace_auto_back_and_forth = false
+prevent_wrapping = true
+workspace_names = ["1", "2", "3", "4", "5"]
+default_workspace = 0
+reapply_app_rules_on_title_change = false
+
+
+[[virtual_workspaces.app_rules]]
+app_id = "com.tinyapp.TablePlus-setapp"
+workspace = "2"
+
+[modifier_combinations]
+hyper = "Meta + Alt + Ctrl + Shift"
+
+[keys]
+"hyper + B" = { exec = ["/usr/bin/open", "/Applications/Zen.app"] }
+"hyper + T" = { exec = ["/usr/bin/open", "/Applications/Wezterm.app"] }
+"hyper + S" = { exec = ["/usr/bin/open", "/Applications/Slack.app"] }
+"hyper + M" = { exec = ["/usr/bin/open", "/System/Applications/Mail.app"] }
+"hyper + F" = { exec = ["/usr/bin/open", "/Applications/Marta.app"] }
+"hyper + O" = { exec = ["/usr/bin/open", "/Applications/Obsidian.app"] }
+"hyper + I" = { exec = ["/usr/bin/open", "/System/Applications/Messages.app"] }
+"Meta + H" = { exec = "/usr/bin/true" }
+"Meta + Alt + H" = { exec = "/usr/bin/true" }
+"hyper + Z" = "toggle_fullscreen"
+
+# Rift has no cycling command, so a small helper queries the active layout and
+# switches between stack (accordion) and master stack
+"hyper + Semicolon" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "toggle-layout"] }
+
+
+"hyper + H" = { move_focus = "left" }
+"hyper + J" = { move_focus = "down" }
+"hyper + K" = { move_focus = "up" }
+"hyper + L" = { move_focus = "right" }
+
+"Alt + Shift + H" = { move_node = "left" }
+"Alt + Shift + J" = { move_node = "down" }
+"Alt + Shift + K" = { move_node = "up" }
+"Alt + Shift + L" = { move_node = "right" }
+
+
+"hyper + Minus" = { resize_window_shrink = "smart" }
+"hyper + Equal" = { resize_window_grow = "smart" }
+
+"hyper + 1" = { switch_to_workspace = 0 }
+"hyper + 2" = { switch_to_workspace = 1 }
+"hyper + 3" = { switch_to_workspace = 2 }
+"hyper + 4" = { switch_to_workspace = 3 }
+"hyper + 5" = { switch_to_workspace = 4 }
+
+"Alt + Shift + 1" = { move_window_to_workspace = 0 }
+"Alt + Shift + 2" = { move_window_to_workspace = 1 }
+"Alt + Shift + 3" = { move_window_to_workspace = 2 }
+"Alt + Shift + 4" = { move_window_to_workspace = 3 }
+"Alt + Shift + 5" = { move_window_to_workspace = 4 }
+
+"Alt + Tab" = "switch_to_last_workspace"
+"hyper + Y" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "move-window-next-display"] }
+"hyper + N" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "focus-next-display"] }
+
+"hyper + Quote" = { binding_mode = "service" }
+
+
+[binding_modes.service]
+"Escape" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "service-exit"] }
+"hyper + R" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "service-unjoin"] }
+"hyper + H" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "service-join", "left"] }
+"hyper + J" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "service-join", "down"] }
+"hyper + K" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "service-join", "up"] }
+"hyper + L" = { exec = ["/bin/sh", "/Users/jesse/.config/rift/rift-helper.sh", "service-join", "right"] }
