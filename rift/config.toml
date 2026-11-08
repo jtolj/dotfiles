@@ -98,6 +98,7 @@ prevent_wrapping = true
 workspace_names = ["1", "2", "3", "4", "5"]
 default_workspace = 0
 reapply_app_rules_on_title_change = false
+mode = "per_display"
 
 
 [[virtual_workspaces.app_rules]]
