@@ -98,12 +98,10 @@ prevent_wrapping = true
 workspace_names = ["1", "2", "3", "4", "5"]
 default_workspace = 0
 reapply_app_rules_on_title_change = false
+app_rules= [
+	{ app_id = "com.tinyapp.TablePlus-setapp", floating = false, focus = false, workspace = 2 }
+]
 mode = "per_display"
-
-
-[[virtual_workspaces.app_rules]]
-app_id = "com.tinyapp.TablePlus-setapp"
-workspace = "2"
 
 [modifier_combinations]
 hyper = "Meta + Alt + Ctrl + Shift"
