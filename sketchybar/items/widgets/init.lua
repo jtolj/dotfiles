@@ -3,7 +3,6 @@ sbar.exec(
 )
 
 require("items.widgets.battery")
-require("items.widgets.headphones")
 require("items.widgets.wifi")
 require("items.widgets.cpu")
 require("items.widgets.memory")

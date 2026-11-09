@@ -11,8 +11,12 @@ clean_battery() {
     fi
 }
 
-devices_json=$(system_profiler SPBluetoothDataType -json | jq -c '.SPBluetoothDataType[0].device_connected // [] | .[]?')
+profile_json=$(system_profiler SPBluetoothDataType SPAudioDataType -json 2>/dev/null)
 
+devices_json=$(printf '%s' "$profile_json" | jq -c '.SPBluetoothDataType[0].device_connected // [] | .[]?')
+
+printf 'bluetooth\n'
+found=0
 while IFS= read -r device; do
     [[ -z "$device" ]] && continue
 
@@ -28,8 +32,18 @@ while IFS= read -r device; do
         vendor_id=$(printf '%s' "$info" | jq -r '.device_vendorID // "-"')
 
         printf '%s\n' "$name" "$minor_type" "$main" "$left" "$right" "$case" "$vendor_id"
-        exit 0
+        found=1
+        break
     fi
 done <<< "$devices_json"
 
-printf '%s\n' "none"
+if [[ $found -eq 0 ]]; then
+    printf 'none\n'
+fi
+
+printf 'audio\n'
+printf '%s' "$profile_json" | jq -r '
+  (.SPAudioDataType[0]._items // []) as $devices
+  | ($devices | map(select(.["coreaudio_default_audio_output_device"] == "spaudio_yes")) | .[0]._name // "None"),
+    ($devices | map(select(.["coreaudio_default_audio_input_device"] == "spaudio_yes")) | .[0]._name // "None")
+'
