@@ -2,6 +2,20 @@ local icons = require("icons")
 local colors = require("colors")
 local settings = require("settings")
 
+local function trim(s)
+	return s:match("^()%s*$") and "" or s:match("^%s*(.*%S)")
+end
+
+-- Spacer on the right edge of the audio block (items added later go further
+-- left on the right side of the bar, so this must be added before the rest).
+sbar.add("item", "widgets.headphones.gap", {
+	position = "right",
+	width = 25,
+	icon = { drawing = false },
+	label = { drawing = false },
+	background = { drawing = false },
+})
+
 local headphones = sbar.add("item", "widgets.headphones", {
 	position = "right",
 	drawing = false,
@@ -25,13 +39,14 @@ local audio_output = sbar.add("item", "widgets.audio.output", {
 	position = "right",
 	width = 0,
 	y_offset = 5,
-	padding_right = 25,
 	scroll_texts = false,
 	updates = "on",
 	update_freq = 15,
 	icon = { drawing = false },
 	label = {
 		string = "Output",
+		align = "right",
+		width = 180,
 		font = {
 			family = settings.font.numbers,
 			style = settings.font.style_map["Regular"],
@@ -43,11 +58,14 @@ local audio_output = sbar.add("item", "widgets.audio.output", {
 
 local audio_input = sbar.add("item", "widgets.audio.input", {
 	position = "right",
+	width = 0,
 	y_offset = -5,
 	scroll_texts = false,
 	icon = { drawing = false },
 	label = {
 		string = "Input",
+		align = "right",
+		width = 180,
 		font = {
 			family = settings.font.numbers,
 			style = settings.font.style_map["Regular"],
@@ -179,16 +197,10 @@ end
 local function update_audio(lines)
 	local output = lines[1] or "None"
 	local input = lines[2] or "None"
-	local input_label = input == output and "" or input
-	local output_is_wider = #output >= #input_label
 
-	audio_output:set({
-		width = output_is_wider and -1 or 0,
-		label = { string = output },
-	})
+	audio_output:set({ label = { string = output, align = "right" } })
 	audio_input:set({
-		width = output_is_wider and 0 or -1,
-		label = { string = input_label },
+		label = { string = input == output and "" or input, align = "right" },
 	})
 end
 
@@ -213,7 +225,9 @@ audio_output:subscribe({ "routine", "system_woke" }, refresh_devices)
 refresh_devices()
 
 local function open_audio_settings()
-	sbar.exec('open "x-apple.systempreferences:com.apple.Sound-Settings.extension" || open /System/Library/PreferencePanes/Sound.prefpane')
+	sbar.exec(
+		'open "x-apple.systempreferences:com.apple.Sound-Settings.extension" || open /System/Library/PreferencePanes/Sound.prefpane'
+	)
 end
 
 audio_output:subscribe("mouse.clicked", open_audio_settings)
