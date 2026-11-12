@@ -34,7 +34,7 @@ local display_icon = sbar.add("item", "rift_display", {
 	},
 })
 
-local workspace_count = 5
+local workspace_count = 3
 local spaces_table = {}
 for i = 1, workspace_count do
 	spaces_table[i] = sbar.add("item", "space." .. i, {
@@ -74,9 +74,7 @@ local function is_builtin_display(name)
 	end
 
 	local lowered = name:lower()
-	return lowered:find("built%-in") ~= nil
-		or lowered:find("color lcd") ~= nil
-		or lowered:find("internal") ~= nil
+	return lowered:find("built%-in") ~= nil or lowered:find("color lcd") ~= nil or lowered:find("internal") ~= nil
 end
 
 local refresh_generation = 0

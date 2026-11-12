@@ -90,12 +90,12 @@ preview = true
 
 [virtual_workspaces]
 enabled = true
-default_workspace_count = 5
+default_workspace_count = 3
 auto_assign_windows = true
 preserve_focus_per_workspace = true
 workspace_auto_back_and_forth = false
 prevent_wrapping = true
-workspace_names = ["1", "2", "3", "4", "5"]
+workspace_names = ["1", "2", "3"]
 default_workspace = 0
 reapply_app_rules_on_title_change = false
 app_rules= [
@@ -114,6 +114,7 @@ hyper = "Meta + Alt + Ctrl + Shift"
 "hyper + F" = { exec = ["/usr/bin/open", "/Applications/Marta.app"] }
 "hyper + O" = { exec = ["/usr/bin/open", "/Applications/Obsidian.app"] }
 "hyper + I" = { exec = ["/usr/bin/open", "/System/Applications/Messages.app"] }
+"hyper + C" = { exec = ["/usr/bin/open", "/Applications/Cinny.app"] }
 "Meta + H" = { exec = "/usr/bin/true" }
 "Meta + Alt + H" = { exec = "/usr/bin/true" }
 "hyper + Z" = "toggle_fullscreen"
